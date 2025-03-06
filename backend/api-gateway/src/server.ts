@@ -14,6 +14,7 @@ app.use("/api/orders", createProxyMiddleware({ target: "http://localhost:5002", 
 app.use("/api/inventory", createProxyMiddleware({ target: "http://localhost:5003", changeOrigin: true }));
 app.use("/api/customers", createProxyMiddleware({ target: "http://localhost:5004", changeOrigin: true }));
 app.use("/api/track", createProxyMiddleware({ target: "http://localhost:5005", changeOrigin: true }));
+app.use("/api/search", createProxyMiddleware({ target: "http://localhost:5006", changeOrigin: true }));
 
 // Route สำหรับทดสอบว่า API Gateway ทำงาน
 app.get('/', (req, res) => {

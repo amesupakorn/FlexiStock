@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import Dashboard from "./stock/page/dashboard";
 import Manage from "./stock/page/manage";
-import Search from "./stock/page/search";
+import Search from "./search/search";
 import HomePage from "./home";
 import Navbar from "./components/nav";
 function App() {
