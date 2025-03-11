@@ -75,12 +75,14 @@ export default function Search() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-left text-green-600 mb-10">
-        Check Product Stock Status
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+      <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+      
+      <h1 className="text-3xl font-bold text-left text-green-600 mb-10 flex flex-row">
+       Check Product Stock Status
       </h1>
 
-      <div className="w-full max-w-6xl bg-white p-8 rounded-lg shadow-lg">
+      <div className="w-full max-w-6xl bg-white p-8 rounded-lg justify-center">
         {/* ประเภทการค้นหา */}
         <div className="mb-6">
           <label className="text-lg font-medium text-gray-700">Search Type</label>
@@ -249,6 +251,7 @@ export default function Search() {
             <p className="text-center text-gray-500 mt-4">No matching results found</p>
           )}
         </div>
+      </div>
       </div>
     </main>
   );
