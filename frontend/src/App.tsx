@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import Dashboard from "./stock/page/dashboard";
 import Manage from "./stock/page/manage";
 import Search from "./search/search";
+import Order from "./order/order";
 import HomePage from "./home";
 import Navbar from "./components/nav";
 function App() {
@@ -19,6 +20,7 @@ function App() {
               <Route path="/home" element={<HomePage/>} />
               <Route path="/manage" element={<Manage />} />
               <Route path="/search" element={<Search />} />
+              <Route path="/order" element={<Order />} />
             </Routes>
           </div>
         </main>

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaHome, FaBox, FaSearch } from "react-icons/fa";
+import { FaHome, FaBox, FaSearch, FaBorderAll } from "react-icons/fa";
 
 const Navbar = () => {
   return (
@@ -43,6 +43,19 @@ const Navbar = () => {
           >
             <FaSearch className="mr-3" />
             Search
+          </NavLink>
+        </li>
+        <li className="flex items-center w-full">
+          <NavLink
+            to="/order"
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
+                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
+            }
+          >
+            <FaBorderAll className="mr-3" />
+            Multi-Warehouse
           </NavLink>
         </li>
       </ul>
