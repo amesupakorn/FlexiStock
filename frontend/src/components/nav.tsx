@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { FaHome, FaBox, FaSearch } from "react-icons/fa";
 import { FaWarehouse } from "react-icons/fa6";
+import { MdSpaceDashboard } from "react-icons/md";
 
 const Navbar = () => {
   return (
@@ -16,23 +17,11 @@ const Navbar = () => {
                 : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
             }
           >
-            <FaHome className="mr-3" />
-            Home
+            <MdSpaceDashboard  className="mr-3 w-5 h-5" />
+            Dashboard
           </NavLink>
         </li>
-        <li className="flex items-center w-full">
-          <NavLink
-            to="/manage"
-            className={({ isActive }) =>
-              isActive
-                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
-                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
-            }
-          >
-            <FaBox className="mr-3" />
-            Manage Stock
-          </NavLink>
-        </li>
+       
         <li className="flex items-center w-full">
           <NavLink
             to="/search"

@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
-import Dashboard from "./stock/page/dashboard";
-import Manage from "./stock/page/manage";
+import Dashboard from "./dashboard";
 import Search from "./search/search";
-import HomePage from "./home";
 import Warehouse from "./warehouse/warehouse";
 import Navbar from "./components/nav";
 function App() {
@@ -17,8 +15,6 @@ function App() {
           <div className="container mx-auto">
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/home" element={<HomePage/>} />
-              <Route path="/manage" element={<Manage />} />
               <Route path="/search" element={<Search />} />
               <Route path="/warehouse" element={<Warehouse />} />
             </Routes>
