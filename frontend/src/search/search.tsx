@@ -78,7 +78,7 @@ export default function Search() {
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
       <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
       
-      <h1 className="text-3xl font-bold text-left text-green-600 mb-10 flex flex-row">
+      <h1 className="text-3xl font-bold text-left text-green-600 mb-10 flex flex-row justify-center">
        Check Product Stock Status
       </h1>
 
