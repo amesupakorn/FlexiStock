@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import Dashboard from "./dashboard";
 import Search from "./search/search";
 import Warehouse from "./warehouse/warehouse";
+import TestApi from "./test/testApi"
 import Navbar from "./components/nav";
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/search" element={<Search />} />
               <Route path="/warehouse" element={<Warehouse />} />
+
+
+              <Route path="/test" element={<TestApi />} />
+
             </Routes>
           </div>
         </main>

@@ -4,25 +4,41 @@ import cors from "cors";
 
 const app = express();
 
-// กำหนด CORS ให้ Frontend สามารถเชื่อมต่อกับ API Gateway ได้
-app.use(cors({ origin: "http://localhost:5173" }));  // ใช้ Cors ให้ Frontend ที่รันบนพอร์ต 5173
+app.use(cors({ 
+  origin: "http://localhost:5173", 
+  credentials: true 
+}));
 
 app.use(express.json());
 
-// เส้นทาง Proxy สำหรับ Microservices
-app.use("/api/orders", createProxyMiddleware({ target: "http://localhost:5002", changeOrigin: true }));
-app.use("/api/inventory", createProxyMiddleware({ target: "http://localhost:5003", changeOrigin: true }));
-app.use("/api/fetchdata", createProxyMiddleware({ target: "http://localhost:5004", changeOrigin: true }));
-app.use("/api/track", createProxyMiddleware({ target: "http://localhost:5005", changeOrigin: true }));
-app.use("/api/search", createProxyMiddleware({ target: "http://localhost:5006", changeOrigin: true }));
-app.use("/api/forecast", createProxyMiddleware({ target: "http://localhost:5007", changeOrigin: true }));
 
-// Route สำหรับทดสอบว่า API Gateway ทำงาน
-app.get('/', (req, res) => {
-  res.send('Hello, API is running!');
+// เพิ่ม Proxy Middleware สำหรับแต่ละ Microservice
+const services = [
+  { route: "/api/orders", target: "http://localhost:5002" },
+  { route: "/api/inventory", target: "http://localhost:5003" },
+  { route: "/api/fetchdata", target: "http://localhost:5004" },
+  { route: "/api/track", target: "http://localhost:5005" },
+  { route: "/api/search", target: "http://localhost:5006" },
+  { route: "/api/forecast", target: "http://localhost:5007" }
+];
+
+// ใช้ Loop เพื่อลดการเขียนซ้ำ
+services.forEach(({ route, target }) => {
+  app.use(
+    route,
+    createProxyMiddleware({
+      target,
+      changeOrigin: true,
+      pathRewrite: { [`^${route}`]: "/" },
+    })
+  );
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello, API is running!");
 });
 
 const PORT = 5001;
 app.listen(PORT, () => {
-  console.log(`API Gateway running on http://localhost:${PORT}`);
+  console.log(`🚀 API Gateway running on http://localhost:${PORT}`);
 });

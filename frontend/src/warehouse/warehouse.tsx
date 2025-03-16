@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Warehouse } from "../models/product";
-import axios from "axios";
 import { Card, CardContent } from "../components/ui/card";
 import { FaWarehouse, FaMapMarkerAlt, FaBox } from "react-icons/fa";
+import { fetchData } from "../api/apiGateway";
 
 const GOOGLE_MAPS_API_KEY = import.meta.env.GOOGLE_MAPS_API_KEY;
 
@@ -12,15 +12,19 @@ export default function WarehousePage() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        axios.get("http://localhost:5004/api/fetchdata") 
-            .then(response => {
-                setWarehouses(response.data);
-                setLoading(false);
-            })
-            .catch(error => {
+        const loadData = async () => {
+            try {
+                const response = await fetchData();
+                setWarehouses(response.data); 
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            } catch (error) {
                 setError("Failed to fetch warehouses");
+            } finally {
                 setLoading(false);
-            });
+            }
+        };
+
+        loadData();
     }, []);
 
     if (loading) return <p className="text-left text-lg font-semibold text-gray-700 pl-6">Loading warehouses...</p>;
