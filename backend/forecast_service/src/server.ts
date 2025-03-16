@@ -7,10 +7,10 @@ const app = express();
 app.use(express.json());
 app.use(cors()); 
 
-// app.use("/api/inventory", inventoryRoutes);
+// app.use("/", inventoryRoutes);
 
 const PORT = process.env.PORT || 5007;
 app.listen(PORT, () => {
-  console.log(`Inventory Service running on http://localhost:${PORT}`);
+  console.log(`forecast Service running on http://localhost:${PORT}`);
 });
 
