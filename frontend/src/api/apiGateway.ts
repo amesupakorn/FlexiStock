@@ -33,6 +33,7 @@ export const fetchData = async () => {
     }
   };
 
+
 export const testAPI = async () => {
   try {
     const response = await axios.get(`${API_GATEWAY_URL}/`);

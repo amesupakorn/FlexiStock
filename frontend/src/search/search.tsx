@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import axios from "axios";
-import { Product, Inventory, Warehouse } from "../models/product"; // Update your Product and Inventory types
+import { Product, Inventory, Warehouse } from "../models/product";
+import { fetchSearchProducts, fetchSearchResults, fetchSearchWarehouses } from "../api/fetchSearch";  
 
 export default function Search() {
   const [searchMethod, setSearchMethod] = useState<"dropdown" | "manual">("dropdown");
@@ -19,12 +19,12 @@ export default function Search() {
 
   // โหลดข้อมูล Product และ Warehouse
   useEffect(() => {
-    axios.get("http://localhost:5006/api/search/getproducts")
-      .then(response => setProducts(response.data))
+    fetchSearchProducts()
+      .then(data => setProducts(data))
       .catch(error => console.error("Error fetching products:", error));
 
-    axios.get("http://localhost:5006/api/search/getwarehouses")
-      .then(response => setWarehouses(response.data))
+    fetchSearchWarehouses()
+      .then(data => setWarehouses(data))
       .catch(error => console.error("Error fetching warehouses:", error));
   }, []);
 
@@ -36,9 +36,7 @@ export default function Search() {
     }
 
     try {
-      const response = await axios.get("http://localhost:5006/api/search", {
-        params: { productId, warehouseId, searchType },
-      });
+      const response = await fetchSearchResults({ productId, warehouseId, searchType });
 
       if (response.data.length === 0) {
         console.warn("No matching results found");
