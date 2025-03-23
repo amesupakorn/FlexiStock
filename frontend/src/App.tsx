@@ -1,9 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
-import Dashboard from "./stock/page/dashboard";
-import Manage from "./stock/page/manage";
+import Dashboard from "./dashboard";
 import Search from "./search/search";
+<<<<<<< HEAD
 import Order from "./order/order";
 import HomePage from "./home";
+=======
+import Warehouse from "./warehouse/warehouse";
+import TestApi from "./test/testApi"
+>>>>>>> main
 import Navbar from "./components/nav";
 function App() {
   return (
@@ -17,10 +21,16 @@ function App() {
           <div className="container mx-auto">
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/home" element={<HomePage/>} />
-              <Route path="/manage" element={<Manage />} />
               <Route path="/search" element={<Search />} />
+<<<<<<< HEAD
               <Route path="/order" element={<Order />} />
+=======
+              <Route path="/warehouse" element={<Warehouse />} />
+
+
+              <Route path="/test" element={<TestApi />} />
+
+>>>>>>> main
             </Routes>
           </div>
         </main>

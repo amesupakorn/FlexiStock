@@ -1,7 +1,6 @@
 import { Request, RequestHandler, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../database/prisma";
 
-const prisma = new PrismaClient();
 
 const DataController = {
   getProducts: (async (req, res) => {

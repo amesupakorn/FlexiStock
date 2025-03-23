@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import axios from "axios";
-import { Product, Inventory, Warehouse } from "../models/product"; // Update your Product and Inventory types
+import { Product, Inventory, Warehouse } from "../models/product";
+import { fetchSearchProducts, fetchSearchResults, fetchSearchWarehouses } from "../api/fetchSearch";  
 
 export default function Search() {
   const [searchMethod, setSearchMethod] = useState<"dropdown" | "manual">("dropdown");
@@ -19,12 +19,12 @@ export default function Search() {
 
   // โหลดข้อมูล Product และ Warehouse
   useEffect(() => {
-    axios.get("http://localhost:5006/api/search/getproducts")
-      .then(response => setProducts(response.data))
+    fetchSearchProducts()
+      .then(data => setProducts(data))
       .catch(error => console.error("Error fetching products:", error));
 
-    axios.get("http://localhost:5006/api/search/getwarehouses")
-      .then(response => setWarehouses(response.data))
+    fetchSearchWarehouses()
+      .then(data => setWarehouses(data))
       .catch(error => console.error("Error fetching warehouses:", error));
   }, []);
 
@@ -36,9 +36,7 @@ export default function Search() {
     }
 
     try {
-      const response = await axios.get("http://localhost:5006/api/search", {
-        params: { productId, warehouseId, searchType },
-      });
+      const response = await fetchSearchResults({ productId, warehouseId, searchType });
 
       if (response.data.length === 0) {
         console.warn("No matching results found");
@@ -75,12 +73,14 @@ export default function Search() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-left text-green-600 mb-10">
-        Check Product Stock Status
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+      <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+      
+      <h1 className="text-3xl font-bold text-left text-green-600 mb-10 flex flex-row justify-center">
+       Check Product Stock Status
       </h1>
 
-      <div className="w-full max-w-6xl bg-white p-8 rounded-lg shadow-lg">
+      <div className="w-full max-w-6xl bg-white p-8 rounded-lg justify-center">
         {/* ประเภทการค้นหา */}
         <div className="mb-6">
           <label className="text-lg font-medium text-gray-700">Search Type</label>
@@ -249,6 +249,7 @@ export default function Search() {
             <p className="text-center text-gray-500 mt-4">No matching results found</p>
           )}
         </div>
+      </div>
       </div>
     </main>
   );
