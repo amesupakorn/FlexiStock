@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaHome, FaBox, FaSearch } from "react-icons/fa";
+import { FaHome, FaBox, FaSearch, FaTruck } from "react-icons/fa";
 import { FaWarehouse } from "react-icons/fa6";
 
 const Navbar = () => {
@@ -12,8 +12,8 @@ const Navbar = () => {
             to="/"
             className={({ isActive }) =>
               isActive
-                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
-                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
+                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"
+                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"
             }
           >
             <FaHome className="mr-3" />
@@ -25,8 +25,8 @@ const Navbar = () => {
             to="/manage"
             className={({ isActive }) =>
               isActive
-                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
-                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
+                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"
+                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"
             }
           >
             <FaBox className="mr-3" />
@@ -38,8 +38,8 @@ const Navbar = () => {
             to="/search"
             className={({ isActive }) =>
               isActive
-                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
-                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
+                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"
+                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"
             }
           >
             <FaSearch className="mr-3" />
@@ -48,19 +48,30 @@ const Navbar = () => {
         </li>
         <li className="flex items-center w-full">
           <NavLink
+            to="/track"
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"
+                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"
+            }
+          >
+            <FaTruck className="mr-3" />
+            Track Order
+          </NavLink>
+        </li>
+        <li className="flex items-center w-full">
+          <NavLink
             to="/warehouse"
             className={({ isActive }) =>
               isActive
-                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
-                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"  // ปรับให้ข้อความชิดซ้าย
+                ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-md shadow-md transition-all duration-300 w-full justify-start"
+                : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-md transition-colors duration-300 w-full justify-start"
             }
           >
-            <FaWarehouse  className="mr-3" />
-
+            <FaWarehouse className="mr-3" />
             Warehouse
           </NavLink>
         </li>
-
       </ul>
     </nav>
   );

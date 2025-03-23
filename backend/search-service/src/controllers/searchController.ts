@@ -14,12 +14,14 @@ export const searchStock = async (req: Request, res: Response): Promise<void> =>
       return;
     }
 
+    
     if (searchType === "product") {
       if (!productId) {
         res.status(400).json({ message: "Product ID is required for product search" });
-        return;
+        return
       }
 
+      
       const product = await prisma.product.findUnique({
         where: { id: productId as string },
       });
