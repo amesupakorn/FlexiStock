@@ -6,11 +6,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cors()); 
-app.use("/api/search", stockRoutes);
+
+app.use("/", stockRoutes);
 
 const PORT = process.env.PORT || 5006;
 app.listen(PORT, () => {
-  console.log(`Inventory Service running on http://localhost:${PORT}`);
+  console.log(`Search Service running on http://localhost:${PORT}`);
 });
-
-//กูลงละนะ งงเลย

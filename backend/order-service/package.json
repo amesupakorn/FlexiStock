@@ -15,7 +15,7 @@
 		"@types/node": "^22.13.9"
 	},
 	"prisma": {
-		"schema": "../database/prisma/schema.prisma"
+		"schema": "./prisma/schema.prisma"
 	  },
 	  "scripts": {
 		"dev": "ts-node src/server.ts"

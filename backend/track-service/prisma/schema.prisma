@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/database/generated/client"
+
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Tracking {
+  id          String   @id @default(uuid())
+  orderId     String
+  status      TrackingStatus
+  location    String?
+  updatedAt   DateTime @default(now())
+}
+
+enum TrackingStatus {
+  Processing    //เตรียมสินค้า
+  InTransit     //ระหว่างส่ง
+  Delivered     //ส่งเสร็จแล้ว
+  Delayed       //ล่าช้า
+}
