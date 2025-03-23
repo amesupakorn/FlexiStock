@@ -1,8 +1,8 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+This is your Prisma schema file,
+learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client-js"
@@ -13,44 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// ✅ **1. คลังสินค้า**
-model Warehouse {
-  id          String   @id @default(uuid())
-  name        String
-  location    String
-  capacity    Int
-  inventories Inventory[]
-  orders      Order[]
-  Alert       Alert[]
-  InventoryForecast InventoryForecast[]
-  OrderItem OrderItem[]
-}
 
-/// ✅ **2. สินค้า**
-model Product {
-  id          String   @id @default(uuid())
-  name        String
-  description String?
-  price       Decimal
-  createdAt   DateTime @default(now())
-  inventories Inventory[]
-  orderItems  OrderItem[]
-  forecasts   InventoryForecast[]
-  alerts      Alert[]
-}
-
-/// ✅ **3. สินค้าคงคลังแต่ละคลัง**
-model Inventory {
-  id          String   @id @default(uuid())
-  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
-  warehouseId String
-  product     Product   @relation(fields: [productId], references: [id])
-  productId   String
-  stock       Int
-  minStock    Int
-  maxStock    Int
-  lastUpdated DateTime @default(now())
-}
 
 /// ✅ **4. คำสั่งซื้อแบบหลายคลัง**
 model Order {
