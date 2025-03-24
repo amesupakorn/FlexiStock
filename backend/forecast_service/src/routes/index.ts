@@ -1,16 +1,23 @@
+// src/routes/forecastRoutes.ts
+
 import { Router } from "express";
-import { callForecast } from "../controllers/callForecast";
+import { saveForecastData } from "../controllers/forecastData";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+// POST route to handle saving forecast data
+router.post("/save", async (req, res) => {
   try {
-    const forecast = await callForecast();
-    res.json(forecast);
-  } catch (error) {
-    console.error("Forecast API error:", error);
-    res.status(500).json({ error: "Failed to fetch forecast data" });
+    const forecastData = req.body; 
+    const result = await saveForecastData(forecastData);  
+
+    res.status(200).json({
+      message: "Forecast data saved successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    console.error("Error in route /forecast:", error);
+    res.status(500).json({ message: "Error saving forecast data", error: error.message });
   }
 });
-
 export default router;

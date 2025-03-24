@@ -117,12 +117,15 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.InventoryForecastScalarFieldEnum = {
+exports.Prisma.ForecastHistoryScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
   warehouseId: 'warehouseId',
-  predictedDemand: 'predictedDemand',
-  forecastDate: 'forecastDate'
+  createdAt: 'createdAt',
+  forecastDate: 'forecastDate',
+  forecastYhat: 'forecastYhat',
+  forecastLower: 'forecastLower',
+  forecastUpper: 'forecastUpper'
 };
 
 exports.Prisma.SortOrder = {
@@ -137,7 +140,7 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  InventoryForecast: 'InventoryForecast'
+  ForecastHistory: 'ForecastHistory'
 };
 
 /**
