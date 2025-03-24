@@ -12,3 +12,11 @@ export interface ForecastPoint {
   
   export interface ForecastResponse {
     [key: string]: ForecastPoint[];  }
+
+
+export interface ForecastData {
+  [warehouse_id: string]: {
+    [product_id: string]: ForecastPoint[];
+  };
+}
+  export const forecast: ForecastData = {};

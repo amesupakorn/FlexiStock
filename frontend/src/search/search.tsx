@@ -16,9 +16,11 @@ export default function Search() {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // โหลดข้อมูล Product และ Warehouse
   useEffect(() => {
+    setLoading(true)
     fetchSearchProducts()
       .then(data => setProducts(data))
       .catch(error => console.error("Error fetching products:", error));
@@ -26,6 +28,7 @@ export default function Search() {
     fetchSearchWarehouses()
       .then(data => setWarehouses(data))
       .catch(error => console.error("Error fetching warehouses:", error));
+    setLoading(false)
   }, []);
 
   // ค้นหาข้อมูล
@@ -71,6 +74,16 @@ export default function Search() {
     setProductId(product.id);
     setShowSuggestions(false);
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <span className="ml-3 text-lg font-medium">กำลังโหลดข้อมูล...</span>
+      </div>
+    );
+  }
+
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
