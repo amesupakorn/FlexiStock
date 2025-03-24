@@ -6,7 +6,7 @@ export const createTrack = async (req: Request, res: Response) => {
   const { orderId, status, location } = req.body;
 
   try {
-    const track = await prisma.track.create({
+    const track = await prisma.tracking.create({
       data: { orderId, status, location },
     });
     res.status(201).json(track);
@@ -20,9 +20,9 @@ export const getTrackByOrderId = async (req: Request, res: Response) => {
   const { orderId } = req.params;
 
   try {
-    const tracks = await prisma.track.findMany({
+    const tracks = await prisma.tracking.findMany({
       where: { orderId },
-      orderBy: { timestamp: "desc" },
+      orderBy: { updatedAt: "desc" },
     });
     res.json(tracks);
   } catch (error) {

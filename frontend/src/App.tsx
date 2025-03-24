@@ -4,6 +4,9 @@ import Search from "./search/search";
 import Warehouse from "./warehouse/warehouse";
 import TestApi from "./test/testApi"
 import Navbar from "./components/nav";
+import TrackingPage from "./track/track";
+
+
 function App() {
   return (
     <Router>
@@ -18,8 +21,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/search" element={<Search />} />
               <Route path="/warehouse" element={<Warehouse />} />
-
-
+              <Route path="/track" element={<TrackingPage />} />
               <Route path="/test" element={<TestApi />} />
 
             </Routes>
