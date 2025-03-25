@@ -2,9 +2,10 @@ import axios from "axios";
 
 const API_GATEWAY_URL = "http://localhost:5001"; 
 
+
 export const fetchSearchProducts = async () => {
   try {
-    const response = await axios.get(`${API_GATEWAY_URL}/api/search/getproducts`);
+    const response = await axios.get(`${API_GATEWAY_URL}/api/inventory/product`);
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -14,7 +15,7 @@ export const fetchSearchProducts = async () => {
 
 export const fetchSearchWarehouses = async () => {
   try {
-    const response = await axios.get(`${API_GATEWAY_URL}/api/search/getwarehouses`);
+    const response = await axios.get(`${API_GATEWAY_URL}/api/inventory/warehouse`);
     return response.data;
   } catch (error) {
     console.error("Error fetching warehouses:", error);
