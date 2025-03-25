@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { findNearestWarehouse } from "../controllers/warehouseController";
+import { findNearestWarehouse } from "../controllers/warehouse";
 
 const router = Router();
 
