@@ -122,7 +122,8 @@ exports.Prisma.TrackingScalarFieldEnum = {
   orderId: 'orderId',
   status: 'status',
   location: 'location',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  delayReason: 'delayReason'
 };
 
 exports.Prisma.SortOrder = {

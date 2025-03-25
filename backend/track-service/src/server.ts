@@ -1,12 +1,13 @@
 import express from "express";
-import trackRoutes from "./routes";
+import cors from "cors";
+import trackRoutes from "./routes/track"; 
 
 const app = express();
-const PORT = process.env.PORT || 3002;
-
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
-app.use("/", trackRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Track-service is running on port ${PORT}`);
+app.use("/", trackRoutes); // ✅ เส้นทางที่รวม /track/:orderId อยู่ในนี้
+
+app.listen(5005, () => {
+  console.log("Track-service is running on port 5005");
 });

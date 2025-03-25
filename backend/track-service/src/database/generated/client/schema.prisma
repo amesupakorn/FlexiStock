@@ -15,11 +15,12 @@ datasource db {
 }
 
 model Tracking {
-  id        String         @id @default(uuid())
-  orderId   String
-  status    TrackingStatus
-  location  String?
-  updatedAt DateTime       @default(now())
+  id          String         @id @default(uuid())
+  orderId     String
+  status      TrackingStatus
+  location    String?
+  updatedAt   DateTime       @default(now())
+  delayReason String?
 }
 
 enum TrackingStatus {

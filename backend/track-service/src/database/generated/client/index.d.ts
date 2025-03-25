@@ -904,6 +904,7 @@ export namespace Prisma {
     status: $Enums.TrackingStatus | null
     location: string | null
     updatedAt: Date | null
+    delayReason: string | null
   }
 
   export type TrackingMaxAggregateOutputType = {
@@ -912,6 +913,7 @@ export namespace Prisma {
     status: $Enums.TrackingStatus | null
     location: string | null
     updatedAt: Date | null
+    delayReason: string | null
   }
 
   export type TrackingCountAggregateOutputType = {
@@ -920,6 +922,7 @@ export namespace Prisma {
     status: number
     location: number
     updatedAt: number
+    delayReason: number
     _all: number
   }
 
@@ -930,6 +933,7 @@ export namespace Prisma {
     status?: true
     location?: true
     updatedAt?: true
+    delayReason?: true
   }
 
   export type TrackingMaxAggregateInputType = {
@@ -938,6 +942,7 @@ export namespace Prisma {
     status?: true
     location?: true
     updatedAt?: true
+    delayReason?: true
   }
 
   export type TrackingCountAggregateInputType = {
@@ -946,6 +951,7 @@ export namespace Prisma {
     status?: true
     location?: true
     updatedAt?: true
+    delayReason?: true
     _all?: true
   }
 
@@ -1027,6 +1033,7 @@ export namespace Prisma {
     status: $Enums.TrackingStatus
     location: string | null
     updatedAt: Date
+    delayReason: string | null
     _count: TrackingCountAggregateOutputType | null
     _min: TrackingMinAggregateOutputType | null
     _max: TrackingMaxAggregateOutputType | null
@@ -1052,6 +1059,7 @@ export namespace Prisma {
     status?: boolean
     location?: boolean
     updatedAt?: boolean
+    delayReason?: boolean
   }, ExtArgs["result"]["tracking"]>
 
   export type TrackingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1060,6 +1068,7 @@ export namespace Prisma {
     status?: boolean
     location?: boolean
     updatedAt?: boolean
+    delayReason?: boolean
   }, ExtArgs["result"]["tracking"]>
 
   export type TrackingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1068,6 +1077,7 @@ export namespace Prisma {
     status?: boolean
     location?: boolean
     updatedAt?: boolean
+    delayReason?: boolean
   }, ExtArgs["result"]["tracking"]>
 
   export type TrackingSelectScalar = {
@@ -1076,9 +1086,10 @@ export namespace Prisma {
     status?: boolean
     location?: boolean
     updatedAt?: boolean
+    delayReason?: boolean
   }
 
-  export type TrackingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "status" | "location" | "updatedAt", ExtArgs["result"]["tracking"]>
+  export type TrackingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "status" | "location" | "updatedAt" | "delayReason", ExtArgs["result"]["tracking"]>
 
   export type $TrackingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Tracking"
@@ -1089,6 +1100,7 @@ export namespace Prisma {
       status: $Enums.TrackingStatus
       location: string | null
       updatedAt: Date
+      delayReason: string | null
     }, ExtArgs["result"]["tracking"]>
     composites: {}
   }
@@ -1517,6 +1529,7 @@ export namespace Prisma {
     readonly status: FieldRef<"Tracking", 'TrackingStatus'>
     readonly location: FieldRef<"Tracking", 'String'>
     readonly updatedAt: FieldRef<"Tracking", 'DateTime'>
+    readonly delayReason: FieldRef<"Tracking", 'String'>
   }
     
 
@@ -1902,7 +1915,8 @@ export namespace Prisma {
     orderId: 'orderId',
     status: 'status',
     location: 'location',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    delayReason: 'delayReason'
   };
 
   export type TrackingScalarFieldEnum = (typeof TrackingScalarFieldEnum)[keyof typeof TrackingScalarFieldEnum]
@@ -2005,6 +2019,7 @@ export namespace Prisma {
     status?: EnumTrackingStatusFilter<"Tracking"> | $Enums.TrackingStatus
     location?: StringNullableFilter<"Tracking"> | string | null
     updatedAt?: DateTimeFilter<"Tracking"> | Date | string
+    delayReason?: StringNullableFilter<"Tracking"> | string | null
   }
 
   export type TrackingOrderByWithRelationInput = {
@@ -2013,6 +2028,7 @@ export namespace Prisma {
     status?: SortOrder
     location?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
+    delayReason?: SortOrderInput | SortOrder
   }
 
   export type TrackingWhereUniqueInput = Prisma.AtLeast<{
@@ -2024,6 +2040,7 @@ export namespace Prisma {
     status?: EnumTrackingStatusFilter<"Tracking"> | $Enums.TrackingStatus
     location?: StringNullableFilter<"Tracking"> | string | null
     updatedAt?: DateTimeFilter<"Tracking"> | Date | string
+    delayReason?: StringNullableFilter<"Tracking"> | string | null
   }, "id">
 
   export type TrackingOrderByWithAggregationInput = {
@@ -2032,6 +2049,7 @@ export namespace Prisma {
     status?: SortOrder
     location?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
+    delayReason?: SortOrderInput | SortOrder
     _count?: TrackingCountOrderByAggregateInput
     _max?: TrackingMaxOrderByAggregateInput
     _min?: TrackingMinOrderByAggregateInput
@@ -2046,6 +2064,7 @@ export namespace Prisma {
     status?: EnumTrackingStatusWithAggregatesFilter<"Tracking"> | $Enums.TrackingStatus
     location?: StringNullableWithAggregatesFilter<"Tracking"> | string | null
     updatedAt?: DateTimeWithAggregatesFilter<"Tracking"> | Date | string
+    delayReason?: StringNullableWithAggregatesFilter<"Tracking"> | string | null
   }
 
   export type TrackingCreateInput = {
@@ -2054,6 +2073,7 @@ export namespace Prisma {
     status: $Enums.TrackingStatus
     location?: string | null
     updatedAt?: Date | string
+    delayReason?: string | null
   }
 
   export type TrackingUncheckedCreateInput = {
@@ -2062,6 +2082,7 @@ export namespace Prisma {
     status: $Enums.TrackingStatus
     location?: string | null
     updatedAt?: Date | string
+    delayReason?: string | null
   }
 
   export type TrackingUpdateInput = {
@@ -2070,6 +2091,7 @@ export namespace Prisma {
     status?: EnumTrackingStatusFieldUpdateOperationsInput | $Enums.TrackingStatus
     location?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    delayReason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TrackingUncheckedUpdateInput = {
@@ -2078,6 +2100,7 @@ export namespace Prisma {
     status?: EnumTrackingStatusFieldUpdateOperationsInput | $Enums.TrackingStatus
     location?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    delayReason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TrackingCreateManyInput = {
@@ -2086,6 +2109,7 @@ export namespace Prisma {
     status: $Enums.TrackingStatus
     location?: string | null
     updatedAt?: Date | string
+    delayReason?: string | null
   }
 
   export type TrackingUpdateManyMutationInput = {
@@ -2094,6 +2118,7 @@ export namespace Prisma {
     status?: EnumTrackingStatusFieldUpdateOperationsInput | $Enums.TrackingStatus
     location?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    delayReason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TrackingUncheckedUpdateManyInput = {
@@ -2102,6 +2127,7 @@ export namespace Prisma {
     status?: EnumTrackingStatusFieldUpdateOperationsInput | $Enums.TrackingStatus
     location?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    delayReason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2163,6 +2189,7 @@ export namespace Prisma {
     status?: SortOrder
     location?: SortOrder
     updatedAt?: SortOrder
+    delayReason?: SortOrder
   }
 
   export type TrackingMaxOrderByAggregateInput = {
@@ -2171,6 +2198,7 @@ export namespace Prisma {
     status?: SortOrder
     location?: SortOrder
     updatedAt?: SortOrder
+    delayReason?: SortOrder
   }
 
   export type TrackingMinOrderByAggregateInput = {
@@ -2179,6 +2207,7 @@ export namespace Prisma {
     status?: SortOrder
     location?: SortOrder
     updatedAt?: SortOrder
+    delayReason?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
