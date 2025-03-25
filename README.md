@@ -19,5 +19,5 @@ FlexiStock เป็นระบบจัดการสต็อกสินค
 **Model ML**
 - Prophet
 
-**API**
+**External APIs**
 - Google Map API
