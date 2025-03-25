@@ -86,8 +86,8 @@ export default function Search() {
   }
 
   return (
-    <main className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-       <div className="w-full bg-white rounded-3xl shadow-xl mx-auto overflow-hidden border border-gray-100 max-w-6xl">
+    <main className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+       <div className="max-w-full bg-white rounded-3xl shadow-xl mx-auto overflow-hidden border border-gray-100 max-w-6xl">
         {/* Header */}
         <div className="bg-gradient-to-r from-green-500 to-green-600 p-6 text-center">
           <h1 className="text-3xl text-white font-bold flex items-center justify-center gap-3">

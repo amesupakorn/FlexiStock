@@ -18,6 +18,8 @@ export default function Order() {
 
   useEffect(() => {
     const loadData = async () => {
+      setLoading(true);
+
         try {
             const response = await fetchProduct();
             setProduct(response.data); 

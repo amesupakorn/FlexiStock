@@ -60,7 +60,7 @@ export default function OrderSummary() {
     try {
       
       await createOrder(customerData, selectedItems, warehouseLocation?.id);
-      handleAlert()
+      handleAlert({title:"Order Success", icon: "success"})
       
       navigate("/order"); 
     } catch (error) {

@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import Dashboard from "./dashboard";
 import Search from "./search/search";
-import Warehouse from "./warehouse/warehouse";
 import Order from "./order/order";
 import Customer from "./order/customer";
 import OrderSummary from "./order/summary";
-
 import Navbar from "./components/nav";
+import StockPage from "./stock";
+
 function App() {
   return (
     <Router>
@@ -17,12 +17,13 @@ function App() {
         </div>
 
           {/* Main Content */}
-          <main className="flex-grow bg-white overflow-y-auto" style={{ height: 'calc(100vh - 10px)' }}> 
+          <main className="flex-grow bg-gray-100 overflow-y-auto" style={{ height: 'calc(100vh - 10px)' }}> 
           <div className="container mx-auto">
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/inventory" element={<StockPage />} />
+
               <Route path="/search" element={<Search />} />
-              <Route path="/warehouse" element={<Warehouse />} />
               <Route path="/order" element={<Order />} />
               <Route path="/customer" element={<Customer />} />
               <Route path="/summary" element={<OrderSummary />} />

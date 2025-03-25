@@ -2,20 +2,19 @@
 import amqp from 'amqplib';
 
 const RABBITMQ_URL = 'amqp://localhost';  
-const QUEUE_NAME = 'forecast_queue'; 
 
 export const sendToForecastQueue = async (data: any) => {
   try {
     const connection = await amqp.connect(RABBITMQ_URL);
     const channel = await connection.createChannel();
-
+    const queue = "forecast_queue"
     // สร้าง queue ถ้าไม่มีก่อนที่จะส่งข้อความ
-    await channel.assertQueue(QUEUE_NAME, {
+    await channel.assertQueue(queue, {
       durable: true,  // ทำให้ queue มีความคงทน
     });
 
     // ส่งข้อความไปที่ queue
-    channel.sendToQueue(QUEUE_NAME, Buffer.from(JSON.stringify(data)), {
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(data)), {
       persistent: true,  // ทำให้ข้อความไม่หายไปเมื่อ RabbitMQ รีสตาร์ท
     });
 
@@ -30,3 +29,27 @@ export const sendToForecastQueue = async (data: any) => {
     console.error("Error sending message to RabbitMQ:", error);
   }
 };
+
+
+export async function sendToInventoryQueue(message: any) {
+  try {
+
+    const connection = await amqp.connect(RABBITMQ_URL);
+    const channel = await connection.createChannel();
+    const queue = "inventory_update";
+
+    await channel.assertQueue(queue, { durable: true });
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), {
+      persistent: true,
+    });
+
+    console.log("📦 Sent to inventory queue:", message);
+
+    setTimeout(() => {
+      channel.close();
+      connection.close();
+    }, 500);
+  } catch (error) {
+    console.error("Error sending message to RabbitMQ:", error);
+  }
+}

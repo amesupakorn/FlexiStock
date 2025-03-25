@@ -23,6 +23,17 @@ export const fetchInventory = async () => {
   }
 };
 
+
+export const fetchInventoryDetail = async () => {
+  try {
+    const response = await axios.get(`${API_GATEWAY_URL}/api/inventory/inventory/detail`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching inventory:", error);
+    throw error;
+  }
+};
+
 export const fetchProduct = async () => {
     try {
       const response = await axios.get(`${API_GATEWAY_URL}/api/inventory/product`);
