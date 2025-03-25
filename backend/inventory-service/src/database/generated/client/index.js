@@ -147,7 +147,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/supakornthongaerd/Documents/Project/FlexiStock/backend/inventory-service/src/generated/client",
+      "value": "/Users/draftmananchaya/Documents/githubb/FlexiStock/backend/inventory-service/src/database/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -161,14 +161,14 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/supakornthongaerd/Documents/Project/FlexiStock/backend/inventory-service/prisma/schema.prisma",
+    "sourceFilePath": "/Users/draftmananchaya/Documents/githubb/FlexiStock/backend/inventory-service/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../../.env"
   },
-  "relativePath": "../../../prisma",
+  "relativePath": "../../../../prisma",
   "clientVersion": "6.4.1",
   "engineVersion": "a9055b89e58b4b5bfb59600785423b1db3d0e75d",
   "datasourceNames": [
@@ -184,8 +184,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Warehouse {\n  id          String      @id @default(uuid())\n  name        String\n  location    String\n  capacity    Int\n  inventories Inventory[]\n}\n\n/// ✅ **2. สินค้า**\nmodel Product {\n  id          String      @id @default(uuid())\n  name        String\n  description String?\n  price       Decimal\n  createdAt   DateTime    @default(now())\n  inventories Inventory[]\n}\n\n/// ✅ **3. สินค้าคงคลังแต่ละคลัง**\nmodel Inventory {\n  id          String    @id @default(uuid())\n  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])\n  warehouseId String\n  product     Product   @relation(fields: [productId], references: [id])\n  productId   String\n  stock       Int\n  minStock    Int\n  maxStock    Int\n  lastUpdated DateTime  @default(now())\n}\n",
-  "inlineSchemaHash": "e6bbaac2cec12532c96b9e20eb6908ed2e7e49bf9eb1531e11fecaa35473eb06",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/database/generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Warehouse {\n  id          String      @id @default(uuid())\n  name        String\n  location    String\n  capacity    Int\n  inventories Inventory[]\n}\n\n/// ✅ **2. สินค้า**\nmodel Product {\n  id          String      @id @default(uuid())\n  name        String\n  description String?\n  price       Decimal\n  createdAt   DateTime    @default(now())\n  inventories Inventory[]\n}\n\n/// ✅ **3. สินค้าคงคลังแต่ละคลัง**\nmodel Inventory {\n  id          String    @id @default(uuid())\n  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])\n  warehouseId String\n  product     Product   @relation(fields: [productId], references: [id])\n  productId   String\n  stock       Int\n  minStock    Int\n  maxStock    Int\n  lastUpdated DateTime  @default(now())\n}\n",
+  "inlineSchemaHash": "76609f24364c5f3132c05e424609d9468fefe302e563118545e1317f392eb8e1",
   "copyEngine": true
 }
 
@@ -194,8 +194,8 @@ const fs = require('fs')
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   const alternativePaths = [
-    "src/generated/client",
-    "generated/client",
+    "src/database/generated/client",
+    "database/generated/client",
   ]
   
   const alternativePath = alternativePaths.find((altPath) => {
@@ -225,7 +225,7 @@ Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "src/generated/client/libquery_engine-darwin-arm64.dylib.node")
+path.join(process.cwd(), "src/database/generated/client/libquery_engine-darwin-arm64.dylib.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "src/generated/client/schema.prisma")
+path.join(process.cwd(), "src/database/generated/client/schema.prisma")

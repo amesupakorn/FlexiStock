@@ -20,27 +20,21 @@ model Customer {
   name      String
   email     String   @unique
   orders    Order[]
+  address   String
 }
+
 
 model Order {
   id          String   @id @default(uuid())
-  customer    Customer @relation(fields: [customerId], references: [id])
-  customerId  String
-  totalPrice  Decimal
-  status      OrderStatus
-  createdAt   DateTime @default(now())
-  orderItems  OrderItem[]
-}
-
-/// ✅ **5. รายการสินค้าภายในคำสั่งซื้อ**
-model OrderItem {
-  id          String   @id @default(uuid())
-  order       Order    @relation(fields: [orderId], references: [id])
-  orderId     String
+  customer    Customer? @relation(fields: [customerId], references: [id])
+  customerId  String?
   productId   String
   warehouseId String
   quantity    Int
-  subtotal    Decimal
+  totalPrice  Decimal
+  status      OrderStatus
+  createdAt   DateTime @default(now())
+
 }
 
 enum OrderStatus {

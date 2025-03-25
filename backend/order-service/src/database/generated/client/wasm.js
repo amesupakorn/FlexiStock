@@ -120,24 +120,19 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.CustomerScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  email: 'email'
+  email: 'email',
+  address: 'address'
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
-  totalPrice: 'totalPrice',
-  status: 'status',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.OrderItemScalarFieldEnum = {
-  id: 'id',
-  orderId: 'orderId',
   productId: 'productId',
   warehouseId: 'warehouseId',
   quantity: 'quantity',
-  subtotal: 'subtotal'
+  totalPrice: 'totalPrice',
+  status: 'status',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -149,6 +144,11 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.OrderStatus = exports.$Enums.OrderStatus = {
   Pending: 'Pending',
   Processing: 'Processing',
@@ -159,8 +159,7 @@ exports.OrderStatus = exports.$Enums.OrderStatus = {
 
 exports.Prisma.ModelName = {
   Customer: 'Customer',
-  Order: 'Order',
-  OrderItem: 'OrderItem'
+  Order: 'Order'
 };
 
 /**

@@ -1,4 +1,4 @@
-import { fetchInventory, testAPI, fetchData } from "../api/apiGateway";
+// import { fetchInventory, testAPI, fetchData } from "../api/fetchData";
 import React, { useEffect, useState } from "react";
 
 export default function TestApi() {

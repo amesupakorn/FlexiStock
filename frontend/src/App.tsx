@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import Dashboard from "./dashboard";
 import Search from "./search/search";
-<<<<<<< HEAD
-import Order from "./order/order";
-import HomePage from "./home";
-=======
 import Warehouse from "./warehouse/warehouse";
 import TestApi from "./test/testApi"
->>>>>>> main
+import Order from "./order/order";
+import Customer from "./order/customer";
+import OrderSummary from "./order/summary";
+
 import Navbar from "./components/nav";
 function App() {
   return (
@@ -22,15 +21,13 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/search" element={<Search />} />
-<<<<<<< HEAD
-              <Route path="/order" element={<Order />} />
-=======
               <Route path="/warehouse" element={<Warehouse />} />
-
+              <Route path="/order" element={<Order />} />
+              <Route path="/customer" element={<Customer />} />
+              <Route path="/summary" element={<OrderSummary />} />
 
               <Route path="/test" element={<TestApi />} />
 
->>>>>>> main
             </Routes>
           </div>
         </main>

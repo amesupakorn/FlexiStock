@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
-import { Line } from "react-chartjs-2";
-
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const DashboardPage = () => {
   const [loading, setLoading] = useState(false);
@@ -23,7 +19,7 @@ const DashboardPage = () => {
   }
 
   return (
-    <Line data={data} />
+    <div></div>
   );
 };
 
