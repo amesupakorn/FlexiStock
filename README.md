@@ -8,7 +8,8 @@ FlexiStock เป็นระบบจัดการสต็อกสินค
 - Tailwind CSS  
 
 **Backend**  
-- Node.js 
+- Node.js
+- Fastapi
 - Prisma ORM
 - RabbitMQ
 
@@ -17,3 +18,6 @@ FlexiStock เป็นระบบจัดการสต็อกสินค
 
 **Model ML**
 - Prophet
+
+**API**
+- Google Map API
