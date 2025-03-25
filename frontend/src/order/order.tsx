@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Product, Warehouse } from "../models/product";
-import { fetchProduct, fetchWarehouse } from "../api/fetchData";
+import { fetchProduct, } from "../api/fetchData";
 export default function Order() {
   const [productId, setProductId] = useState("");
   const [products, setProduct] = useState<Product[]>([]);
-  const [warehouses, setWarehouse] = useState<Warehouse[]>([]);;
 
 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const [quantity, setQuantity] = useState(1);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
 
   const navigate = useNavigate();
@@ -20,12 +20,10 @@ export default function Order() {
     const loadData = async () => {
         try {
             const response = await fetchProduct();
-            const resware = await fetchWarehouse();
             setProduct(response.data); 
-            setWarehouse(response.data)
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
-            setError("Failed to fetch warehouses");
+            setError("Failed to fetch product");
         } finally {
             setLoading(false);
         }
@@ -36,10 +34,9 @@ export default function Order() {
   // 🔸 กำหนดรายการสินค้าแบบ static
 
   const handleSubmit = () => {
-    if (!productId || quantity < 1 || warehouses.length === 0) return;
+    if (!productId || quantity < 1 ) return;
   
     const selectedProduct = products.find(p => p.id === productId);
-    const selectedWarehouse = warehouses[0];
   
     if (selectedProduct) {
       const updatedItems = [...selectedItems];
@@ -54,7 +51,6 @@ export default function Order() {
       } else {
         updatedItems.push({
           product: selectedProduct,
-          warehouse: selectedWarehouse,
           quantity: quantity,
           total: Number(selectedProduct.price) * quantity,
         });

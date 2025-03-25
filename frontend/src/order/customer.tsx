@@ -21,6 +21,7 @@ export default function Customer() {
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMapClick = (e: any) => {
     setLocation({
       lat: e.latLng.lat(),

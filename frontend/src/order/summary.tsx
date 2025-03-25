@@ -1,19 +1,17 @@
 import { useState, useEffect, useRef } from "react";
-import { LoadScript, GoogleMap, Marker, Polyline } from "@react-google-maps/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MapPin, User, Mail, Package, Route, Clock, ChevronLeft } from "lucide-react";
-import { FaArrowDown } from "react-icons/fa6";
-import { FaTruckFast } from "react-icons/fa6";
-import { SiGooglemaps } from "react-icons/si";
-import { getNearestWarehouse } from "../api/fetchOrder";
+import { createOrder, getNearestWarehouse } from "../api/fetchOrder";
 import RouteVisualization from "../components/ui/routeDlivery"
 import { SelectedItem } from "../models/selectItem";
 import { NearestWarehouse, Warehouse } from "../models/warehouse";
+import { handleAlert } from "../components/swifAlert";
 export default function OrderSummary() {
   const { state } = useLocation();
   const { customerData } = state || {};
   const { selectedItems } = useLocation().state as { selectedItems: SelectedItem[] };
-  const [isSubmitting, setIsSubmitting] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const navigate = useNavigate();
 
   const [warehouseLocation, setWarehouseLocation] = useState<null | Warehouse>(null);
@@ -21,7 +19,9 @@ export default function OrderSummary() {
   
   const customerLocation = customerData?.location || { lat: 13.747, lng: 100.5223 };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   const [path, setPath] = useState<any[]>([]); 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   const polylineRef = useRef<any>(null);
   
   
@@ -53,6 +53,22 @@ export default function OrderSummary() {
   useEffect(() => {
     setPath([warehouseLocation, customerLocation]);
   }, [customerLocation]);
+
+
+  const handleCreateOrder = async () => {
+    setIsSubmitting(true)
+    try {
+      
+      await createOrder(customerData, selectedItems, warehouseLocation?.id);
+      handleAlert()
+      
+      navigate("/order"); 
+    } catch (error) {
+      console.error("Failed to create order:", error);
+    }
+    setIsSubmitting(false)
+
+  };
 
   return (
     <main className="flex flex-col min-h-screen p-4 md:p-8">
@@ -243,12 +259,12 @@ export default function OrderSummary() {
          {/* Submit Button */}
          <div className="p-6 border-t border-gray-200">
           <button
-            // onClick={handleSubmit}
+            onClick={handleCreateOrder}
             disabled={isSubmitting}
             className={`w-full p-4 text-white text-lg font-medium rounded-lg transition-all flex items-center justify-center space-x-2
               ${(isSubmitting) 
                 ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-green-500 hover:bg-green-600 hover:scale-105 shadow-lg'}`}
+                : 'bg-green-500 hover:bg-green-600 hover:scale-101 shadow-lg'}`}
           >
             {isSubmitting ? (
               <>

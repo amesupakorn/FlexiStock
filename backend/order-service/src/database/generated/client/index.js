@@ -145,7 +145,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/draftmananchaya/Documents/githubb/FlexiStock/backend/order-service/src/database/generated/client",
+      "value": "/Users/supakornthongaerd/Documents/Project/FlexiStock/backend/order-service/src/database/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -159,11 +159,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/draftmananchaya/Documents/githubb/FlexiStock/backend/order-service/prisma/schema.prisma",
+    "sourceFilePath": "/Users/supakornthongaerd/Documents/Project/FlexiStock/backend/order-service/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../../.env"
   },
   "relativePath": "../../../../prisma",

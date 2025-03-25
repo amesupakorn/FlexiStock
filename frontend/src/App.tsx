@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import Dashboard from "./dashboard";
 import Search from "./search/search";
 import Warehouse from "./warehouse/warehouse";
-import TestApi from "./test/testApi"
 import Order from "./order/order";
 import Customer from "./order/customer";
 import OrderSummary from "./order/summary";
@@ -27,8 +26,6 @@ function App() {
               <Route path="/order" element={<Order />} />
               <Route path="/customer" element={<Customer />} />
               <Route path="/summary" element={<OrderSummary />} />
-
-              <Route path="/test" element={<TestApi />} />
 
             </Routes>
           </div>

@@ -5,6 +5,7 @@ import { FaWarehouse } from "react-icons/fa6";
 import { MdSpaceDashboard } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import { FaCartShopping } from "react-icons/fa6";
 
 
 const Navbar = () => {
@@ -70,6 +71,19 @@ const Navbar = () => {
             >
               <FaBox className="mr-3 w-5 h-5" />
               <span>สินค้าคงคลัง</span>
+            </NavLink>
+          </li>
+          <li className="flex items-center w-full">
+            <NavLink
+              to="/Order"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-lg shadow-md transition-all duration-300 w-full justify-start"
+                  : "flex items-center text-gray-400 hover:text-white hover:bg-gray-700 px-6 py-3 rounded-lg transition-colors duration-300 w-full justify-start"
+              }
+            >
+              <FaCartShopping className="mr-3 w-5 h-5" />
+              <span>สั่งซื้อสินค้า</span>
             </NavLink>
           </li>
         </ul>
