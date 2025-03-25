@@ -4,7 +4,7 @@ import { haversineDistance } from "../utils/haversine";
 import dotenv from "dotenv";
 dotenv.config();
 
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+const GOOGLE_API_KEY = "AIzaSyDlOE8vlYCnaOdeG1JWZ4TZt_xCzKiZv6w";
 
 const geocodeLocation = async (place: string) => {
   try {
@@ -26,10 +26,17 @@ const geocodeLocation = async (place: string) => {
 export const findNearestWarehouse = async (
   lat: number,
   lng: number
-): Promise<{ warehouse: any; distance_km: number } | null> => {
+): Promise<{ warehouse: any; distance_km: number; estimated_time_mins: number } | null> => {
   try {
+
     const response = await axios.get("http://localhost:5001/api/inventory/warehouse");
     const warehouses = response.data;
+
+    if (!warehouses || warehouses.length === 0) {
+      console.warn("No warehouses found from inventory service.");
+      return null; 
+
+    }
 
     const enrichedWarehouses = await Promise.all(
       warehouses.map(async (w: any) => {
@@ -41,6 +48,7 @@ export const findNearestWarehouse = async (
         return { ...w, lat: geo.lat, lng: geo.lng };
       })
     );
+
 
     const validWarehouses = enrichedWarehouses.filter(Boolean);
 
@@ -55,9 +63,13 @@ export const findNearestWarehouse = async (
       curr.distance < min.distance ? curr : min
     );
 
+    const estimatedTimeMins = (nearest.distance / 50) * 60;
+
+
     return {
       warehouse: nearest.warehouse,
       distance_km: Number(nearest.distance.toFixed(2)),
+      estimated_time_mins: Math.ceil(estimatedTimeMins),
     };
   } catch (error) {
     console.error("Error finding nearest warehouse:", error);

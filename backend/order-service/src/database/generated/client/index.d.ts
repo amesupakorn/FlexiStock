@@ -4240,10 +4240,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
     address?: StringFieldUpdateOperationsInput | string
-=======
->>>>>>> main
   }
 
   export type OrderCreateManyCustomerInput = {

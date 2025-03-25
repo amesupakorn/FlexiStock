@@ -5,42 +5,44 @@ import { MapPin, User, Mail, Package, Route, Clock, ChevronLeft } from "lucide-r
 import { FaArrowDown } from "react-icons/fa6";
 import { FaTruckFast } from "react-icons/fa6";
 import { SiGooglemaps } from "react-icons/si";
-
+import { getNearestWarehouse } from "../api/fetchOrder";
 import RouteVisualization from "../components/ui/routeDlivery"
 import { SelectedItem } from "../models/selectItem";
-
+import { NearestWarehouse, Warehouse } from "../models/warehouse";
 export default function OrderSummary() {
   const { state } = useLocation();
   const { customerData } = state || {};
   const { selectedItems } = useLocation().state as { selectedItems: SelectedItem[] };
   const [isSubmitting, setIsSubmitting] = useState(true);
   const navigate = useNavigate();
-  const warehouseLocation = { lat: 13.7563, lng: 100.5018 };
+
+  const [warehouseLocation, setWarehouseLocation] = useState<null | Warehouse>(null);
+  const [nearestWarehouse, setNearestWarehouse] = useState<null | NearestWarehouse>(null);  
+  
   const customerLocation = customerData?.location || { lat: 13.747, lng: 100.5223 };
+
   const [path, setPath] = useState<any[]>([]); 
   const polylineRef = useRef<any>(null);
+  
+  
+  useEffect(() => {
+    const fetchWarehouse = async () => {
+      if (!customerLocation.lat || !customerLocation.lng) return;
 
-  // Simulated distance and time calculation
-  const calculateDistance = () => {
-    // Basic Haversine formula implementation 
-    const R = 6371; // Earth's radius in kilometers
-    const dLat = (customerLocation.lat - warehouseLocation.lat) * Math.PI / 180;
-    const dLon = (customerLocation.lng - warehouseLocation.lng) * Math.PI / 180;
-    const a = 
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(warehouseLocation.lat * Math.PI / 180) * 
-      Math.cos(customerLocation.lat * Math.PI / 180) * 
-      Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    const distance = R * c;
-    
-    return {
-      distance: distance.toFixed(2),
-      estimatedTime: (distance / 50 * 60).toFixed(0) // Assuming 50 km/h average speed
+      try {
+        const data = await getNearestWarehouse(customerLocation.lat, customerLocation.lng);
+        setNearestWarehouse(data);
+        if (data.warehouse) {
+          setWarehouseLocation(data.warehouse);
+        }
+      } catch (err) {
+        console.error("Fetch warehouse failed:", err);
+      }
     };
-  };
 
-  const { distance, estimatedTime } = calculateDistance();
+    fetchWarehouse();
+  }, [customerLocation]);
+
 
   const handleGoBack = () => {
     navigate(-1); // Navigate back to the previous page
@@ -80,6 +82,8 @@ export default function OrderSummary() {
                     Delivery Route
                 </h2>
                 <div className="mt-6 border rounded-lg overflow-hidden shadow-md">
+                {warehouseLocation && (
+
                     <iframe
                         title="Delivery Route"
                         width="100%"
@@ -89,19 +93,25 @@ export default function OrderSummary() {
                         loading="lazy"
                         allowFullScreen
                         src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyDlOE8vlYCnaOdeG1JWZ4TZt_xCzKiZv6w&origin=${warehouseLocation.lat},${warehouseLocation.lng}&destination=${customerLocation.lat},${customerLocation.lng}&mode=driving`}                />
-                </div>
-                    <div className="flex flex-row items-center">
+                      )}
+                       
+                  </div>
+                  {warehouseLocation && (
 
-                        <span> <a
-                        href={`https://www.google.com/maps/dir/?api=1&origin=${warehouseLocation.lat},${warehouseLocation.lng}&destination=${customerLocation.lat},${customerLocation.lng}&travelmode=driving`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-emerald-600 hover:underline mt-4 inline-block"
-                        >
-                        เปิดเส้นทางบน Google Maps
-                        </a></span>
-                    
+                    <div className="flex flex-row items-center">
+                            <span> <a
+                            href={`https://www.google.com/maps/dir/?api=1&origin=${warehouseLocation.lat},${warehouseLocation.lng}&destination=${customerLocation.lat},${customerLocation.lng}&travelmode=driving`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-emerald-600 hover:underline mt-4 inline-block"
+                            >
+                            เปิดเส้นทางบน Google Maps
+                            </a></span>
+
                     </div>
+                   )}
+
+                   
                 </div>
                 
         </div>
@@ -145,8 +155,9 @@ export default function OrderSummary() {
                             <Route className="w-5 h-5 text-emerald-600" />
                             <span className="text-gray-700 font-medium">Warehouse</span>
                         </div>
-                        <span className="text-emerald-800 font-semibold">
-                            {warehouseLocation.lat.toFixed(4)}, {warehouseLocation.lng.toFixed(4)}
+                        <span className="text-emerald-800 font-semibold">{
+                            `${warehouseLocation?.location} (
+                            ${warehouseLocation?.lat.toFixed(4)}, ${warehouseLocation?.lng.toFixed(4)} )`}
                         </span>
                         </div>
 
@@ -170,12 +181,12 @@ export default function OrderSummary() {
                         <div className="flex items-center space-x-4">
                             <div className="flex items-center">
                             <Route className="w-4 h-4 text-emerald-600 mr-1" />
-                            <span className="text-emerald-800 font-semibold">{distance} km</span>
+                            <span className="text-emerald-800 font-semibold"> {nearestWarehouse?.distance_km} km</span>
                             </div>
                             <div className="h-4 border-r border-gray-300"></div>
                             <div className="flex items-center">
                             <Clock className="w-4 h-4 text-purple-600 mr-1" />
-                            <span className="text-purple-800 font-semibold">{estimatedTime} mins</span>
+                            <span className="text-purple-800 font-semibold">{nearestWarehouse?.estimated_time_mins} mins</span>
                             </div>
                         </div>
                         </div>
