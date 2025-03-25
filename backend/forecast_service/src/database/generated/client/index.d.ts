@@ -14,10 +14,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model InventoryForecast
+ * Model ForecastHistory
  * 
  */
-export type InventoryForecast = $Result.DefaultSelection<Prisma.$InventoryForecastPayload>
+export type ForecastHistory = $Result.DefaultSelection<Prisma.$ForecastHistoryPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -26,8 +26,8 @@ export type InventoryForecast = $Result.DefaultSelection<Prisma.$InventoryForeca
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more InventoryForecasts
- * const inventoryForecasts = await prisma.inventoryForecast.findMany()
+ * // Fetch zero or more ForecastHistories
+ * const forecastHistories = await prisma.forecastHistory.findMany()
  * ```
  *
  *
@@ -47,8 +47,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more InventoryForecasts
-   * const inventoryForecasts = await prisma.inventoryForecast.findMany()
+   * // Fetch zero or more ForecastHistories
+   * const forecastHistories = await prisma.forecastHistory.findMany()
    * ```
    *
    *
@@ -145,14 +145,14 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.inventoryForecast`: Exposes CRUD operations for the **InventoryForecast** model.
+   * `prisma.forecastHistory`: Exposes CRUD operations for the **ForecastHistory** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more InventoryForecasts
-    * const inventoryForecasts = await prisma.inventoryForecast.findMany()
+    * // Fetch zero or more ForecastHistories
+    * const forecastHistories = await prisma.forecastHistory.findMany()
     * ```
     */
-  get inventoryForecast(): Prisma.InventoryForecastDelegate<ExtArgs, ClientOptions>;
+  get forecastHistory(): Prisma.ForecastHistoryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +593,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    InventoryForecast: 'InventoryForecast'
+    ForecastHistory: 'ForecastHistory'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,81 +612,81 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "inventoryForecast"
+      modelProps: "forecastHistory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      InventoryForecast: {
-        payload: Prisma.$InventoryForecastPayload<ExtArgs>
-        fields: Prisma.InventoryForecastFieldRefs
+      ForecastHistory: {
+        payload: Prisma.$ForecastHistoryPayload<ExtArgs>
+        fields: Prisma.ForecastHistoryFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.InventoryForecastFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload> | null
+            args: Prisma.ForecastHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.InventoryForecastFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload>
+            args: Prisma.ForecastHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload>
           }
           findFirst: {
-            args: Prisma.InventoryForecastFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload> | null
+            args: Prisma.ForecastHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.InventoryForecastFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload>
+            args: Prisma.ForecastHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload>
           }
           findMany: {
-            args: Prisma.InventoryForecastFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload>[]
+            args: Prisma.ForecastHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload>[]
           }
           create: {
-            args: Prisma.InventoryForecastCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload>
+            args: Prisma.ForecastHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload>
           }
           createMany: {
-            args: Prisma.InventoryForecastCreateManyArgs<ExtArgs>
+            args: Prisma.ForecastHistoryCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.InventoryForecastCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload>[]
+            args: Prisma.ForecastHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload>[]
           }
           delete: {
-            args: Prisma.InventoryForecastDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload>
+            args: Prisma.ForecastHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload>
           }
           update: {
-            args: Prisma.InventoryForecastUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload>
+            args: Prisma.ForecastHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload>
           }
           deleteMany: {
-            args: Prisma.InventoryForecastDeleteManyArgs<ExtArgs>
+            args: Prisma.ForecastHistoryDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.InventoryForecastUpdateManyArgs<ExtArgs>
+            args: Prisma.ForecastHistoryUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.InventoryForecastUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload>[]
+            args: Prisma.ForecastHistoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload>[]
           }
           upsert: {
-            args: Prisma.InventoryForecastUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$InventoryForecastPayload>
+            args: Prisma.ForecastHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ForecastHistoryPayload>
           }
           aggregate: {
-            args: Prisma.InventoryForecastAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateInventoryForecast>
+            args: Prisma.ForecastHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateForecastHistory>
           }
           groupBy: {
-            args: Prisma.InventoryForecastGroupByArgs<ExtArgs>
-            result: $Utils.Optional<InventoryForecastGroupByOutputType>[]
+            args: Prisma.ForecastHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ForecastHistoryGroupByOutputType>[]
           }
           count: {
-            args: Prisma.InventoryForecastCountArgs<ExtArgs>
-            result: $Utils.Optional<InventoryForecastCountAggregateOutputType> | number
+            args: Prisma.ForecastHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<ForecastHistoryCountAggregateOutputType> | number
           }
         }
       }
@@ -774,7 +774,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    inventoryForecast?: InventoryForecastOmit
+    forecastHistory?: ForecastHistoryOmit
   }
 
   /* Types for Logging */
@@ -870,370 +870,414 @@ export namespace Prisma {
    */
 
   /**
-   * Model InventoryForecast
+   * Model ForecastHistory
    */
 
-  export type AggregateInventoryForecast = {
-    _count: InventoryForecastCountAggregateOutputType | null
-    _avg: InventoryForecastAvgAggregateOutputType | null
-    _sum: InventoryForecastSumAggregateOutputType | null
-    _min: InventoryForecastMinAggregateOutputType | null
-    _max: InventoryForecastMaxAggregateOutputType | null
+  export type AggregateForecastHistory = {
+    _count: ForecastHistoryCountAggregateOutputType | null
+    _avg: ForecastHistoryAvgAggregateOutputType | null
+    _sum: ForecastHistorySumAggregateOutputType | null
+    _min: ForecastHistoryMinAggregateOutputType | null
+    _max: ForecastHistoryMaxAggregateOutputType | null
   }
 
-  export type InventoryForecastAvgAggregateOutputType = {
-    predictedDemand: number | null
+  export type ForecastHistoryAvgAggregateOutputType = {
+    forecastYhat: number | null
+    forecastLower: number | null
+    forecastUpper: number | null
   }
 
-  export type InventoryForecastSumAggregateOutputType = {
-    predictedDemand: number | null
+  export type ForecastHistorySumAggregateOutputType = {
+    forecastYhat: number | null
+    forecastLower: number | null
+    forecastUpper: number | null
   }
 
-  export type InventoryForecastMinAggregateOutputType = {
+  export type ForecastHistoryMinAggregateOutputType = {
     id: string | null
     productId: string | null
     warehouseId: string | null
-    predictedDemand: number | null
+    createdAt: Date | null
     forecastDate: Date | null
+    forecastYhat: number | null
+    forecastLower: number | null
+    forecastUpper: number | null
   }
 
-  export type InventoryForecastMaxAggregateOutputType = {
+  export type ForecastHistoryMaxAggregateOutputType = {
     id: string | null
     productId: string | null
     warehouseId: string | null
-    predictedDemand: number | null
+    createdAt: Date | null
     forecastDate: Date | null
+    forecastYhat: number | null
+    forecastLower: number | null
+    forecastUpper: number | null
   }
 
-  export type InventoryForecastCountAggregateOutputType = {
+  export type ForecastHistoryCountAggregateOutputType = {
     id: number
     productId: number
     warehouseId: number
-    predictedDemand: number
+    createdAt: number
     forecastDate: number
+    forecastYhat: number
+    forecastLower: number
+    forecastUpper: number
     _all: number
   }
 
 
-  export type InventoryForecastAvgAggregateInputType = {
-    predictedDemand?: true
+  export type ForecastHistoryAvgAggregateInputType = {
+    forecastYhat?: true
+    forecastLower?: true
+    forecastUpper?: true
   }
 
-  export type InventoryForecastSumAggregateInputType = {
-    predictedDemand?: true
+  export type ForecastHistorySumAggregateInputType = {
+    forecastYhat?: true
+    forecastLower?: true
+    forecastUpper?: true
   }
 
-  export type InventoryForecastMinAggregateInputType = {
+  export type ForecastHistoryMinAggregateInputType = {
     id?: true
     productId?: true
     warehouseId?: true
-    predictedDemand?: true
+    createdAt?: true
     forecastDate?: true
+    forecastYhat?: true
+    forecastLower?: true
+    forecastUpper?: true
   }
 
-  export type InventoryForecastMaxAggregateInputType = {
+  export type ForecastHistoryMaxAggregateInputType = {
     id?: true
     productId?: true
     warehouseId?: true
-    predictedDemand?: true
+    createdAt?: true
     forecastDate?: true
+    forecastYhat?: true
+    forecastLower?: true
+    forecastUpper?: true
   }
 
-  export type InventoryForecastCountAggregateInputType = {
+  export type ForecastHistoryCountAggregateInputType = {
     id?: true
     productId?: true
     warehouseId?: true
-    predictedDemand?: true
+    createdAt?: true
     forecastDate?: true
+    forecastYhat?: true
+    forecastLower?: true
+    forecastUpper?: true
     _all?: true
   }
 
-  export type InventoryForecastAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which InventoryForecast to aggregate.
+     * Filter which ForecastHistory to aggregate.
      */
-    where?: InventoryForecastWhereInput
+    where?: ForecastHistoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of InventoryForecasts to fetch.
+     * Determine the order of ForecastHistories to fetch.
      */
-    orderBy?: InventoryForecastOrderByWithRelationInput | InventoryForecastOrderByWithRelationInput[]
+    orderBy?: ForecastHistoryOrderByWithRelationInput | ForecastHistoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: InventoryForecastWhereUniqueInput
+    cursor?: ForecastHistoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` InventoryForecasts from the position of the cursor.
+     * Take `±n` ForecastHistories from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` InventoryForecasts.
+     * Skip the first `n` ForecastHistories.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned InventoryForecasts
+     * Count returned ForecastHistories
     **/
-    _count?: true | InventoryForecastCountAggregateInputType
+    _count?: true | ForecastHistoryCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: InventoryForecastAvgAggregateInputType
+    _avg?: ForecastHistoryAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: InventoryForecastSumAggregateInputType
+    _sum?: ForecastHistorySumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: InventoryForecastMinAggregateInputType
+    _min?: ForecastHistoryMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: InventoryForecastMaxAggregateInputType
+    _max?: ForecastHistoryMaxAggregateInputType
   }
 
-  export type GetInventoryForecastAggregateType<T extends InventoryForecastAggregateArgs> = {
-        [P in keyof T & keyof AggregateInventoryForecast]: P extends '_count' | 'count'
+  export type GetForecastHistoryAggregateType<T extends ForecastHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateForecastHistory]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateInventoryForecast[P]>
-      : GetScalarType<T[P], AggregateInventoryForecast[P]>
+        : GetScalarType<T[P], AggregateForecastHistory[P]>
+      : GetScalarType<T[P], AggregateForecastHistory[P]>
   }
 
 
 
 
-  export type InventoryForecastGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: InventoryForecastWhereInput
-    orderBy?: InventoryForecastOrderByWithAggregationInput | InventoryForecastOrderByWithAggregationInput[]
-    by: InventoryForecastScalarFieldEnum[] | InventoryForecastScalarFieldEnum
-    having?: InventoryForecastScalarWhereWithAggregatesInput
+  export type ForecastHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ForecastHistoryWhereInput
+    orderBy?: ForecastHistoryOrderByWithAggregationInput | ForecastHistoryOrderByWithAggregationInput[]
+    by: ForecastHistoryScalarFieldEnum[] | ForecastHistoryScalarFieldEnum
+    having?: ForecastHistoryScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: InventoryForecastCountAggregateInputType | true
-    _avg?: InventoryForecastAvgAggregateInputType
-    _sum?: InventoryForecastSumAggregateInputType
-    _min?: InventoryForecastMinAggregateInputType
-    _max?: InventoryForecastMaxAggregateInputType
+    _count?: ForecastHistoryCountAggregateInputType | true
+    _avg?: ForecastHistoryAvgAggregateInputType
+    _sum?: ForecastHistorySumAggregateInputType
+    _min?: ForecastHistoryMinAggregateInputType
+    _max?: ForecastHistoryMaxAggregateInputType
   }
 
-  export type InventoryForecastGroupByOutputType = {
+  export type ForecastHistoryGroupByOutputType = {
     id: string
     productId: string
     warehouseId: string
-    predictedDemand: number
+    createdAt: Date
     forecastDate: Date
-    _count: InventoryForecastCountAggregateOutputType | null
-    _avg: InventoryForecastAvgAggregateOutputType | null
-    _sum: InventoryForecastSumAggregateOutputType | null
-    _min: InventoryForecastMinAggregateOutputType | null
-    _max: InventoryForecastMaxAggregateOutputType | null
+    forecastYhat: number
+    forecastLower: number
+    forecastUpper: number
+    _count: ForecastHistoryCountAggregateOutputType | null
+    _avg: ForecastHistoryAvgAggregateOutputType | null
+    _sum: ForecastHistorySumAggregateOutputType | null
+    _min: ForecastHistoryMinAggregateOutputType | null
+    _max: ForecastHistoryMaxAggregateOutputType | null
   }
 
-  type GetInventoryForecastGroupByPayload<T extends InventoryForecastGroupByArgs> = Prisma.PrismaPromise<
+  type GetForecastHistoryGroupByPayload<T extends ForecastHistoryGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<InventoryForecastGroupByOutputType, T['by']> &
+      PickEnumerable<ForecastHistoryGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof InventoryForecastGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ForecastHistoryGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], InventoryForecastGroupByOutputType[P]>
-            : GetScalarType<T[P], InventoryForecastGroupByOutputType[P]>
+              : GetScalarType<T[P], ForecastHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], ForecastHistoryGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type InventoryForecastSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ForecastHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     productId?: boolean
     warehouseId?: boolean
-    predictedDemand?: boolean
+    createdAt?: boolean
     forecastDate?: boolean
-  }, ExtArgs["result"]["inventoryForecast"]>
+    forecastYhat?: boolean
+    forecastLower?: boolean
+    forecastUpper?: boolean
+  }, ExtArgs["result"]["forecastHistory"]>
 
-  export type InventoryForecastSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ForecastHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     productId?: boolean
     warehouseId?: boolean
-    predictedDemand?: boolean
+    createdAt?: boolean
     forecastDate?: boolean
-  }, ExtArgs["result"]["inventoryForecast"]>
+    forecastYhat?: boolean
+    forecastLower?: boolean
+    forecastUpper?: boolean
+  }, ExtArgs["result"]["forecastHistory"]>
 
-  export type InventoryForecastSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ForecastHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     productId?: boolean
     warehouseId?: boolean
-    predictedDemand?: boolean
+    createdAt?: boolean
     forecastDate?: boolean
-  }, ExtArgs["result"]["inventoryForecast"]>
+    forecastYhat?: boolean
+    forecastLower?: boolean
+    forecastUpper?: boolean
+  }, ExtArgs["result"]["forecastHistory"]>
 
-  export type InventoryForecastSelectScalar = {
+  export type ForecastHistorySelectScalar = {
     id?: boolean
     productId?: boolean
     warehouseId?: boolean
-    predictedDemand?: boolean
+    createdAt?: boolean
     forecastDate?: boolean
+    forecastYhat?: boolean
+    forecastLower?: boolean
+    forecastUpper?: boolean
   }
 
-  export type InventoryForecastOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "warehouseId" | "predictedDemand" | "forecastDate", ExtArgs["result"]["inventoryForecast"]>
+  export type ForecastHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "warehouseId" | "createdAt" | "forecastDate" | "forecastYhat" | "forecastLower" | "forecastUpper", ExtArgs["result"]["forecastHistory"]>
 
-  export type $InventoryForecastPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "InventoryForecast"
+  export type $ForecastHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ForecastHistory"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       productId: string
       warehouseId: string
-      predictedDemand: number
+      createdAt: Date
       forecastDate: Date
-    }, ExtArgs["result"]["inventoryForecast"]>
+      forecastYhat: number
+      forecastLower: number
+      forecastUpper: number
+    }, ExtArgs["result"]["forecastHistory"]>
     composites: {}
   }
 
-  type InventoryForecastGetPayload<S extends boolean | null | undefined | InventoryForecastDefaultArgs> = $Result.GetResult<Prisma.$InventoryForecastPayload, S>
+  type ForecastHistoryGetPayload<S extends boolean | null | undefined | ForecastHistoryDefaultArgs> = $Result.GetResult<Prisma.$ForecastHistoryPayload, S>
 
-  type InventoryForecastCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<InventoryForecastFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: InventoryForecastCountAggregateInputType | true
+  type ForecastHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ForecastHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ForecastHistoryCountAggregateInputType | true
     }
 
-  export interface InventoryForecastDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InventoryForecast'], meta: { name: 'InventoryForecast' } }
+  export interface ForecastHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ForecastHistory'], meta: { name: 'ForecastHistory' } }
     /**
-     * Find zero or one InventoryForecast that matches the filter.
-     * @param {InventoryForecastFindUniqueArgs} args - Arguments to find a InventoryForecast
+     * Find zero or one ForecastHistory that matches the filter.
+     * @param {ForecastHistoryFindUniqueArgs} args - Arguments to find a ForecastHistory
      * @example
-     * // Get one InventoryForecast
-     * const inventoryForecast = await prisma.inventoryForecast.findUnique({
+     * // Get one ForecastHistory
+     * const forecastHistory = await prisma.forecastHistory.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends InventoryForecastFindUniqueArgs>(args: SelectSubset<T, InventoryForecastFindUniqueArgs<ExtArgs>>): Prisma__InventoryForecastClient<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ForecastHistoryFindUniqueArgs>(args: SelectSubset<T, ForecastHistoryFindUniqueArgs<ExtArgs>>): Prisma__ForecastHistoryClient<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one InventoryForecast that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ForecastHistory that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {InventoryForecastFindUniqueOrThrowArgs} args - Arguments to find a InventoryForecast
+     * @param {ForecastHistoryFindUniqueOrThrowArgs} args - Arguments to find a ForecastHistory
      * @example
-     * // Get one InventoryForecast
-     * const inventoryForecast = await prisma.inventoryForecast.findUniqueOrThrow({
+     * // Get one ForecastHistory
+     * const forecastHistory = await prisma.forecastHistory.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends InventoryForecastFindUniqueOrThrowArgs>(args: SelectSubset<T, InventoryForecastFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InventoryForecastClient<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ForecastHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, ForecastHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ForecastHistoryClient<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first InventoryForecast that matches the filter.
+     * Find the first ForecastHistory that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {InventoryForecastFindFirstArgs} args - Arguments to find a InventoryForecast
+     * @param {ForecastHistoryFindFirstArgs} args - Arguments to find a ForecastHistory
      * @example
-     * // Get one InventoryForecast
-     * const inventoryForecast = await prisma.inventoryForecast.findFirst({
+     * // Get one ForecastHistory
+     * const forecastHistory = await prisma.forecastHistory.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends InventoryForecastFindFirstArgs>(args?: SelectSubset<T, InventoryForecastFindFirstArgs<ExtArgs>>): Prisma__InventoryForecastClient<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ForecastHistoryFindFirstArgs>(args?: SelectSubset<T, ForecastHistoryFindFirstArgs<ExtArgs>>): Prisma__ForecastHistoryClient<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first InventoryForecast that matches the filter or
+     * Find the first ForecastHistory that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {InventoryForecastFindFirstOrThrowArgs} args - Arguments to find a InventoryForecast
+     * @param {ForecastHistoryFindFirstOrThrowArgs} args - Arguments to find a ForecastHistory
      * @example
-     * // Get one InventoryForecast
-     * const inventoryForecast = await prisma.inventoryForecast.findFirstOrThrow({
+     * // Get one ForecastHistory
+     * const forecastHistory = await prisma.forecastHistory.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends InventoryForecastFindFirstOrThrowArgs>(args?: SelectSubset<T, InventoryForecastFindFirstOrThrowArgs<ExtArgs>>): Prisma__InventoryForecastClient<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ForecastHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, ForecastHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__ForecastHistoryClient<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more InventoryForecasts that matches the filter.
+     * Find zero or more ForecastHistories that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {InventoryForecastFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ForecastHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all InventoryForecasts
-     * const inventoryForecasts = await prisma.inventoryForecast.findMany()
+     * // Get all ForecastHistories
+     * const forecastHistories = await prisma.forecastHistory.findMany()
      * 
-     * // Get first 10 InventoryForecasts
-     * const inventoryForecasts = await prisma.inventoryForecast.findMany({ take: 10 })
+     * // Get first 10 ForecastHistories
+     * const forecastHistories = await prisma.forecastHistory.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const inventoryForecastWithIdOnly = await prisma.inventoryForecast.findMany({ select: { id: true } })
+     * const forecastHistoryWithIdOnly = await prisma.forecastHistory.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends InventoryForecastFindManyArgs>(args?: SelectSubset<T, InventoryForecastFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ForecastHistoryFindManyArgs>(args?: SelectSubset<T, ForecastHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a InventoryForecast.
-     * @param {InventoryForecastCreateArgs} args - Arguments to create a InventoryForecast.
+     * Create a ForecastHistory.
+     * @param {ForecastHistoryCreateArgs} args - Arguments to create a ForecastHistory.
      * @example
-     * // Create one InventoryForecast
-     * const InventoryForecast = await prisma.inventoryForecast.create({
+     * // Create one ForecastHistory
+     * const ForecastHistory = await prisma.forecastHistory.create({
      *   data: {
-     *     // ... data to create a InventoryForecast
+     *     // ... data to create a ForecastHistory
      *   }
      * })
      * 
      */
-    create<T extends InventoryForecastCreateArgs>(args: SelectSubset<T, InventoryForecastCreateArgs<ExtArgs>>): Prisma__InventoryForecastClient<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ForecastHistoryCreateArgs>(args: SelectSubset<T, ForecastHistoryCreateArgs<ExtArgs>>): Prisma__ForecastHistoryClient<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many InventoryForecasts.
-     * @param {InventoryForecastCreateManyArgs} args - Arguments to create many InventoryForecasts.
+     * Create many ForecastHistories.
+     * @param {ForecastHistoryCreateManyArgs} args - Arguments to create many ForecastHistories.
      * @example
-     * // Create many InventoryForecasts
-     * const inventoryForecast = await prisma.inventoryForecast.createMany({
+     * // Create many ForecastHistories
+     * const forecastHistory = await prisma.forecastHistory.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends InventoryForecastCreateManyArgs>(args?: SelectSubset<T, InventoryForecastCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ForecastHistoryCreateManyArgs>(args?: SelectSubset<T, ForecastHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many InventoryForecasts and returns the data saved in the database.
-     * @param {InventoryForecastCreateManyAndReturnArgs} args - Arguments to create many InventoryForecasts.
+     * Create many ForecastHistories and returns the data saved in the database.
+     * @param {ForecastHistoryCreateManyAndReturnArgs} args - Arguments to create many ForecastHistories.
      * @example
-     * // Create many InventoryForecasts
-     * const inventoryForecast = await prisma.inventoryForecast.createManyAndReturn({
+     * // Create many ForecastHistories
+     * const forecastHistory = await prisma.forecastHistory.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many InventoryForecasts and only return the `id`
-     * const inventoryForecastWithIdOnly = await prisma.inventoryForecast.createManyAndReturn({
+     * // Create many ForecastHistories and only return the `id`
+     * const forecastHistoryWithIdOnly = await prisma.forecastHistory.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -1243,28 +1287,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends InventoryForecastCreateManyAndReturnArgs>(args?: SelectSubset<T, InventoryForecastCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ForecastHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, ForecastHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a InventoryForecast.
-     * @param {InventoryForecastDeleteArgs} args - Arguments to delete one InventoryForecast.
+     * Delete a ForecastHistory.
+     * @param {ForecastHistoryDeleteArgs} args - Arguments to delete one ForecastHistory.
      * @example
-     * // Delete one InventoryForecast
-     * const InventoryForecast = await prisma.inventoryForecast.delete({
+     * // Delete one ForecastHistory
+     * const ForecastHistory = await prisma.forecastHistory.delete({
      *   where: {
-     *     // ... filter to delete one InventoryForecast
+     *     // ... filter to delete one ForecastHistory
      *   }
      * })
      * 
      */
-    delete<T extends InventoryForecastDeleteArgs>(args: SelectSubset<T, InventoryForecastDeleteArgs<ExtArgs>>): Prisma__InventoryForecastClient<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ForecastHistoryDeleteArgs>(args: SelectSubset<T, ForecastHistoryDeleteArgs<ExtArgs>>): Prisma__ForecastHistoryClient<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one InventoryForecast.
-     * @param {InventoryForecastUpdateArgs} args - Arguments to update one InventoryForecast.
+     * Update one ForecastHistory.
+     * @param {ForecastHistoryUpdateArgs} args - Arguments to update one ForecastHistory.
      * @example
-     * // Update one InventoryForecast
-     * const inventoryForecast = await prisma.inventoryForecast.update({
+     * // Update one ForecastHistory
+     * const forecastHistory = await prisma.forecastHistory.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1274,30 +1318,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends InventoryForecastUpdateArgs>(args: SelectSubset<T, InventoryForecastUpdateArgs<ExtArgs>>): Prisma__InventoryForecastClient<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ForecastHistoryUpdateArgs>(args: SelectSubset<T, ForecastHistoryUpdateArgs<ExtArgs>>): Prisma__ForecastHistoryClient<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more InventoryForecasts.
-     * @param {InventoryForecastDeleteManyArgs} args - Arguments to filter InventoryForecasts to delete.
+     * Delete zero or more ForecastHistories.
+     * @param {ForecastHistoryDeleteManyArgs} args - Arguments to filter ForecastHistories to delete.
      * @example
-     * // Delete a few InventoryForecasts
-     * const { count } = await prisma.inventoryForecast.deleteMany({
+     * // Delete a few ForecastHistories
+     * const { count } = await prisma.forecastHistory.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends InventoryForecastDeleteManyArgs>(args?: SelectSubset<T, InventoryForecastDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ForecastHistoryDeleteManyArgs>(args?: SelectSubset<T, ForecastHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more InventoryForecasts.
+     * Update zero or more ForecastHistories.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {InventoryForecastUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ForecastHistoryUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many InventoryForecasts
-     * const inventoryForecast = await prisma.inventoryForecast.updateMany({
+     * // Update many ForecastHistories
+     * const forecastHistory = await prisma.forecastHistory.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1307,14 +1351,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends InventoryForecastUpdateManyArgs>(args: SelectSubset<T, InventoryForecastUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ForecastHistoryUpdateManyArgs>(args: SelectSubset<T, ForecastHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more InventoryForecasts and returns the data updated in the database.
-     * @param {InventoryForecastUpdateManyAndReturnArgs} args - Arguments to update many InventoryForecasts.
+     * Update zero or more ForecastHistories and returns the data updated in the database.
+     * @param {ForecastHistoryUpdateManyAndReturnArgs} args - Arguments to update many ForecastHistories.
      * @example
-     * // Update many InventoryForecasts
-     * const inventoryForecast = await prisma.inventoryForecast.updateManyAndReturn({
+     * // Update many ForecastHistories
+     * const forecastHistory = await prisma.forecastHistory.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1323,8 +1367,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more InventoryForecasts and only return the `id`
-     * const inventoryForecastWithIdOnly = await prisma.inventoryForecast.updateManyAndReturn({
+     * // Update zero or more ForecastHistories and only return the `id`
+     * const forecastHistoryWithIdOnly = await prisma.forecastHistory.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -1337,56 +1381,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends InventoryForecastUpdateManyAndReturnArgs>(args: SelectSubset<T, InventoryForecastUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ForecastHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, ForecastHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one InventoryForecast.
-     * @param {InventoryForecastUpsertArgs} args - Arguments to update or create a InventoryForecast.
+     * Create or update one ForecastHistory.
+     * @param {ForecastHistoryUpsertArgs} args - Arguments to update or create a ForecastHistory.
      * @example
-     * // Update or create a InventoryForecast
-     * const inventoryForecast = await prisma.inventoryForecast.upsert({
+     * // Update or create a ForecastHistory
+     * const forecastHistory = await prisma.forecastHistory.upsert({
      *   create: {
-     *     // ... data to create a InventoryForecast
+     *     // ... data to create a ForecastHistory
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the InventoryForecast we want to update
+     *     // ... the filter for the ForecastHistory we want to update
      *   }
      * })
      */
-    upsert<T extends InventoryForecastUpsertArgs>(args: SelectSubset<T, InventoryForecastUpsertArgs<ExtArgs>>): Prisma__InventoryForecastClient<$Result.GetResult<Prisma.$InventoryForecastPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ForecastHistoryUpsertArgs>(args: SelectSubset<T, ForecastHistoryUpsertArgs<ExtArgs>>): Prisma__ForecastHistoryClient<$Result.GetResult<Prisma.$ForecastHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of InventoryForecasts.
+     * Count the number of ForecastHistories.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {InventoryForecastCountArgs} args - Arguments to filter InventoryForecasts to count.
+     * @param {ForecastHistoryCountArgs} args - Arguments to filter ForecastHistories to count.
      * @example
-     * // Count the number of InventoryForecasts
-     * const count = await prisma.inventoryForecast.count({
+     * // Count the number of ForecastHistories
+     * const count = await prisma.forecastHistory.count({
      *   where: {
-     *     // ... the filter for the InventoryForecasts we want to count
+     *     // ... the filter for the ForecastHistories we want to count
      *   }
      * })
     **/
-    count<T extends InventoryForecastCountArgs>(
-      args?: Subset<T, InventoryForecastCountArgs>,
+    count<T extends ForecastHistoryCountArgs>(
+      args?: Subset<T, ForecastHistoryCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], InventoryForecastCountAggregateOutputType>
+          : GetScalarType<T['select'], ForecastHistoryCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a InventoryForecast.
+     * Allows you to perform aggregations operations on a ForecastHistory.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {InventoryForecastAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ForecastHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -1406,13 +1450,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends InventoryForecastAggregateArgs>(args: Subset<T, InventoryForecastAggregateArgs>): Prisma.PrismaPromise<GetInventoryForecastAggregateType<T>>
+    aggregate<T extends ForecastHistoryAggregateArgs>(args: Subset<T, ForecastHistoryAggregateArgs>): Prisma.PrismaPromise<GetForecastHistoryAggregateType<T>>
 
     /**
-     * Group by InventoryForecast.
+     * Group by ForecastHistory.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {InventoryForecastGroupByArgs} args - Group by arguments.
+     * @param {ForecastHistoryGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -1427,14 +1471,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends InventoryForecastGroupByArgs,
+      T extends ForecastHistoryGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: InventoryForecastGroupByArgs['orderBy'] }
-        : { orderBy?: InventoryForecastGroupByArgs['orderBy'] },
+        ? { orderBy: ForecastHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: ForecastHistoryGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1483,20 +1527,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, InventoryForecastGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInventoryForecastGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ForecastHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetForecastHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the InventoryForecast model
+   * Fields of the ForecastHistory model
    */
-  readonly fields: InventoryForecastFieldRefs;
+  readonly fields: ForecastHistoryFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for InventoryForecast.
+   * The delegate class that acts as a "Promise-like" for ForecastHistory.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__InventoryForecastClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ForecastHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1524,377 +1568,380 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the InventoryForecast model
+   * Fields of the ForecastHistory model
    */ 
-  interface InventoryForecastFieldRefs {
-    readonly id: FieldRef<"InventoryForecast", 'String'>
-    readonly productId: FieldRef<"InventoryForecast", 'String'>
-    readonly warehouseId: FieldRef<"InventoryForecast", 'String'>
-    readonly predictedDemand: FieldRef<"InventoryForecast", 'Int'>
-    readonly forecastDate: FieldRef<"InventoryForecast", 'DateTime'>
+  interface ForecastHistoryFieldRefs {
+    readonly id: FieldRef<"ForecastHistory", 'String'>
+    readonly productId: FieldRef<"ForecastHistory", 'String'>
+    readonly warehouseId: FieldRef<"ForecastHistory", 'String'>
+    readonly createdAt: FieldRef<"ForecastHistory", 'DateTime'>
+    readonly forecastDate: FieldRef<"ForecastHistory", 'DateTime'>
+    readonly forecastYhat: FieldRef<"ForecastHistory", 'Float'>
+    readonly forecastLower: FieldRef<"ForecastHistory", 'Float'>
+    readonly forecastUpper: FieldRef<"ForecastHistory", 'Float'>
   }
     
 
   // Custom InputTypes
   /**
-   * InventoryForecast findUnique
+   * ForecastHistory findUnique
    */
-  export type InventoryForecastFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * Filter, which InventoryForecast to fetch.
+     * Filter, which ForecastHistory to fetch.
      */
-    where: InventoryForecastWhereUniqueInput
+    where: ForecastHistoryWhereUniqueInput
   }
 
   /**
-   * InventoryForecast findUniqueOrThrow
+   * ForecastHistory findUniqueOrThrow
    */
-  export type InventoryForecastFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * Filter, which InventoryForecast to fetch.
+     * Filter, which ForecastHistory to fetch.
      */
-    where: InventoryForecastWhereUniqueInput
+    where: ForecastHistoryWhereUniqueInput
   }
 
   /**
-   * InventoryForecast findFirst
+   * ForecastHistory findFirst
    */
-  export type InventoryForecastFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * Filter, which InventoryForecast to fetch.
+     * Filter, which ForecastHistory to fetch.
      */
-    where?: InventoryForecastWhereInput
+    where?: ForecastHistoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of InventoryForecasts to fetch.
+     * Determine the order of ForecastHistories to fetch.
      */
-    orderBy?: InventoryForecastOrderByWithRelationInput | InventoryForecastOrderByWithRelationInput[]
+    orderBy?: ForecastHistoryOrderByWithRelationInput | ForecastHistoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for InventoryForecasts.
+     * Sets the position for searching for ForecastHistories.
      */
-    cursor?: InventoryForecastWhereUniqueInput
+    cursor?: ForecastHistoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` InventoryForecasts from the position of the cursor.
+     * Take `±n` ForecastHistories from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` InventoryForecasts.
+     * Skip the first `n` ForecastHistories.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of InventoryForecasts.
+     * Filter by unique combinations of ForecastHistories.
      */
-    distinct?: InventoryForecastScalarFieldEnum | InventoryForecastScalarFieldEnum[]
+    distinct?: ForecastHistoryScalarFieldEnum | ForecastHistoryScalarFieldEnum[]
   }
 
   /**
-   * InventoryForecast findFirstOrThrow
+   * ForecastHistory findFirstOrThrow
    */
-  export type InventoryForecastFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * Filter, which InventoryForecast to fetch.
+     * Filter, which ForecastHistory to fetch.
      */
-    where?: InventoryForecastWhereInput
+    where?: ForecastHistoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of InventoryForecasts to fetch.
+     * Determine the order of ForecastHistories to fetch.
      */
-    orderBy?: InventoryForecastOrderByWithRelationInput | InventoryForecastOrderByWithRelationInput[]
+    orderBy?: ForecastHistoryOrderByWithRelationInput | ForecastHistoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for InventoryForecasts.
+     * Sets the position for searching for ForecastHistories.
      */
-    cursor?: InventoryForecastWhereUniqueInput
+    cursor?: ForecastHistoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` InventoryForecasts from the position of the cursor.
+     * Take `±n` ForecastHistories from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` InventoryForecasts.
+     * Skip the first `n` ForecastHistories.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of InventoryForecasts.
+     * Filter by unique combinations of ForecastHistories.
      */
-    distinct?: InventoryForecastScalarFieldEnum | InventoryForecastScalarFieldEnum[]
+    distinct?: ForecastHistoryScalarFieldEnum | ForecastHistoryScalarFieldEnum[]
   }
 
   /**
-   * InventoryForecast findMany
+   * ForecastHistory findMany
    */
-  export type InventoryForecastFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * Filter, which InventoryForecasts to fetch.
+     * Filter, which ForecastHistories to fetch.
      */
-    where?: InventoryForecastWhereInput
+    where?: ForecastHistoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of InventoryForecasts to fetch.
+     * Determine the order of ForecastHistories to fetch.
      */
-    orderBy?: InventoryForecastOrderByWithRelationInput | InventoryForecastOrderByWithRelationInput[]
+    orderBy?: ForecastHistoryOrderByWithRelationInput | ForecastHistoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing InventoryForecasts.
+     * Sets the position for listing ForecastHistories.
      */
-    cursor?: InventoryForecastWhereUniqueInput
+    cursor?: ForecastHistoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` InventoryForecasts from the position of the cursor.
+     * Take `±n` ForecastHistories from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` InventoryForecasts.
+     * Skip the first `n` ForecastHistories.
      */
     skip?: number
-    distinct?: InventoryForecastScalarFieldEnum | InventoryForecastScalarFieldEnum[]
+    distinct?: ForecastHistoryScalarFieldEnum | ForecastHistoryScalarFieldEnum[]
   }
 
   /**
-   * InventoryForecast create
+   * ForecastHistory create
    */
-  export type InventoryForecastCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * The data needed to create a InventoryForecast.
+     * The data needed to create a ForecastHistory.
      */
-    data: XOR<InventoryForecastCreateInput, InventoryForecastUncheckedCreateInput>
+    data: XOR<ForecastHistoryCreateInput, ForecastHistoryUncheckedCreateInput>
   }
 
   /**
-   * InventoryForecast createMany
+   * ForecastHistory createMany
    */
-  export type InventoryForecastCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many InventoryForecasts.
+     * The data used to create many ForecastHistories.
      */
-    data: InventoryForecastCreateManyInput | InventoryForecastCreateManyInput[]
+    data: ForecastHistoryCreateManyInput | ForecastHistoryCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * InventoryForecast createManyAndReturn
+   * ForecastHistory createManyAndReturn
    */
-  export type InventoryForecastCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ForecastHistorySelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * The data used to create many InventoryForecasts.
+     * The data used to create many ForecastHistories.
      */
-    data: InventoryForecastCreateManyInput | InventoryForecastCreateManyInput[]
+    data: ForecastHistoryCreateManyInput | ForecastHistoryCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * InventoryForecast update
+   * ForecastHistory update
    */
-  export type InventoryForecastUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * The data needed to update a InventoryForecast.
+     * The data needed to update a ForecastHistory.
      */
-    data: XOR<InventoryForecastUpdateInput, InventoryForecastUncheckedUpdateInput>
+    data: XOR<ForecastHistoryUpdateInput, ForecastHistoryUncheckedUpdateInput>
     /**
-     * Choose, which InventoryForecast to update.
+     * Choose, which ForecastHistory to update.
      */
-    where: InventoryForecastWhereUniqueInput
+    where: ForecastHistoryWhereUniqueInput
   }
 
   /**
-   * InventoryForecast updateMany
+   * ForecastHistory updateMany
    */
-  export type InventoryForecastUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update InventoryForecasts.
+     * The data used to update ForecastHistories.
      */
-    data: XOR<InventoryForecastUpdateManyMutationInput, InventoryForecastUncheckedUpdateManyInput>
+    data: XOR<ForecastHistoryUpdateManyMutationInput, ForecastHistoryUncheckedUpdateManyInput>
     /**
-     * Filter which InventoryForecasts to update
+     * Filter which ForecastHistories to update
      */
-    where?: InventoryForecastWhereInput
+    where?: ForecastHistoryWhereInput
     /**
-     * Limit how many InventoryForecasts to update.
+     * Limit how many ForecastHistories to update.
      */
     limit?: number
   }
 
   /**
-   * InventoryForecast updateManyAndReturn
+   * ForecastHistory updateManyAndReturn
    */
-  export type InventoryForecastUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ForecastHistorySelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * The data used to update InventoryForecasts.
+     * The data used to update ForecastHistories.
      */
-    data: XOR<InventoryForecastUpdateManyMutationInput, InventoryForecastUncheckedUpdateManyInput>
+    data: XOR<ForecastHistoryUpdateManyMutationInput, ForecastHistoryUncheckedUpdateManyInput>
     /**
-     * Filter which InventoryForecasts to update
+     * Filter which ForecastHistories to update
      */
-    where?: InventoryForecastWhereInput
+    where?: ForecastHistoryWhereInput
     /**
-     * Limit how many InventoryForecasts to update.
+     * Limit how many ForecastHistories to update.
      */
     limit?: number
   }
 
   /**
-   * InventoryForecast upsert
+   * ForecastHistory upsert
    */
-  export type InventoryForecastUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * The filter to search for the InventoryForecast to update in case it exists.
+     * The filter to search for the ForecastHistory to update in case it exists.
      */
-    where: InventoryForecastWhereUniqueInput
+    where: ForecastHistoryWhereUniqueInput
     /**
-     * In case the InventoryForecast found by the `where` argument doesn't exist, create a new InventoryForecast with this data.
+     * In case the ForecastHistory found by the `where` argument doesn't exist, create a new ForecastHistory with this data.
      */
-    create: XOR<InventoryForecastCreateInput, InventoryForecastUncheckedCreateInput>
+    create: XOR<ForecastHistoryCreateInput, ForecastHistoryUncheckedCreateInput>
     /**
-     * In case the InventoryForecast was found with the provided `where` argument, update it with this data.
+     * In case the ForecastHistory was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<InventoryForecastUpdateInput, InventoryForecastUncheckedUpdateInput>
+    update: XOR<ForecastHistoryUpdateInput, ForecastHistoryUncheckedUpdateInput>
   }
 
   /**
-   * InventoryForecast delete
+   * ForecastHistory delete
    */
-  export type InventoryForecastDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
     /**
-     * Filter which InventoryForecast to delete.
+     * Filter which ForecastHistory to delete.
      */
-    where: InventoryForecastWhereUniqueInput
+    where: ForecastHistoryWhereUniqueInput
   }
 
   /**
-   * InventoryForecast deleteMany
+   * ForecastHistory deleteMany
    */
-  export type InventoryForecastDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which InventoryForecasts to delete
+     * Filter which ForecastHistories to delete
      */
-    where?: InventoryForecastWhereInput
+    where?: ForecastHistoryWhereInput
     /**
-     * Limit how many InventoryForecasts to delete.
+     * Limit how many ForecastHistories to delete.
      */
     limit?: number
   }
 
   /**
-   * InventoryForecast without action
+   * ForecastHistory without action
    */
-  export type InventoryForecastDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ForecastHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryForecast
+     * Select specific fields to fetch from the ForecastHistory
      */
-    select?: InventoryForecastSelect<ExtArgs> | null
+    select?: ForecastHistorySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryForecast
+     * Omit specific fields from the ForecastHistory
      */
-    omit?: InventoryForecastOmit<ExtArgs> | null
+    omit?: ForecastHistoryOmit<ExtArgs> | null
   }
 
 
@@ -1912,15 +1959,18 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const InventoryForecastScalarFieldEnum: {
+  export const ForecastHistoryScalarFieldEnum: {
     id: 'id',
     productId: 'productId',
     warehouseId: 'warehouseId',
-    predictedDemand: 'predictedDemand',
-    forecastDate: 'forecastDate'
+    createdAt: 'createdAt',
+    forecastDate: 'forecastDate',
+    forecastYhat: 'forecastYhat',
+    forecastLower: 'forecastLower',
+    forecastUpper: 'forecastUpper'
   };
 
-  export type InventoryForecastScalarFieldEnum = (typeof InventoryForecastScalarFieldEnum)[keyof typeof InventoryForecastScalarFieldEnum]
+  export type ForecastHistoryScalarFieldEnum = (typeof ForecastHistoryScalarFieldEnum)[keyof typeof ForecastHistoryScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1959,20 +2009,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -1998,119 +2034,169 @@ export namespace Prisma {
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
   /**
    * Deep Input Types
    */
 
 
-  export type InventoryForecastWhereInput = {
-    AND?: InventoryForecastWhereInput | InventoryForecastWhereInput[]
-    OR?: InventoryForecastWhereInput[]
-    NOT?: InventoryForecastWhereInput | InventoryForecastWhereInput[]
-    id?: StringFilter<"InventoryForecast"> | string
-    productId?: StringFilter<"InventoryForecast"> | string
-    warehouseId?: StringFilter<"InventoryForecast"> | string
-    predictedDemand?: IntFilter<"InventoryForecast"> | number
-    forecastDate?: DateTimeFilter<"InventoryForecast"> | Date | string
+  export type ForecastHistoryWhereInput = {
+    AND?: ForecastHistoryWhereInput | ForecastHistoryWhereInput[]
+    OR?: ForecastHistoryWhereInput[]
+    NOT?: ForecastHistoryWhereInput | ForecastHistoryWhereInput[]
+    id?: StringFilter<"ForecastHistory"> | string
+    productId?: StringFilter<"ForecastHistory"> | string
+    warehouseId?: StringFilter<"ForecastHistory"> | string
+    createdAt?: DateTimeFilter<"ForecastHistory"> | Date | string
+    forecastDate?: DateTimeFilter<"ForecastHistory"> | Date | string
+    forecastYhat?: FloatFilter<"ForecastHistory"> | number
+    forecastLower?: FloatFilter<"ForecastHistory"> | number
+    forecastUpper?: FloatFilter<"ForecastHistory"> | number
   }
 
-  export type InventoryForecastOrderByWithRelationInput = {
+  export type ForecastHistoryOrderByWithRelationInput = {
     id?: SortOrder
     productId?: SortOrder
     warehouseId?: SortOrder
-    predictedDemand?: SortOrder
+    createdAt?: SortOrder
     forecastDate?: SortOrder
+    forecastYhat?: SortOrder
+    forecastLower?: SortOrder
+    forecastUpper?: SortOrder
   }
 
-  export type InventoryForecastWhereUniqueInput = Prisma.AtLeast<{
+  export type ForecastHistoryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: InventoryForecastWhereInput | InventoryForecastWhereInput[]
-    OR?: InventoryForecastWhereInput[]
-    NOT?: InventoryForecastWhereInput | InventoryForecastWhereInput[]
-    productId?: StringFilter<"InventoryForecast"> | string
-    warehouseId?: StringFilter<"InventoryForecast"> | string
-    predictedDemand?: IntFilter<"InventoryForecast"> | number
-    forecastDate?: DateTimeFilter<"InventoryForecast"> | Date | string
+    AND?: ForecastHistoryWhereInput | ForecastHistoryWhereInput[]
+    OR?: ForecastHistoryWhereInput[]
+    NOT?: ForecastHistoryWhereInput | ForecastHistoryWhereInput[]
+    productId?: StringFilter<"ForecastHistory"> | string
+    warehouseId?: StringFilter<"ForecastHistory"> | string
+    createdAt?: DateTimeFilter<"ForecastHistory"> | Date | string
+    forecastDate?: DateTimeFilter<"ForecastHistory"> | Date | string
+    forecastYhat?: FloatFilter<"ForecastHistory"> | number
+    forecastLower?: FloatFilter<"ForecastHistory"> | number
+    forecastUpper?: FloatFilter<"ForecastHistory"> | number
   }, "id">
 
-  export type InventoryForecastOrderByWithAggregationInput = {
+  export type ForecastHistoryOrderByWithAggregationInput = {
     id?: SortOrder
     productId?: SortOrder
     warehouseId?: SortOrder
-    predictedDemand?: SortOrder
+    createdAt?: SortOrder
     forecastDate?: SortOrder
-    _count?: InventoryForecastCountOrderByAggregateInput
-    _avg?: InventoryForecastAvgOrderByAggregateInput
-    _max?: InventoryForecastMaxOrderByAggregateInput
-    _min?: InventoryForecastMinOrderByAggregateInput
-    _sum?: InventoryForecastSumOrderByAggregateInput
+    forecastYhat?: SortOrder
+    forecastLower?: SortOrder
+    forecastUpper?: SortOrder
+    _count?: ForecastHistoryCountOrderByAggregateInput
+    _avg?: ForecastHistoryAvgOrderByAggregateInput
+    _max?: ForecastHistoryMaxOrderByAggregateInput
+    _min?: ForecastHistoryMinOrderByAggregateInput
+    _sum?: ForecastHistorySumOrderByAggregateInput
   }
 
-  export type InventoryForecastScalarWhereWithAggregatesInput = {
-    AND?: InventoryForecastScalarWhereWithAggregatesInput | InventoryForecastScalarWhereWithAggregatesInput[]
-    OR?: InventoryForecastScalarWhereWithAggregatesInput[]
-    NOT?: InventoryForecastScalarWhereWithAggregatesInput | InventoryForecastScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"InventoryForecast"> | string
-    productId?: StringWithAggregatesFilter<"InventoryForecast"> | string
-    warehouseId?: StringWithAggregatesFilter<"InventoryForecast"> | string
-    predictedDemand?: IntWithAggregatesFilter<"InventoryForecast"> | number
-    forecastDate?: DateTimeWithAggregatesFilter<"InventoryForecast"> | Date | string
+  export type ForecastHistoryScalarWhereWithAggregatesInput = {
+    AND?: ForecastHistoryScalarWhereWithAggregatesInput | ForecastHistoryScalarWhereWithAggregatesInput[]
+    OR?: ForecastHistoryScalarWhereWithAggregatesInput[]
+    NOT?: ForecastHistoryScalarWhereWithAggregatesInput | ForecastHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ForecastHistory"> | string
+    productId?: StringWithAggregatesFilter<"ForecastHistory"> | string
+    warehouseId?: StringWithAggregatesFilter<"ForecastHistory"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ForecastHistory"> | Date | string
+    forecastDate?: DateTimeWithAggregatesFilter<"ForecastHistory"> | Date | string
+    forecastYhat?: FloatWithAggregatesFilter<"ForecastHistory"> | number
+    forecastLower?: FloatWithAggregatesFilter<"ForecastHistory"> | number
+    forecastUpper?: FloatWithAggregatesFilter<"ForecastHistory"> | number
   }
 
-  export type InventoryForecastCreateInput = {
+  export type ForecastHistoryCreateInput = {
     id?: string
     productId: string
     warehouseId: string
-    predictedDemand: number
+    createdAt?: Date | string
     forecastDate: Date | string
+    forecastYhat: number
+    forecastLower: number
+    forecastUpper: number
   }
 
-  export type InventoryForecastUncheckedCreateInput = {
+  export type ForecastHistoryUncheckedCreateInput = {
     id?: string
     productId: string
     warehouseId: string
-    predictedDemand: number
+    createdAt?: Date | string
     forecastDate: Date | string
+    forecastYhat: number
+    forecastLower: number
+    forecastUpper: number
   }
 
-  export type InventoryForecastUpdateInput = {
+  export type ForecastHistoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     warehouseId?: StringFieldUpdateOperationsInput | string
-    predictedDemand?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     forecastDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    forecastYhat?: FloatFieldUpdateOperationsInput | number
+    forecastLower?: FloatFieldUpdateOperationsInput | number
+    forecastUpper?: FloatFieldUpdateOperationsInput | number
   }
 
-  export type InventoryForecastUncheckedUpdateInput = {
+  export type ForecastHistoryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     warehouseId?: StringFieldUpdateOperationsInput | string
-    predictedDemand?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     forecastDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    forecastYhat?: FloatFieldUpdateOperationsInput | number
+    forecastLower?: FloatFieldUpdateOperationsInput | number
+    forecastUpper?: FloatFieldUpdateOperationsInput | number
   }
 
-  export type InventoryForecastCreateManyInput = {
+  export type ForecastHistoryCreateManyInput = {
     id?: string
     productId: string
     warehouseId: string
-    predictedDemand: number
+    createdAt?: Date | string
     forecastDate: Date | string
+    forecastYhat: number
+    forecastLower: number
+    forecastUpper: number
   }
 
-  export type InventoryForecastUpdateManyMutationInput = {
+  export type ForecastHistoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     warehouseId?: StringFieldUpdateOperationsInput | string
-    predictedDemand?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     forecastDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    forecastYhat?: FloatFieldUpdateOperationsInput | number
+    forecastLower?: FloatFieldUpdateOperationsInput | number
+    forecastUpper?: FloatFieldUpdateOperationsInput | number
   }
 
-  export type InventoryForecastUncheckedUpdateManyInput = {
+  export type ForecastHistoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     warehouseId?: StringFieldUpdateOperationsInput | string
-    predictedDemand?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     forecastDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    forecastYhat?: FloatFieldUpdateOperationsInput | number
+    forecastLower?: FloatFieldUpdateOperationsInput | number
+    forecastUpper?: FloatFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2128,17 +2214,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2150,36 +2225,60 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type InventoryForecastCountOrderByAggregateInput = {
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type ForecastHistoryCountOrderByAggregateInput = {
     id?: SortOrder
     productId?: SortOrder
     warehouseId?: SortOrder
-    predictedDemand?: SortOrder
+    createdAt?: SortOrder
     forecastDate?: SortOrder
+    forecastYhat?: SortOrder
+    forecastLower?: SortOrder
+    forecastUpper?: SortOrder
   }
 
-  export type InventoryForecastAvgOrderByAggregateInput = {
-    predictedDemand?: SortOrder
+  export type ForecastHistoryAvgOrderByAggregateInput = {
+    forecastYhat?: SortOrder
+    forecastLower?: SortOrder
+    forecastUpper?: SortOrder
   }
 
-  export type InventoryForecastMaxOrderByAggregateInput = {
+  export type ForecastHistoryMaxOrderByAggregateInput = {
     id?: SortOrder
     productId?: SortOrder
     warehouseId?: SortOrder
-    predictedDemand?: SortOrder
+    createdAt?: SortOrder
     forecastDate?: SortOrder
+    forecastYhat?: SortOrder
+    forecastLower?: SortOrder
+    forecastUpper?: SortOrder
   }
 
-  export type InventoryForecastMinOrderByAggregateInput = {
+  export type ForecastHistoryMinOrderByAggregateInput = {
     id?: SortOrder
     productId?: SortOrder
     warehouseId?: SortOrder
-    predictedDemand?: SortOrder
+    createdAt?: SortOrder
     forecastDate?: SortOrder
+    forecastYhat?: SortOrder
+    forecastLower?: SortOrder
+    forecastUpper?: SortOrder
   }
 
-  export type InventoryForecastSumOrderByAggregateInput = {
-    predictedDemand?: SortOrder
+  export type ForecastHistorySumOrderByAggregateInput = {
+    forecastYhat?: SortOrder
+    forecastLower?: SortOrder
+    forecastUpper?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2200,22 +2299,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2230,20 +2313,36 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type IntFieldUpdateOperationsInput = {
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2260,17 +2359,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2280,6 +2368,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2299,7 +2398,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -2307,23 +2406,7 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -2338,6 +2421,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
 

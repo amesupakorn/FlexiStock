@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import forecastRoutes from "./routes/forecastRoute";  
 import warehouseRoutes from "./routes/warehouseRoutes";  
 
 const app = express();
@@ -7,9 +8,11 @@ const app = express();
 app.use(express.json());
 app.use(cors()); 
 
+app.use("/", forecastRoutes);
 app.use("/", warehouseRoutes);
 
 const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
-  console.log(`Search Service running on http://localhost:${PORT}`);
+  console.log(`forecast Service running on http://localhost:${PORT}`);
 });
+

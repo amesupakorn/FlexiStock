@@ -1,13 +1,16 @@
 import express from "express";
 import cors from "cors";
-// import inventoryRoutes from "./routes/index";  
+import forecastRoutes from "./routes/index";  
+import { listenForForecastData } from './services/rabbitMqService';
 
 const app = express();
 
 app.use(express.json());
 app.use(cors()); 
 
-// app.use("/", inventoryRoutes);
+listenForForecastData();
+
+app.use("/", forecastRoutes);
 
 const PORT = process.env.PORT || 5007;
 app.listen(PORT, () => {

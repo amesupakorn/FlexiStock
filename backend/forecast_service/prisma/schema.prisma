@@ -16,10 +16,14 @@ datasource db {
 }
 
 
-model InventoryForecast {
-  id          String   @id @default(uuid())
-  productId   String
-  warehouseId String
-  predictedDemand Int
-  forecastDate  DateTime
+model ForecastHistory {
+  id            String   @id @default(uuid()) // ID ของการพยากรณ์
+  productId     String   // รหัสสินค้า
+  warehouseId   String   // รหัสคลังสินค้า
+  createdAt     DateTime @default(now()) // วันที่และเวลาของคำสั่งซื้อ
+  forecastDate  DateTime // วันที่ของการพยากรณ์
+  forecastYhat  Float    // ค่าพยากรณ์
+  forecastLower Float    // ขอบล่างของการพยากรณ์
+  forecastUpper Float    // ขอบบนของการพยากรณ์
+  
 }

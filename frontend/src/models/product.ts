@@ -91,3 +91,6 @@ export interface Product {
     LowStock = "LowStock",
     OutOfStock = "OutOfStock"
   }
+
+
+  

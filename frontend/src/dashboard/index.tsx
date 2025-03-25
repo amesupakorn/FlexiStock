@@ -1,25 +1,15 @@
-import React, { useEffect, useState } from 'react';
+
+import ForeCast from './foreCast';
+
 
 const DashboardPage = () => {
-  const [loading, setLoading] = useState(false);
-  const data = {
-    labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"],
-    datasets: [
-      {
-        label: "Stock Level",
-        data: [100, 80, 60, 40, 20],
-        fill: false,
-        borderColor: "red",
-      },
-    ],
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
-    <div></div>
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <ForeCast/>
+      
+    </div>
+    
   );
 };
 
