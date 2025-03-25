@@ -1,8 +1,11 @@
 import { Router } from "express";
-import { getInventory } from "../controllers/index";
+import DataController  from "../controllers/getData";
 
 const router = Router();
 
-router.get("/", getInventory);
+router.get("/inventory", DataController.getInventory);
+router.get("/warehouse", DataController.getWarehouses);
+router.get("/product", DataController.getProducts);
+
 
 export default router;

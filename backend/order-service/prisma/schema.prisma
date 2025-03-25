@@ -20,6 +20,7 @@ model Customer {
   name      String
   email     String   @unique
   orders    Order[]
+  address   String
 }
 
 

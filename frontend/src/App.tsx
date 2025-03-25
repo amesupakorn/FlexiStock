@@ -3,6 +3,10 @@ import Dashboard from "./dashboard";
 import Search from "./search/search";
 import Warehouse from "./warehouse/warehouse";
 import TestApi from "./test/testApi"
+import Order from "./order/order";
+import Customer from "./order/customer";
+import OrderSummary from "./order/summary";
+
 import Navbar from "./components/nav";
 function App() {
   return (
@@ -16,15 +20,20 @@ function App() {
           {/* Main Content */}
           <main className="flex-grow bg-white overflow-y-auto" style={{ height: 'calc(100vh - 10px)' }}> 
           <div className="container mx-auto">
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/search" element={<Search />} />
-                <Route path="/warehouse" element={<Warehouse />} />
-                <Route path="/test" element={<TestApi />} />
-              </Routes>
-            </div>
-          </main>
-        </div>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/warehouse" element={<Warehouse />} />
+              <Route path="/order" element={<Order />} />
+              <Route path="/customer" element={<Customer />} />
+              <Route path="/summary" element={<OrderSummary />} />
+
+              <Route path="/test" element={<TestApi />} />
+
+            </Routes>
+          </div>
+        </main>
+      </div>
     </Router>
   );
 }

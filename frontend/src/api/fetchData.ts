@@ -15,7 +15,7 @@ export const fetchOrders = async () => {
 
 export const fetchInventory = async () => {
   try {
-    const response = await axios.get(`${API_GATEWAY_URL}/api/inventory`);
+    const response = await axios.get(`${API_GATEWAY_URL}/api/inventory/inventory`);
     return response;
   } catch (error) {
     console.error("Error fetching inventory:", error);
@@ -23,9 +23,19 @@ export const fetchInventory = async () => {
   }
 };
 
-export const fetchData = async () => {
+export const fetchProduct = async () => {
     try {
-      const response = await axios.get(`${API_GATEWAY_URL}/api/fetchdata`);
+      const response = await axios.get(`${API_GATEWAY_URL}/api/inventory/product`);
+      return response;
+    } catch (error) {
+      console.error("Error fetching Data:", error);
+      throw error;
+    }
+  };
+
+export const fetchWarehouse = async () => {
+    try {
+      const response = await axios.get(`${API_GATEWAY_URL}/api/inventory/warehouse`);
       return response;
     } catch (error) {
       console.error("Error fetching Data:", error);

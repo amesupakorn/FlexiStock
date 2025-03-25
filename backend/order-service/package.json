@@ -1,8 +1,10 @@
 {
 	"dependencies": {
 		"@prisma/client": "^6.4.1",
+		"@types/body-parser": "^1.19.5",
 		"amqplib": "^0.10.5",
 		"axios": "^1.8.4",
+		"body-parser": "^1.20.3",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.7",
 		"express": "^4.21.2",
@@ -18,8 +20,7 @@
 		"@types/node": "^22.13.9"
 	},
 	"prisma": {
-		"schema": "./prisma/schema.prisma",
-		"seed": "./src/database/"
+		"schema": "./prisma/schema.prisma"
 	},
 	"scripts": {
 		"dev": "ts-node src/server.ts"

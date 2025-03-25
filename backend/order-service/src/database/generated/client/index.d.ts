@@ -1021,18 +1021,21 @@ export namespace Prisma {
     id: string | null
     name: string | null
     email: string | null
+    address: string | null
   }
 
   export type CustomerMaxAggregateOutputType = {
     id: string | null
     name: string | null
     email: string | null
+    address: string | null
   }
 
   export type CustomerCountAggregateOutputType = {
     id: number
     name: number
     email: number
+    address: number
     _all: number
   }
 
@@ -1041,18 +1044,21 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
+    address?: true
   }
 
   export type CustomerMaxAggregateInputType = {
     id?: true
     name?: true
     email?: true
+    address?: true
   }
 
   export type CustomerCountAggregateInputType = {
     id?: true
     name?: true
     email?: true
+    address?: true
     _all?: true
   }
 
@@ -1132,6 +1138,7 @@ export namespace Prisma {
     id: string
     name: string
     email: string
+    address: string
     _count: CustomerCountAggregateOutputType | null
     _min: CustomerMinAggregateOutputType | null
     _max: CustomerMaxAggregateOutputType | null
@@ -1155,6 +1162,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    address?: boolean
     orders?: boolean | Customer$ordersArgs<ExtArgs>
     _count?: boolean | CustomerCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["customer"]>
@@ -1163,21 +1171,24 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    address?: boolean
   }, ExtArgs["result"]["customer"]>
 
   export type CustomerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     email?: boolean
+    address?: boolean
   }, ExtArgs["result"]["customer"]>
 
   export type CustomerSelectScalar = {
     id?: boolean
     name?: boolean
     email?: boolean
+    address?: boolean
   }
 
-  export type CustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email", ExtArgs["result"]["customer"]>
+  export type CustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "address", ExtArgs["result"]["customer"]>
   export type CustomerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | Customer$ordersArgs<ExtArgs>
     _count?: boolean | CustomerCountOutputTypeDefaultArgs<ExtArgs>
@@ -1194,6 +1205,7 @@ export namespace Prisma {
       id: string
       name: string
       email: string
+      address: string
     }, ExtArgs["result"]["customer"]>
     composites: {}
   }
@@ -1621,6 +1633,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Customer", 'String'>
     readonly name: FieldRef<"Customer", 'String'>
     readonly email: FieldRef<"Customer", 'String'>
+    readonly address: FieldRef<"Customer", 'String'>
   }
     
 
@@ -3222,7 +3235,8 @@ export namespace Prisma {
   export const CustomerScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    email: 'email'
+    email: 'email',
+    address: 'address'
   };
 
   export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
@@ -3365,6 +3379,7 @@ export namespace Prisma {
     id?: StringFilter<"Customer"> | string
     name?: StringFilter<"Customer"> | string
     email?: StringFilter<"Customer"> | string
+    address?: StringFilter<"Customer"> | string
     orders?: OrderListRelationFilter
   }
 
@@ -3372,6 +3387,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    address?: SortOrder
     orders?: OrderOrderByRelationAggregateInput
   }
 
@@ -3382,6 +3398,7 @@ export namespace Prisma {
     OR?: CustomerWhereInput[]
     NOT?: CustomerWhereInput | CustomerWhereInput[]
     name?: StringFilter<"Customer"> | string
+    address?: StringFilter<"Customer"> | string
     orders?: OrderListRelationFilter
   }, "id" | "email">
 
@@ -3389,6 +3406,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    address?: SortOrder
     _count?: CustomerCountOrderByAggregateInput
     _max?: CustomerMaxOrderByAggregateInput
     _min?: CustomerMinOrderByAggregateInput
@@ -3401,6 +3419,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Customer"> | string
     name?: StringWithAggregatesFilter<"Customer"> | string
     email?: StringWithAggregatesFilter<"Customer"> | string
+    address?: StringWithAggregatesFilter<"Customer"> | string
   }
 
   export type OrderWhereInput = {
@@ -3479,6 +3498,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    address: string
     orders?: OrderCreateNestedManyWithoutCustomerInput
   }
 
@@ -3486,6 +3506,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    address: string
     orders?: OrderUncheckedCreateNestedManyWithoutCustomerInput
   }
 
@@ -3493,6 +3514,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
     orders?: OrderUpdateManyWithoutCustomerNestedInput
   }
 
@@ -3500,6 +3522,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
     orders?: OrderUncheckedUpdateManyWithoutCustomerNestedInput
   }
 
@@ -3507,18 +3530,21 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    address: string
   }
 
   export type CustomerUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
   }
 
   export type CustomerUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
   }
 
   export type OrderCreateInput = {
@@ -3626,18 +3652,21 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    address?: SortOrder
   }
 
   export type CustomerMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    address?: SortOrder
   }
 
   export type CustomerMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    address?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -4174,12 +4203,14 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    address: string
   }
 
   export type CustomerUncheckedCreateWithoutOrdersInput = {
     id?: string
     name: string
     email: string
+    address: string
   }
 
   export type CustomerCreateOrConnectWithoutOrdersInput = {
@@ -4202,12 +4233,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
   }
 
   export type CustomerUncheckedUpdateWithoutOrdersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
   }
 
   export type OrderCreateManyCustomerInput = {

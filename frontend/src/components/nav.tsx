@@ -6,6 +6,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 
+
 const Navbar = () => {
   return (
     <nav className="min-w-max bg-gray-800 text-white p-6 rounded-r-xl shadow-lg h-screen flex flex-col justify-between">

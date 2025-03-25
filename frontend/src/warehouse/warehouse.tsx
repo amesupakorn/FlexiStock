@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Warehouse } from "../models/product";
 import { Card, CardContent } from "../components/ui/card";
 import { FaWarehouse, FaMapMarkerAlt, FaBox } from "react-icons/fa";
-import { fetchData } from "../api/apiGateway";
+// import { fetchData } from "../api/fetchData";
 
-const GOOGLE_MAPS_API_KEY = import.meta.env.GOOGLE_MAPS_API_KEY;
+// const GOOGLE_MAPS_API_KEY = import.meta.env.GOOGLE_MAPS_API_KEY;
 
 export default function WarehousePage() {
     const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
