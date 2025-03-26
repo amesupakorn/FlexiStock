@@ -19,3 +19,43 @@ FlexiStock เป็นระบบจัดการสต็อกสินค
 ---
 
 ![](image/applications.png)
+
+
+## ⚙️ Installation & Setup
+
+> 💡 ต้องติดตั้ง `pnpm` ก่อนเริ่มต้นใช้งาน:
+```bash
+npm install -g pnpm
+```
+> ติดตั้ง Frontend
+```bash
+cd frontend
+pnpm install
+pnpm run dev
+```
+> ติดตั้ง Backend
+```bash
+cd Backend
+ 
+for dir in */ ; do
+  cd "$dir"
+  pnpm install
+  pnpm run dev
+  cd ..
+done
+```
+> ติดตั้ง Model Service (FastAPI + Prophet)
+```bash
+cd backend/forecast_service/pyservice
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+> ติดตั้ง prisma database (ยกเว้น api-gateway)
+```bash
+pnpm prisma generate
+pnpm prisma migrate dev --name init
+```
+
+
+
+
