@@ -62,7 +62,7 @@ const Navbar = () => {
           </li>
           <li className="flex items-center w-full">
             <NavLink
-              to=""
+              to="/track"
               className={({ isActive }) =>
                 isActive
                   ? "flex items-center text-white bg-green-600 px-6 py-3 rounded-lg shadow-md transition-all duration-300 w-full justify-start"

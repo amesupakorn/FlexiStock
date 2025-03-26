@@ -22,6 +22,7 @@ model Tracking {
   status      TrackingStatus
   location    String?
   updatedAt   DateTime @default(now())
+  delayReason String?
 }
 
 enum TrackingStatus {

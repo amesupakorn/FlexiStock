@@ -6,6 +6,7 @@ import Customer from "./order/customer";
 import OrderSummary from "./order/summary";
 import Navbar from "./components/nav";
 import StockPage from "./stock";
+import TrackingPage from "./tracking";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/inventory" element={<StockPage />} />
+              <Route path="/track" element={<TrackingPage />} />
 
               <Route path="/search" element={<Search />} />
               <Route path="/order" element={<Order />} />
