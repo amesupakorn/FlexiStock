@@ -6,23 +6,16 @@ FlexiStock เป็นระบบจัดการสต็อกสินค
 ![](image/work.png)
 
 
-**Frontend** 
-- React.js + Vite
-- Tailwind CSS  
+---
 
-**Backend**  
-- Node.js
-- Fastapi
-- Prisma ORM
-- RabbitMQ
+| Layer      | Technologies                         |
+|------------|--------------------------------------|
+| Frontend   | React.js + Vite + Tailwind CSS       |
+| Backend    | Node.js + Prisma ORM + RabbitMQ      |
+| Model API  | FastAPI + Prophet (Time Series ML)   |
+| Database   | PostgreSQL                           |
+| External   | Google Maps API                      |
 
-**Database**  
-- PostgreSQL 
-
-**Model ML**
-- Prophet
-
-**External APIs**
-- Google Map API
+---
 
 ![](image/applications.png)
