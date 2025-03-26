@@ -41,7 +41,6 @@ export async function startInventoryConsumer() {
       channel.ack(msg);
     } catch (error) {
       console.error("❌ Failed to update inventory:", error);
-      // ไม่ ack เพื่อให้ queue ลองใหม่
     }
   });
 }

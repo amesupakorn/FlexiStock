@@ -5,6 +5,7 @@ FlexiStock เป็นระบบจัดการสต็อกสินค
 
 ![](image/work.png)
 
+
 **Frontend** 
 - React.js + Vite
 - Tailwind CSS  
@@ -23,3 +24,5 @@ FlexiStock เป็นระบบจัดการสต็อกสินค
 
 **External APIs**
 - Google Map API
+
+![](image/applications.png)

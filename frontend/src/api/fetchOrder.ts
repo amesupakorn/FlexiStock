@@ -8,10 +8,7 @@ const API_GATEWAY_URL = "http://localhost:5001/api/orders/createOrder";
 export const getNearestWarehouse = async (lat: number, lng: number) => {
   try {
     const response = await axios.post(API_Near_URL, { lat, lng });
-    return {
-      forecastResult: response.data.forecastResult,
-      forecastData: response.data.forecastData
-    };
+    return response.data; 
   } catch (error) {
     console.error("Error fetching nearest warehouse:", error);
     throw error;
