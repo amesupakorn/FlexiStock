@@ -4,7 +4,7 @@ import { haversineDistance } from "../utils/haversine";
 import dotenv from "dotenv";
 dotenv.config();
 
-const GOOGLE_API_KEY = "AIzaSyDlOE8vlYCnaOdeG1JWZ4TZt_xCzKiZv6w";
+const GOOGLE_API_KEY =  process.env.Google_MAP_API;
 
 const geocodeLocation = async (place: string) => {
   try {
