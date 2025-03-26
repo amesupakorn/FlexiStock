@@ -17,6 +17,8 @@ export const getTrackByOrderId = async (req: Request) => {
     orderBy: { updatedAt: "desc" },
   });
 };
+
+
 export const updateTrackStatus = async (req: Request) => {
   const { orderId, newStatus, location, delayReason } = req.body;
 
