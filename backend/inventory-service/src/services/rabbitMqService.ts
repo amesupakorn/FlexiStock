@@ -34,6 +34,9 @@ export async function startInventoryConsumer() {
         data: { stock: newStock },
       });
 
+      await checkAndSendLowStockAlert(inventory.id);
+
+
       console.log(`✅ Inventory updated for product ${productId} at warehouse ${warehouseId}`);
       channel.ack(msg);
     } catch (error) {

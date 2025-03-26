@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../database/prisma";
+import { checkAndSendLowStockAlert } from "../services/rabbitMqService";
 
 export const searchStock = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -134,7 +135,7 @@ export const updateInventory = async (req: Request, res: Response) => {
       },
     });
 
-    await checkStockLevel(id);
+    await checkAndSendLowStockAlert(id);
 
     return res.status(200).json(updatedInventory);
   } catch (error) {
@@ -143,18 +144,3 @@ export const updateInventory = async (req: Request, res: Response) => {
   }
 };
 
-
-async function checkStockLevel(inventoryId: string) {
-    const inventory = await prisma.inventory.findUnique({
-      where: { id: inventoryId },
-      include: { product: true, warehouse: true }
-    });
-  
-    if (!inventory) return;
-  
-    if (inventory.stock < inventory.minStock) {
-      console.warn(`🚨 Low stock alert for ${inventory.product.name} at ${inventory.warehouse.name}:`, inventory.stock);
-  
-     
-    }
-}
