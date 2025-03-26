@@ -42,8 +42,11 @@ export const sendForecastData = async () => {
     const forecast = { data: response.data };
     await sendToForecastQueue(forecast)
 
-    return response.data;
-  } catch (error) {
+    return {
+      forecastData,
+      forecastResult: response.data
+    };
+    } catch (error) {
     console.error("Error sending forecast data:", error);
     throw error;
   }

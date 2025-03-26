@@ -13,36 +13,58 @@ const ForeCast = () => {
     'W02': 'พัทยา',
     'W03': 'เชียงใหม่',
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [forecastData, setForecastData] = useState<any[]>([]);
   
   useEffect(() => {
-    setLoading(true);
-    fetchForecast()
-      .then((data) => {
-        if (data && typeof data === 'object') {
-          const groupedByWarehouse = Object.entries(data).reduce((acc: Record<string, Record<string, ForecastPoint[]>>, [key, values]) => {
-            const [warehouse_id, product_id] = key.split('-');
-            if (!acc[warehouse_id]) {
-              acc[warehouse_id] = {};
-            }
-            acc[warehouse_id][product_id] = values as ForecastPoint[];
-            return acc;
-          }, {});
+    const loadForecast = async () => {
+      setLoading(true);
+      try {
+        const { forecastResult, forecastData } = await fetchForecast();
+        setForecastData(forecastData);
+
+        if (forecastResult && typeof forecastResult === 'object') {
+          const groupedByWarehouse = Object.entries(forecastResult).reduce(
+            (acc: Record<string, Record<string, ForecastPoint[]>>, [key, values]) => {
+              const [warehouse_id, product_id] = key.split('-');
+              if (!acc[warehouse_id]) acc[warehouse_id] = {};
+              acc[warehouse_id][product_id] = values as ForecastPoint[];
+              return acc;
+            },
+            {}
+          );
+  
           setForecast(groupedByWarehouse);
-          
-          // Set first warehouse as default selected
+  
           if (Object.keys(groupedByWarehouse).length > 0) {
             setSelectedWarehouse(Object.keys(groupedByWarehouse)[0]);
           }
         } else {
-          console.error('Expected an object of forecast data, but got:', data);
+          console.error("⚠️ Unexpected forecast format:", forecastResult);
         }
+      } catch (err) {
+        console.error("❌ Failed to load forecast:", err);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Failed to load forecast', err);
-        setLoading(false);
-      });
+      }
+    };
+  
+    loadForecast();
   }, []);
+
+  const getTotalSalesByWarehouse = (warehouseId: string) => {
+    return forecastData
+      .filter(item => item.warehouse_id === warehouseId)
+      .reduce((sum, item) => sum + (item.y ?? 0), 0)
+      .toFixed(2);
+  };
+
+  const getTotalSalesByProduct = (productId: string, warehouseId: string) => {
+    return forecastData
+      .filter(item => item.product_id === productId && item.warehouse_id === warehouseId)
+      .reduce((sum, item) => sum + (item.y ?? 0), 0)
+      .toFixed(2);
+  };
 
   // Helper function to get the weekday name
   const getWeekdayName = (date: string) => {
@@ -75,6 +97,8 @@ const ForeCast = () => {
     const date = new Date(dateStr);
     return date.toLocaleDateString('th-TH', { weekday: 'short', month: 'short', day: 'numeric' });
   };
+
+  
 
   if (loading) {
     return (
@@ -126,7 +150,7 @@ const ForeCast = () => {
 
         {/* Stats Cards */}
         {selectedWarehouse && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
             {(() => {
               const stats = getWarehouseStats(forecast[selectedWarehouse]);
               return (
@@ -167,6 +191,20 @@ const ForeCast = () => {
                     <p className="mt-2 text-3xl font-semibold text-gray-900">{stats.avgRecommendedIncrease}</p>
                     <p className="mt-1 text-sm text-gray-500">หน่วย/สินค้า</p>
                   </div>
+                  <div className="bg-white shadow rounded-lg p-6 border-l-4 border-yellow-500">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-medium text-gray-900">ยอดขายรวม</h3>
+                      <span className="text-yellow-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h10" />
+                        </svg>
+                      </span>
+                    </div>
+                    <p className="mt-2 text-3xl font-semibold text-gray-900">
+                      {getTotalSalesByWarehouse(selectedWarehouse)}
+                    </p>
+                    <p className="mt-1 text-sm text-gray-500">หน่วย</p>
+                  </div>
                 </>
               );
             })()}
@@ -181,7 +219,8 @@ const ForeCast = () => {
               const recommendedStockIncrease = Math.max(0, lastForecast.yhat_upper - lastForecast.yhat);
               const highestForecast = data.reduce((max, item) => (item.yhat > max.yhat ? item : max), data[0]);
               const highestForecastDay = getWeekdayName(highestForecast.ds);
-              
+
+              const totalActualSales = parseFloat(getTotalSalesByProduct(product_id, selectedWarehouse));
               // Find trend (increasing or decreasing)
               const firstHalf = data.slice(0, Math.floor(data.length / 2));
               const secondHalf = data.slice(Math.floor(data.length / 2));
@@ -261,7 +300,7 @@ const ForeCast = () => {
                     </div>
 
                     {/* Recommendations */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* เพิ่มสต็อก */}
                     <div className="bg-blue-50 rounded-lg p-4 shadow-md">
                       <h4 className="text-sm font-medium text-blue-800">คำแนะนำการเพิ่มสต็อก</h4>
@@ -283,7 +322,7 @@ const ForeCast = () => {
                       </p>
                       <p className="mt-1 text-sm text-blue-600">
                         {recommendedStockIncrease > 0.1
-                          ? "เพิ่มเพื่อรองรับการขายในอนาคต"
+                          ? "เพิ่มเพื่อรองรับการขาย"
                           : "ไม่ต้องเพิ่มสต็อก"}
                       </p>
                     </div>
@@ -293,6 +332,11 @@ const ForeCast = () => {
                       <h4 className="text-sm font-medium text-green-800">วันที่ยอดขายสูงสุด</h4>
                       <p className="mt-2 text-2xl font-bold text-green-900">{highestForecastDay}</p>
                       <p className="mt-1 text-sm text-green-600">{formatDate(highestForecast.ds)}</p>
+                    </div>
+                    <div className="bg-yellow-50 rounded-lg p-4 shadow-md">
+                      <h4 className="text-sm font-medium text-yellow-800">ยอดขายรวม</h4>
+                      <p className="mt-2 text-2xl font-bold text-yellow-900">{totalActualSales} หน่วย</p>
+                      
                     </div>
                   </div>
                   </div>
