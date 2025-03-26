@@ -134,9 +134,27 @@ export const updateInventory = async (req: Request, res: Response) => {
       },
     });
 
+    await checkStockLevel(id);
+
     return res.status(200).json(updatedInventory);
   } catch (error) {
     console.error("Error updating inventory:", error);
     return res.status(500).json({ error: "Failed to update inventory" });
   }
 };
+
+
+async function checkStockLevel(inventoryId: string) {
+    const inventory = await prisma.inventory.findUnique({
+      where: { id: inventoryId },
+      include: { product: true, warehouse: true }
+    });
+  
+    if (!inventory) return;
+  
+    if (inventory.stock < inventory.minStock) {
+      console.warn(`🚨 Low stock alert for ${inventory.product.name} at ${inventory.warehouse.name}:`, inventory.stock);
+  
+     
+    }
+}

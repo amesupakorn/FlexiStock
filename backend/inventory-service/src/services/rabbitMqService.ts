@@ -43,3 +43,42 @@ export async function startInventoryConsumer() {
   });
 }
 
+
+
+export async function checkAndSendLowStockAlert(inventoryId: string) {
+  const inventory = await prisma.inventory.findUnique({
+    where: { id: inventoryId },
+    include: { product: true, warehouse: true },
+  });
+
+  if (!inventory) return;
+  
+
+  if (inventory.stock < inventory.minStock) {
+    console.log(`🚨 Low stock detected: ${inventory.product.name}`);
+
+    const connection = await amqp.connect("amqp://localhost");
+    const channel = await connection.createChannel();
+    const queue = "low_stock_alert"
+
+    await channel.assertQueue(queue, { durable: true });
+
+    const message = {
+      inventoryId: inventory.id,
+      productName: inventory.product.name,
+      warehouseName: inventory.warehouse.name,
+      stock: inventory.stock,
+      minStock: inventory.minStock,
+    };
+
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), {
+      persistent: true,
+    });
+
+    setTimeout(() => {
+      channel.close();
+      connection.close();
+    }, 500);
+  }
+}
+
