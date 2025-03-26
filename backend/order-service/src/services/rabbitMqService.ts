@@ -56,19 +56,25 @@ export async function sendToInventoryQueue(message: any) {
 
 
 export async function sendToTrackingQueue(message: any) {
-  const connection = await amqp.connect("amqp://localhost");
-  const channel = await connection.createChannel();
-  const queue = "create_tracking";
+  
+  try{
+    const connection = await amqp.connect("amqp://localhost");
+    const channel = await connection.createChannel();
+    const queue = "create_tracking";
 
-  await channel.assertQueue(queue, { durable: true });
-  channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), {
-    persistent: true,
-  });
+    await channel.assertQueue(queue, { durable: true });
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), {
+      persistent: true,
+    });
 
-  console.log("🚚 Sent to tracking queue:", message);
+    console.log("🚚 Sent to tracking queue:", message);
 
-  setTimeout(() => {
-    channel.close();
-    connection.close();
-  }, 500);
+    setTimeout(() => {
+      channel.close();
+      connection.close();
+    }, 500);
+  }
+  catch (error) {
+    console.error("Error sending message to RabbitMQ:", error);
+  }
 }

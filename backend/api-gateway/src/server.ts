@@ -16,7 +16,7 @@ app.use(express.json());
 const services = [
   { route: "/api/orders", target: "http://localhost:5002" },
   { route: "/api/inventory", target: "http://localhost:5003" },
-  { route: "/api/fetchdata", target: "http://localhost:5004" },
+  { route: "/api/notification", target: "http://localhost:5004" },
   { route: "/api/track", target: "http://localhost:5005" },
   { route: "/api/search", target: "http://localhost:5006" },
   { route: "/api/forecast", target: "http://localhost:5007" }

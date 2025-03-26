@@ -1,10 +1,9 @@
 import amqp from "amqplib";
-import prisma from "../database/prisma";
-import { v4 as uuidv4 } from "uuid";
+import { sendEmail } from "../controllers/sendEmailTracking";
 
 const QUEUE_NAME = "create_tracking";
 
-export async function startTrackingConsumer() {
+export async function startSendEmailTrackingConsumer() {
   const connection = await amqp.connect("amqp://localhost");
   const channel = await connection.createChannel();
   await channel.assertQueue(QUEUE_NAME, { durable: true });
@@ -15,22 +14,21 @@ export async function startTrackingConsumer() {
     if (!msg) return;
 
     const data = JSON.parse(msg.content.toString());
-    const { orderId, tracking } = data;
+    const { orderId, customer, tracking } = data;
 
     try {
-
-      const track = await prisma.tracking.create({
-        data: {
-            orderId,
-            status: tracking.status,
-            location: tracking.location,
-        },
+      await sendEmail({
+        to: customer.email,
+        name: customer.name,
+        orderId,
+        status: tracking.status,
+        location: tracking.location,
       });
 
+      console.log(`📧 Email sent to ${customer.email} for order ${orderId}`);
       channel.ack(msg);
     } catch (error) {
-      console.error("❌ Failed to create tracking:", error);
+      console.error("❌ Failed to send email:", error);
     }
   });
 }
-

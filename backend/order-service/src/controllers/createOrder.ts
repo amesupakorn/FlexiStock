@@ -57,8 +57,14 @@ export const createOrder = async (req: Request, res: Response) => {
 
         await sendToTrackingQueue({
           orderId: order.id,
-          status: "Processing",
-          location: customerData.address
+          customer: {
+            name: customer.name,
+            email: customer.email
+          },
+          tracking: {
+            status: "Processing",
+            location: customer.address
+          }
         });
     
         return order;
