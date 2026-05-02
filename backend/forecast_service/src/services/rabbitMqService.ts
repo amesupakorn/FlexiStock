@@ -3,7 +3,7 @@ import amqp from 'amqplib';
 import { saveForecastData } from '../controllers/forecastData'; 
 import { ForecastPoint } from '../database/model/forecast';
 
-const RABBITMQ_URL = 'amqp://localhost';  // URL ของ RabbitMQ server
+const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://localhost';  // URL ของ RabbitMQ server
 const QUEUE_NAME = 'forecast_queue';  // ชื่อของ queue ที่ใช้ใน RabbitMQ
 
 export const listenForForecastData = async () => {

@@ -5,7 +5,7 @@ const QUEUE_NAME = "create_tracking";
 const EXCHANGE_NAME = "tracking_exchange";
 
 export async function startTrackingConsumer() {
-  const connection = await amqp.connect("amqp://localhost");
+  const connection = await amqp.connect(process.env.RABBITMQ_URL || "amqp://localhost");
   const channel = await connection.createChannel();
 
   await channel.assertQueue(QUEUE_NAME, { durable: true });

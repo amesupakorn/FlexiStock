@@ -6,7 +6,7 @@ const QUEUE_NAME = "send_tracking_email";
 const EXCHANGE_NAME = "tracking_exchange";
 
 export async function startSendEmailTrackingConsumer() {
-  const connection = await amqp.connect("amqp://localhost");
+  const connection = await amqp.connect(process.env.RABBITMQ_URL || "amqp://localhost");
   const channel = await connection.createChannel();
 
   await channel.assertExchange(EXCHANGE_NAME, "fanout", { durable: true });
@@ -40,7 +40,7 @@ export async function startSendEmailTrackingConsumer() {
 
 
 export async function startLowStockEmailConsumer() {
-    const connection = await amqp.connect("amqp://localhost");
+    const connection = await amqp.connect(process.env.RABBITMQ_URL || "amqp://localhost");
     const channel = await connection.createChannel();
     const queue = "low_stock_alert"
 

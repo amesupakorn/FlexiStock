@@ -1,7 +1,7 @@
 // src/services/rabbitMqService.ts (ใน order-service)
 import amqp from 'amqplib';
 
-const RABBITMQ_URL = 'amqp://localhost';  
+const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://localhost';  
 
 export const sendToForecastQueue = async (data: any) => {
   try {
@@ -58,7 +58,7 @@ export async function sendToInventoryQueue(message: any) {
 
 export async function sendToTrackingQueue(message: any) {
   try {
-    const connection = await amqp.connect("amqp://localhost");
+    const connection = await amqp.connect(process.env.RABBITMQ_URL || "amqp://localhost");
     const channel = await connection.createChannel();
 
     const queue = "create_tracking";

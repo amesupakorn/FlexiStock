@@ -190,7 +190,7 @@ const StockPage = () => {
         price: parseFloat(productForm.price)
       };
 
-      await axios.post('http://localhost:5003/create/product', productData);
+      await axios.post('http://localhost:5001/api/inventory/create/product', productData);
       setProductForm({ name: '', description: '', price: '' });
       setIsModalOpen(false);
 
@@ -220,7 +220,7 @@ const StockPage = () => {
         maxStock: stockForm.maxStock,
       };
 
-      await axios.post('http://localhost:5003/create/inventory', stockData);
+      await axios.post('http://localhost:5001/api/inventory/create/inventory', stockData);
       setStockForm({ productId: '', warehouseId: '', stock: 0, minStock: 0, maxStock: 0 });
       setIsStockModalOpen(false);
       await fetchInventoryDetail();
@@ -246,7 +246,7 @@ const StockPage = () => {
     const stockChange = type === "add" ? parsedAmount : -parsedAmount;
   
     try {
-      const response = await fetch(`http://localhost:5003/update/${item.id}`, {
+      const response = await fetch(`http://localhost:5001/api/inventory/update/${item.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -779,7 +779,7 @@ const StockPage = () => {
                     const maxStock = parseInt(e.target.maxStock.value);
 
                     try {
-                        const response = await fetch(`http://localhost:5003/update/${selectedInventory.id}`, {
+                        const response = await fetch(`http://localhost:5001/api/inventory/update/${selectedInventory.id}`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ minStock, maxStock }),

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_Near_URL = "http://localhost:5002/nearest";
-const API_create_URL = "http://localhost:5002/createOrder";
+const API_Near_URL = "http://localhost:5001/api/orders/nearest";
+const API_create_URL = "http://localhost:5001/api/orders/createOrder";
 
 const API_GATEWAY_URL = "http://localhost:5001/api/orders/createOrder"; 
 

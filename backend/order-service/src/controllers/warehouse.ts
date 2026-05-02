@@ -29,7 +29,8 @@ export const findNearestWarehouse = async (
 ): Promise<{ warehouse: any; distance_km: number; estimated_time_mins: number } | null> => {
   try {
 
-    const response = await axios.get("http://localhost:5001/api/inventory/warehouse");
+    const INVENTORY_SERVICE_URL = process.env.INVENTORY_SERVICE_URL || "http://inventory-service:8080";
+    const response = await axios.get(`${INVENTORY_SERVICE_URL}/warehouse`);
     const warehouses = response.data;
 
     if (!warehouses || warehouses.length === 0) {

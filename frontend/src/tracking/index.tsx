@@ -20,7 +20,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 
 // Enum matching Prisma
 export type TrackingStatus = 'Processing' | 'InTransit' | 'Delivered' | 'Delayed';
-const BASE_URL = "http://localhost:5005";
+const BASE_URL = "http://localhost:5001/api/track";
 
 // Define status progression order
 const STATUS_PROGRESSION: TrackingStatus[] = ['Processing', 'InTransit', 'Delivered'];

@@ -103,7 +103,7 @@ export const createInventory = async (req: Request, res: Response) => {
 
 export const updateInventory = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const { stockChange, minStock, maxStock } = req.body;
 
     if (!id) {

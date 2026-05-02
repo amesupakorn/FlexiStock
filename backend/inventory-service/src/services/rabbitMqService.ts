@@ -3,7 +3,7 @@ import prisma from "../database/prisma"; // path ตามของคุณ
 
 
 export async function startInventoryConsumer() {
-  const connection = await amqp.connect("amqp://localhost");
+  const connection = await amqp.connect(process.env.RABBITMQ_URL || "amqp://localhost");
   const channel = await connection.createChannel();
   const queue = "inventory_update"
   await channel.assertQueue(queue, { durable: true });
@@ -59,7 +59,7 @@ export async function checkAndSendLowStockAlert(inventoryId: string) {
   if (inventory.stock < inventory.minStock) {
     console.log(`🚨 Low stock detected: ${inventory.product.name}`);
 
-    const connection = await amqp.connect("amqp://localhost");
+    const connection = await amqp.connect(process.env.RABBITMQ_URL || "amqp://localhost");
     const channel = await connection.createChannel();
     const queue = "low_stock_alert"
 

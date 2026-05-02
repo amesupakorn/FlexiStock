@@ -36,8 +36,9 @@ export const sendForecastData = async () => {
         return { ds, y, product_id, warehouse_id };
       });
 
-  // ส่งข้อมูลไปยัง forecast service (http://localhost:8000/forecast)
-    const response = await axios.post("http://localhost:8000/forecast", forecastData);
+  // ส่งข้อมูลไปยัง forecast service
+    const FORECAST_API_URL = process.env.FORECAST_API_URL || "http://localhost:8000/forecast";
+    const response = await axios.post(FORECAST_API_URL, forecastData);
 
     const forecast = { data: response.data };
     await sendToForecastQueue(forecast)

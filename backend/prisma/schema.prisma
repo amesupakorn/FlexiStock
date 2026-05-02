@@ -1,7 +1,9 @@
 // Unified Prisma Schema for FlexiStock
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
+  output        = "../src/database/generated/client"
 }
 
 datasource db {
