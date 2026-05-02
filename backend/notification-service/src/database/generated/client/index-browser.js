@@ -117,6 +117,69 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.WarehouseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  location: 'location',
+  capacity: 'capacity'
+};
+
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.InventoryScalarFieldEnum = {
+  id: 'id',
+  warehouseId: 'warehouseId',
+  productId: 'productId',
+  stock: 'stock',
+  minStock: 'minStock',
+  maxStock: 'maxStock',
+  lastUpdated: 'lastUpdated'
+};
+
+exports.Prisma.CustomerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  address: 'address'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  productId: 'productId',
+  warehouseId: 'warehouseId',
+  quantity: 'quantity',
+  totalPrice: 'totalPrice',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TrackingScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  status: 'status',
+  location: 'location',
+  updatedAt: 'updatedAt',
+  delayReason: 'delayReason'
+};
+
+exports.Prisma.ForecastHistoryScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  warehouseId: 'warehouseId',
+  createdAt: 'createdAt',
+  forecastDate: 'forecastDate',
+  forecastYhat: 'forecastYhat',
+  forecastLower: 'forecastLower',
+  forecastUpper: 'forecastUpper'
+};
+
 exports.Prisma.AlertScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
@@ -135,12 +198,39 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.OrderStatus = exports.$Enums.OrderStatus = {
+  Pending: 'Pending',
+  Processing: 'Processing',
+  Shipped: 'Shipped',
+  Delivered: 'Delivered',
+  Cancelled: 'Cancelled'
+};
+
+exports.TrackingStatus = exports.$Enums.TrackingStatus = {
+  Processing: 'Processing',
+  InTransit: 'InTransit',
+  Delivered: 'Delivered',
+  Delayed: 'Delayed'
+};
+
 exports.AlertType = exports.$Enums.AlertType = {
   LowStock: 'LowStock',
   OutOfStock: 'OutOfStock'
 };
 
 exports.Prisma.ModelName = {
+  Warehouse: 'Warehouse',
+  Product: 'Product',
+  Inventory: 'Inventory',
+  Customer: 'Customer',
+  Order: 'Order',
+  Tracking: 'Tracking',
+  ForecastHistory: 'ForecastHistory',
   Alert: 'Alert'
 };
 

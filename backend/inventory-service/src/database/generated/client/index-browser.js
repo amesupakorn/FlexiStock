@@ -142,6 +142,53 @@ exports.Prisma.InventoryScalarFieldEnum = {
   lastUpdated: 'lastUpdated'
 };
 
+exports.Prisma.CustomerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  address: 'address'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  productId: 'productId',
+  warehouseId: 'warehouseId',
+  quantity: 'quantity',
+  totalPrice: 'totalPrice',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TrackingScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  status: 'status',
+  location: 'location',
+  updatedAt: 'updatedAt',
+  delayReason: 'delayReason'
+};
+
+exports.Prisma.ForecastHistoryScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  warehouseId: 'warehouseId',
+  createdAt: 'createdAt',
+  forecastDate: 'forecastDate',
+  forecastYhat: 'forecastYhat',
+  forecastLower: 'forecastLower',
+  forecastUpper: 'forecastUpper'
+};
+
+exports.Prisma.AlertScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  warehouseId: 'warehouseId',
+  type: 'type',
+  message: 'message',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -156,12 +203,35 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.OrderStatus = exports.$Enums.OrderStatus = {
+  Pending: 'Pending',
+  Processing: 'Processing',
+  Shipped: 'Shipped',
+  Delivered: 'Delivered',
+  Cancelled: 'Cancelled'
+};
 
+exports.TrackingStatus = exports.$Enums.TrackingStatus = {
+  Processing: 'Processing',
+  InTransit: 'InTransit',
+  Delivered: 'Delivered',
+  Delayed: 'Delayed'
+};
+
+exports.AlertType = exports.$Enums.AlertType = {
+  LowStock: 'LowStock',
+  OutOfStock: 'OutOfStock'
+};
 
 exports.Prisma.ModelName = {
   Warehouse: 'Warehouse',
   Product: 'Product',
-  Inventory: 'Inventory'
+  Inventory: 'Inventory',
+  Customer: 'Customer',
+  Order: 'Order',
+  Tracking: 'Tracking',
+  ForecastHistory: 'ForecastHistory',
+  Alert: 'Alert'
 };
 
 /**

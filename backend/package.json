@@ -1,0 +1,12 @@
+{
+  "name": "flexistock-backend",
+  "version": "1.0.0",
+  "description": "Root package to manage all FlexiStock backend services",
+  "scripts": {
+    "dev": "npx concurrently -n \"GATEWAY,INVENTORY,ORDER,TRACK,FORECAST,NOTIFY,SEARCH\" -c \"bgBlue,bgGreen,bgMagenta,bgCyan,bgYellow,bgRed,bgWhite\" \"npm run dev --prefix api-gateway\" \"npm run dev --prefix inventory-service\" \"npm run dev --prefix order-service\" \"npm run dev --prefix track-service\" \"npm run dev --prefix forecast_service\" \"npm run dev --prefix notification-service\" \"npm run dev --prefix search-service\"",
+    "install-all": "npm install --prefix api-gateway && npm install --prefix inventory-service && npm install --prefix order-service && npm install --prefix track-service && npm install --prefix forecast_service && npm install --prefix notification-service && npm install --prefix search-service"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
