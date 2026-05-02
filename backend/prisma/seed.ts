@@ -80,14 +80,15 @@ async function main() {
     });
   }
 
-  // 4. Create Customer
+  // 4. Create Sample Customer (Optional - currently removed)
+  /*
   const customer = await prisma.customer.upsert({
-    where: { email: "somchai@example.com" },
+    where: { email: "customer@example.com" },
     update: {},
     create: {
-      name: "Somchai Saendee",
-      email: "somchai@example.com",
-      address: "123 Sukhumvit, Bangkok",
+      name: "Demo Customer",
+      email: "customer@example.com",
+      address: "123 Main St, Bangkok",
     },
   });
 
@@ -97,11 +98,12 @@ async function main() {
       customerId: customer.id,
       productId: p1.id,
       warehouseId: wh1.id,
-      quantity: 2,
-      totalPrice: 139800,
+      quantity: 1,
+      totalPrice: 69900,
       status: "Pending",
     }
   }).catch(() => {});
+  */
 
   console.log("✅ Seeding completed successfully!");
 }

@@ -29,3 +29,13 @@ export const createOrder = async (customerData: any, selectedItems: any[], wareh
     throw error;
   }
 };
+
+export const getOrders = async () => {
+  try {
+    const response = await axios.get("http://localhost:5001/api/orders/all");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    throw error;
+  }
+};

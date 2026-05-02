@@ -1,283 +1,379 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { MapPin, User, Mail, Package, Route, Clock, ChevronLeft } from "lucide-react";
 import { createOrder, getNearestWarehouse } from "../api/fetchOrder";
-import RouteVisualization from "../components/ui/routeDlivery"
 import { SelectedItem } from "../models/selectItem";
 import { NearestWarehouse, Warehouse } from "../models/warehouse";
 import { handleAlert } from "../components/swifAlert";
+
 export default function OrderSummary() {
   const { state } = useLocation();
-  const { customerData } = state || {};
-  const { selectedItems } = useLocation().state as { selectedItems: SelectedItem[] };
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const navigate = useNavigate();
 
-  const [warehouseLocation, setWarehouseLocation] = useState<null | Warehouse>(null);
-  const [nearestWarehouse, setNearestWarehouse] = useState<null | NearestWarehouse>(null);  
-  
-  const customerLocation = customerData?.location || { lat: 13.747, lng: 100.5223 };
+  // Guard: redirect if accessed directly
+  if (!state?.customerData || !state?.selectedItems) {
+    return (
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="bg-white shadow-md rounded-lg p-10 text-center max-w-sm w-full">
+          <div className="w-14 h-14 bg-amber-50 border border-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-slate-800 mb-2">No Order Data</h2>
+          <p className="text-slate-500 text-sm mb-6">Please complete the order flow from the beginning.</p>
+          <button
+            onClick={() => navigate("/order")}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-semibold transition-colors"
+          >
+            Start New Order
+          </button>
+        </div>
+      </main>
+    );
+  }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  const [path, setPath] = useState<any[]>([]); 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  const polylineRef = useRef<any>(null);
-  
-  
+  const { customerData, selectedItems } = state as { customerData: { name: string; email: string; phone?: string; address: string; location: { lat: number; lng: number } }; selectedItems: SelectedItem[] };
+  const customerLocation = customerData.location || { lat: 13.747, lng: 100.5223 };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [warehouseLocation, setWarehouseLocation] = useState<null | Warehouse>(null);
+  const [nearestWarehouse, setNearestWarehouse] = useState<null | NearestWarehouse>(null);
+  const [warehouseLoading, setWarehouseLoading] = useState(true);
+
   useEffect(() => {
     const fetchWarehouse = async () => {
       if (!customerLocation.lat || !customerLocation.lng) return;
-
+      setWarehouseLoading(true);
       try {
         const data = await getNearestWarehouse(customerLocation.lat, customerLocation.lng);
-        setNearestWarehouse(data);
-        if (data.warehouse) {
-          setWarehouseLocation(data.warehouse);
+        if (data) {
+          setNearestWarehouse(data);
+          if (data.warehouse) setWarehouseLocation(data.warehouse);
+        } else {
+          console.warn("No nearest warehouse data returned");
         }
       } catch (err) {
         console.error("Fetch warehouse failed:", err);
+      } finally {
+        setWarehouseLoading(false);
       }
     };
-
     fetchWarehouse();
-  }, [customerLocation]);
-
-
-  const handleGoBack = () => {
-    navigate(-1); // Navigate back to the previous page
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const total = selectedItems.reduce((sum, item) => sum + item.total, 0);
 
-  useEffect(() => {
-    setPath([warehouseLocation, customerLocation]);
-  }, [customerLocation]);
-
-
   const handleCreateOrder = async () => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     try {
-      
-      await createOrder(customerData, selectedItems, warehouseLocation?.id);
-      handleAlert({title:"Order Success", icon: "success"})
-      
-      navigate("/order"); 
+      const order = await createOrder(customerData, selectedItems, warehouseLocation?.id);
+      handleAlert({ title: "Order Created Successfully", icon: "success" });
+      navigate(`/track?orderId=${order.id}`);
     } catch (error) {
       console.error("Failed to create order:", error);
+      handleAlert({ title: "Failed to create order", icon: "error" });
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false)
-
   };
 
+  const mapsDirectionsUrl = warehouseLocation
+    ? `https://www.google.com/maps/dir/?api=1&origin=${warehouseLocation.lat},${warehouseLocation.lng}&destination=${customerLocation.lat},${customerLocation.lng}&travelmode=driving`
+    : "#";
+
+  const mapsEmbedSrc = warehouseLocation
+    ? `https://www.google.com/maps/embed/v1/directions?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&origin=${warehouseLocation.lat},${warehouseLocation.lng}&destination=${customerLocation.lat},${customerLocation.lng}&mode=driving`
+    : null;
+
   return (
-    <main className="flex flex-col min-h-screen p-4 md:p-8">
-      <div className="w-full bg-white rounded-3xl shadow-xl mx-auto overflow-hidden border border-gray-100">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-green-500 to-green-600 p-6 relative">
-          <button 
-            onClick={handleGoBack}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 p-2 rounded-full transition-all"
-          >
-            <ChevronLeft className="text-white" size={24} />
-          </button>
-          <div className="text-center">
-            <h1 className="text-2xl md:text-3xl font-bold text-white">
+    <main className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="max-w-full mx-auto">
+
+        {/* ── Page Header ── */}
+        <div className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate(-1)}
+              className="w-10 h-10 bg-white border border-gray-200 shadow-sm rounded-lg flex items-center justify-center text-slate-500 hover:bg-gray-50 hover:text-slate-800 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </button>
+            <div>
+              <h1 className="text-4xl font-extrabold text-gray-900 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
                 Order Summary
-            </h1>
-            <p className="text-green-100 mt-2">Delivery and Order Details</p>
-          </div>
-        </div>
-
-        {/* Main Content */}
-        {/* Google Map Section */}
-        <div className="p-6">
-            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 shadow-sm">
-                <h2 className="text-xl font-semibold text-gray-700 border-b border-gray-300 pb-3 mb-4 flex items-center">
-                    <Route className="mr-3 text-emerald-500" />
-                    Delivery Route
-                </h2>
-                <div className="mt-6 border rounded-lg overflow-hidden shadow-md">
-                {warehouseLocation && (
-
-                    <iframe
-                        title="Delivery Route"
-                        width="100%"
-                        height="450"
-                        frameBorder="0"
-                        style={{ border: 0 }}
-                        loading="lazy"
-                        allowFullScreen
-                        src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyDlOE8vlYCnaOdeG1JWZ4TZt_xCzKiZv6w&origin=${warehouseLocation.lat},${warehouseLocation.lng}&destination=${customerLocation.lat},${customerLocation.lng}&mode=driving`}                />
-                      )}
-                       
-                  </div>
-                  {warehouseLocation && (
-
-                    <div className="flex flex-row items-center">
-                            <span> <a
-                            href={`https://www.google.com/maps/dir/?api=1&origin=${warehouseLocation.lat},${warehouseLocation.lng}&destination=${customerLocation.lat},${customerLocation.lng}&travelmode=driving`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-emerald-600 hover:underline mt-4 inline-block"
-                            >
-                            เปิดเส้นทางบน Google Maps
-                            </a></span>
-
-                    </div>
-                   )}
-
-                   
-                </div>
-                
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 p-6 ">
-          {/* Left - Customer Information */}
-          <div className="space-y-6 bg-gray-50 rounded-2xl p-6 border border-gray-200 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-700 border-b border-gray-300 pb-3 mb-4 flex items-center">
-              <User className="mr-3 text-emerald-500" />
-              Customer Information
-            </h2>
-            <div className="space-y-4">
-              {[
-                { icon: <User className="text-emerald-500" />, label: "Name", value: customerData?.name },
-                { icon: <Mail className="text-emerald-500" />, label: "Email", value: customerData?.email },
-                { icon: <MapPin className="text-emerald-500" />, label: "Address", value: customerData?.address },
-              ].map((item, idx) => (
-                <div 
-                  key={idx} 
-                  className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition"
-                >
-                  <div className="flex items-center space-x-3">
-                    {item.icon}
-                    <span className="font-medium text-gray-600">{item.label}:</span>
-                  </div>
-                  <span className="text-gray-800 font-semibold text-right max-w-[200px] truncate">
-                    {item.value}
-                  </span>
-                </div>
-              ))}
-
-                <div className="bg-white shadow-lg rounded-2xl p-4 mx-auto">
-                    {/* Route Visualization */}
-                    <RouteVisualization/>
-
-                    {/* Location Details */}
-                    <div className="space-y-4">
-                        {/* Warehouse Location */}
-                        <div className="bg-emerald-50 p-4 rounded-xl flex justify-between items-center">
-                        <div className="flex items-center space-x-3">
-                            <Route className="w-5 h-5 text-emerald-600" />
-                            <span className="text-gray-700 font-medium">Warehouse</span>
-                        </div>
-                        <span className="text-emerald-800 font-semibold">{
-                            `${warehouseLocation?.location} (
-                            ${warehouseLocation?.lat.toFixed(4)}, ${warehouseLocation?.lng.toFixed(4)} )`}
-                        </span>
-                        </div>
-
-                        {/* Customer Location */}
-                        <div className="bg-blue-50 p-4 rounded-xl flex justify-between items-center">
-                        <div className="flex items-center space-x-3">
-                            <MapPin className="w-5 h-5 text-blue-600" />
-                            <span className="text-gray-700 font-medium">Customer</span>
-                        </div>
-                        <span className="text-blue-800 font-semibold">
-                            {customerLocation.lat.toFixed(4)}, {customerLocation.lng.toFixed(4)}
-                        </span>
-                        </div>
-
-                        {/* Delivery Details */}
-                        <div className="bg-purple-50 p-4 rounded-xl flex justify-between items-center">
-                        <div className="flex items-center space-x-3">
-                            <Clock className="w-5 h-5 text-purple-600" />
-                            <span className="text-gray-700 font-medium">Delivery Details</span>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <div className="flex items-center">
-                            <Route className="w-4 h-4 text-emerald-600 mr-1" />
-                            <span className="text-emerald-800 font-semibold"> {nearestWarehouse?.distance_km} km</span>
-                            </div>
-                            <div className="h-4 border-r border-gray-300"></div>
-                            <div className="flex items-center">
-                            <Clock className="w-4 h-4 text-purple-600 mr-1" />
-                            <span className="text-purple-800 font-semibold">{nearestWarehouse?.estimated_time_mins} mins</span>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+              </h1>
+              <p className="text-slate-500 text-sm mt-1 ml-[52px]">Step 3 of 3 — Review and confirm</p>
             </div>
           </div>
 
-          {/* Right Side */}
-          <div className="space-y-6">
-            {/* Order Items Section */}
-            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 shadow-sm">
-              <div className="flex justify-between items-center border-b border-gray-300 pb-3 mb-4">
-                <h2 className="text-xl font-semibold text-gray-700 flex items-center">
-                  <Package className="mr-3 text-emerald-500" />
-                  Order Items
-                </h2>
-                <span className="text-sm text-gray-500 bg-emerald-50 px-2 py-1 rounded-full">
-                  {selectedItems.length} item{selectedItems.length !== 1 ? 's' : ''}
+          {/* Step indicator */}
+          <div className="flex items-center gap-2 text-sm font-medium">
+            {["Select Products", "Customer Info", "Summary"].map((label, i) => (
+              <div key={i} className="flex items-center gap-2">
+                {i > 0 && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                )}
+                <span className={`flex items-center gap-1.5 ${i === 2 ? "text-blue-600 font-bold" : "text-slate-400"}`}>
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${i === 2 ? "bg-blue-600 text-white" : "bg-slate-200 text-slate-500"}`}>
+                    {i === 2 ? "✓" : i + 1}
+                  </span>
+                  {label}
                 </span>
               </div>
+            ))}
+          </div>
+        </div>
 
-              {selectedItems.length === 0 ? (
-                <div className="text-center py-8 text-gray-400">
-                  <Package className="h-12 w-12 mx-auto mb-4 text-gray-300" />
-                  No items in your order
+        {/* ── Main Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+          {/* LEFT column: Customer + Delivery Info + Order Items */}
+          <div className="lg:col-span-2 space-y-4">
+
+            {/* Customer Information Card */}
+            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+              <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
+                <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Customer Information
+                </h2>
+              </div>
+              <div className="divide-y divide-slate-100">
+                {[
+                  { label: "Name", value: customerData.name, icon: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" },
+                  { label: "Email", value: customerData.email, icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
+                  { label: "Phone", value: customerData.phone || "—", icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" },
+                  { label: "Address", value: customerData.address, icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" },
+                ].map(({ label, value, icon }) => (
+                  <div key={label} className="flex items-start gap-4 px-6 py-3">
+                    <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={icon} />
+                      </svg>
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">{label}</p>
+                      <p className="text-sm font-semibold text-slate-800 truncate">{value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Delivery Stats Card */}
+            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+              <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
+                <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                  </svg>
+                  Warehouse & Delivery
+                </h2>
+              </div>
+              {warehouseLoading ? (
+                <div className="px-6 py-8 flex items-center justify-center gap-3 text-slate-400">
+                  <div className="w-5 h-5 border-2 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
+                  <span className="text-sm font-medium">Finding nearest warehouse...</span>
                 </div>
               ) : (
-                <div className="space-y-3">
-                  {selectedItems.map((item, idx) => (
-                    <div 
-                      key={idx} 
-                      className="flex justify-between items-center bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <Package className="text-emerald-500" />
-                        <span className="font-medium text-gray-700">{item.product.name}</span>
+                <div className="divide-y divide-slate-100">
+                  <div className="flex items-center justify-between px-6 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
                       </div>
-                      <span className="text-emerald-600 font-semibold bg-emerald-50 px-2 py-1 rounded-full">
-                        Qty: {item.quantity}
-                      </span>
+                      <div>
+                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Nearest Warehouse</p>
+                        <p className="text-sm font-bold text-slate-800">{warehouseLocation?.name || "—"}</p>
+                        <p className="text-xs text-slate-500">{warehouseLocation?.location}</p>
+                      </div>
                     </div>
-                  ))}
-                  <div className="flex justify-between text-lg font-semibold text-gray-700 mt-4 border-t pt-4">
-                    <span>Total</span>
-                    <span className="text-green-600">฿{total.toFixed(2)}</span>
+                  </div>
+                  <div className="grid grid-cols-2 divide-x divide-slate-100">
+                    <div className="px-6 py-4 text-center">
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">Distance</p>
+                      <p className="text-2xl font-extrabold text-blue-600">
+                        {nearestWarehouse?.distance_km ?? "—"}
+                        <span className="text-sm font-semibold text-slate-400 ml-1">km</span>
+                      </p>
                     </div>
-
+                    <div className="px-6 py-4 text-center">
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">Est. Time</p>
+                      <p className="text-2xl font-extrabold text-blue-600">
+                        {nearestWarehouse?.estimated_time_mins ?? "—"}
+                        <span className="text-sm font-semibold text-slate-400 ml-1">min</span>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
+
+            {/* Order Items Table */}
+            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+              <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                  Order Items
+                </h2>
+                <span className="text-xs font-semibold text-slate-500 bg-white border border-slate-200 px-2 py-1 rounded-full">
+                  {selectedItems.length} item{selectedItems.length !== 1 ? 's' : ''}
+                </span>
+              </div>
+              <table className="w-full border-collapse">
+                <thead className="bg-slate-100 border-b-2 border-slate-200">
+                  <tr>
+                    {['Product', 'Qty', 'Subtotal'].map(h => (
+                      <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {selectedItems.map((item, idx) => (
+                    <tr key={idx} className="border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-bold text-xs shrink-0">
+                            {item.product.name.charAt(0).toUpperCase()}
+                          </div>
+                          <span className="text-sm font-medium text-slate-800">{item.product.name}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full text-xs font-bold">×{item.quantity}</span>
+                      </td>
+                      <td className="px-4 py-3 text-sm font-bold text-slate-800">
+                        ฿{item.total.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center">
+                <span className="text-sm font-semibold text-gray-700">Grand Total</span>
+                <span className="text-2xl font-extrabold text-blue-600">
+                  ฿{total.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                </span>
+              </div>
+            </div>
+
+            {/* Confirm Button */}
+            <button
+              onClick={handleCreateOrder}
+              disabled={isSubmitting}
+              className={`w-full py-4 rounded-lg font-semibold text-base transition-colors flex items-center justify-center gap-2 ${
+                isSubmitting
+                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
+            >
+              {isSubmitting ? (
+                <>
+                  <svg className="animate-spin h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  Creating Order...
+                </>
+              ) : (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Confirm & Create Order
+                </>
+              )}
+            </button>
           </div>
-        </div>
-         {/* Submit Button */}
-         <div className="p-6 border-t border-gray-200">
-          <button
-            onClick={handleCreateOrder}
-            disabled={isSubmitting}
-            className={`w-full p-4 text-white text-lg font-medium rounded-lg transition-all flex items-center justify-center space-x-2
-              ${(isSubmitting) 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-green-500 hover:bg-green-600 hover:scale-101 shadow-lg'}`}
-          >
-            {isSubmitting ? (
-              <>
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Processing...
-              </>
-            ) : (
-              "Complete Order"
-            )}
-          </button>
+
+          {/* RIGHT column: Delivery Route Map */}
+          <div className="lg:col-span-3">
+            <div className="bg-white shadow-md rounded-lg overflow-hidden h-full flex flex-col">
+              <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                  </svg>
+                  Delivery Route
+                </h2>
+                {warehouseLocation && (
+                  <a
+                    href={mapsDirectionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-100 px-3 py-1.5 rounded-full transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Open in Google Maps
+                  </a>
+                )}
+              </div>
+
+              <div className="flex-grow p-6 flex flex-col gap-4">
+                {warehouseLoading ? (
+                  <div className="flex-grow bg-slate-50 rounded-lg border border-slate-200 flex flex-col items-center justify-center gap-3 text-slate-400 min-h-[420px]">
+                    <div className="w-8 h-8 border-4 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
+                    <p className="text-sm font-medium">Loading route...</p>
+                  </div>
+                ) : mapsEmbedSrc ? (
+                  <>
+                    {/* Route pills */}
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="flex items-center gap-2 bg-green-50 border border-green-100 px-3 py-2 rounded-lg">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        <span className="font-semibold text-green-800 text-xs">{warehouseLocation?.name}</span>
+                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      <div className="flex items-center gap-2 bg-blue-50 border border-blue-100 px-3 py-2 rounded-lg flex-grow min-w-0">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full shrink-0"></div>
+                        <span className="font-semibold text-blue-800 text-xs truncate">{customerData.address}</span>
+                      </div>
+                    </div>
+
+                    {/* Map iframe */}
+                    <div className="rounded-lg overflow-hidden border border-gray-200 flex-grow">
+                      <iframe
+                        title="Delivery Route"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0, minHeight: "420px" }}
+                        loading="lazy"
+                        allowFullScreen
+                        src={mapsEmbedSrc}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex-grow bg-slate-50 rounded-lg border border-slate-200 flex flex-col items-center justify-center gap-3 text-slate-400 min-h-[420px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-slate-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    <p className="text-sm font-medium">Route not available</p>
+                    <p className="text-xs text-slate-300">Warehouse data could not be loaded</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </main>

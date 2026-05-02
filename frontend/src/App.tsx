@@ -6,24 +6,21 @@ import Customer from "./order/customer";
 import OrderSummary from "./order/summary";
 import Navbar from "./components/nav";
 import StockPage from "./stock";
-import TrackingPage from "./tracking";
+import TrackingTable from "./order/tracking";
+import TrackingPage from "./tracking/index";
 
 function App() {
   return (
     <Router>
-      <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar / Navbar */}
-        <div className="flex-shrink-0">
-          <Navbar />
-        </div>
-
-          {/* Main Content */}
-          <main className="flex-grow bg-gray-100 overflow-y-auto" style={{ height: 'calc(100vh - 10px)' }}> 
-          <div className="container mx-auto">
+      <div className="flex min-h-screen bg-slate-50">
+        <Navbar />
+        <main className="flex-1 overflow-y-auto"> 
+          <div className="max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/inventory" element={<StockPage />} />
               <Route path="/track" element={<TrackingPage />} />
+              <Route path="/track-list" element={<TrackingTable />} />
 
               <Route path="/search" element={<Search />} />
               <Route path="/order" element={<Order />} />

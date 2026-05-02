@@ -60,6 +60,7 @@ services:
       - RABBITMQ_URL=amqp://rabbitmq:5672
       - FORECAST_API_URL=http://forecast-python:8000/forecast
       - INVENTORY_SERVICE_URL=http://inventory-service:8080
+      - Google_MAP_API=${GOOGLE_MAPS_API_KEY}
     depends_on:
       db:
         condition: service_healthy

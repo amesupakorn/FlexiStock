@@ -13,6 +13,7 @@ startTrackingConsumer()
 
 app.use("/", trackRoutes); 
 
-app.listen(5005, () => {
-  console.log("Track-service is running on port 5005");
+const PORT = process.env.PORT || 5005;
+app.listen(PORT, () => {
+  console.log(`Track-service is running on port ${PORT}`);
 });

@@ -18,6 +18,6 @@ app.use("/", orderRoutes);
 
 const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
-  console.log(`forecast Service running on http://localhost:${PORT}`);
+  console.log(`Order-service is running on port ${PORT}`);
 });
 

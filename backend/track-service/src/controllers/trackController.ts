@@ -11,11 +11,15 @@ export const createTrack = async (req: Request) => {
 
 export const getTrackByOrderId = async (req: Request) => {
   const orderId = req.params.orderId as string;
+  console.log(`🔍 Searching for tracking data: orderId=${orderId}`);
 
-  return await prisma.tracking.findMany({
+  const results = await prisma.tracking.findMany({
     where: { orderId },
     orderBy: { updatedAt: "desc" },
   });
+
+  console.log(`✅ Found ${results.length} tracking records for ${orderId}`);
+  return results;
 };
 
 
