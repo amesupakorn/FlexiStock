@@ -28,7 +28,7 @@ services:
       - FORECAST_SERVICE_URL=http://forecast_service:8080
       - SEARCH_SERVICE_URL=http://search-service:8080
     depends_on:
-      db:
+      cloudsql-proxy:
         condition: service_healthy
 
   inventory-service:
@@ -38,7 +38,7 @@ services:
       - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
       - RABBITMQ_URL=amqp://rabbitmq:5672
     depends_on:
-      db:
+      cloudsql-proxy:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
@@ -53,7 +53,7 @@ services:
       - INVENTORY_SERVICE_URL=http://inventory-service:8080
       - Google_MAP_API=${GOOGLE_MAPS_API_KEY}
     depends_on:
-      db:
+      cloudsql-proxy:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
@@ -65,7 +65,7 @@ services:
       - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
       - RABBITMQ_URL=amqp://rabbitmq:5672
     depends_on:
-      db:
+      cloudsql-proxy:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
@@ -77,7 +77,7 @@ services:
       - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
       - RABBITMQ_URL=amqp://rabbitmq:5672
     depends_on:
-      db:
+      cloudsql-proxy:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
@@ -91,7 +91,7 @@ services:
       - EMAIL_USER=${EMAIL_USER}
       - EMAIL_PASS=${EMAIL_PASS}
     depends_on:
-      db:
+      cloudsql-proxy:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
@@ -102,7 +102,7 @@ services:
       - PORT=8080
       - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
     depends_on:
-      db:
+      cloudsql-proxy:
         condition: service_healthy
 
   forecast-python:
