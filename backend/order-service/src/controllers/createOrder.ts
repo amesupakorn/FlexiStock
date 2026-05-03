@@ -55,6 +55,11 @@ export const createOrder = async (req: Request, res: Response) => {
           type: "decrease" 
         });
 
+        // Fetch warehouse location for initial tracking
+        const warehouse = await prisma.warehouse.findUnique({
+          where: { id: warehouse_id }
+        });
+
         await sendToTrackingQueue({
           orderId: order.id,
           customer: {
@@ -63,7 +68,7 @@ export const createOrder = async (req: Request, res: Response) => {
           },
           tracking: {
             status: "Processing",
-            location: customer.address
+            location: warehouse?.name || "Warehouse"
           }
         });
     

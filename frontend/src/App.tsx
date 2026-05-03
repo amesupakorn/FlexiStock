@@ -14,7 +14,7 @@ function App() {
     <Router>
       <div className="flex min-h-screen bg-slate-50">
         <Navbar />
-        <main className="flex-1 overflow-y-auto"> 
+        <main className="flex-1"> 
           <div className="max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8">
             <Routes>
               <Route path="/" element={<Dashboard />} />

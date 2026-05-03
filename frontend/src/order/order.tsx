@@ -81,7 +81,7 @@ export default function Order() {
         {/* Header Section */}
         <div className="mb-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <h1 className="text-4xl font-extrabold text-gray-900 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
             Create Order
@@ -106,7 +106,7 @@ export default function Order() {
             {/* Product Selection Card */}
             <div className="bg-white shadow-md rounded-lg p-6">
               <h2 className="text-lg font-semibold text-gray-800 border-b border-gray-100 pb-3 mb-5 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                 </svg>
                 Select Product
@@ -119,7 +119,7 @@ export default function Order() {
                   <select
                     value={productId}
                     onChange={(e) => setProductId(e.target.value)}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-slate-800 font-medium"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none bg-white text-slate-800 font-medium"
                   >
                     <option value="">— Choose a product —</option>
                     {products.map((product) => (
@@ -132,13 +132,13 @@ export default function Order() {
 
                 {/* Selected Product Preview */}
                 {selectedProduct && (
-                  <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 flex items-center gap-4">
-                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold shrink-0">
+                  <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-center gap-4">
+                    <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold shrink-0">
                       {selectedProduct.name.charAt(0)}
                     </div>
                     <div className="flex-grow overflow-hidden">
                       <p className="font-semibold text-slate-800 truncate">{selectedProduct.name}</p>
-                      <p className="text-sm text-blue-600 font-bold">฿{Number(selectedProduct.price).toLocaleString()}</p>
+                      <p className="text-sm text-green-600 font-bold">฿{Number(selectedProduct.price).toLocaleString()}</p>
                     </div>
                   </div>
                 )}
@@ -183,7 +183,7 @@ export default function Order() {
                   disabled={!productId}
                   className={`w-full py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2 ${
                     productId
-                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                      ? 'bg-green-600 hover:bg-green-700 text-white'
                       : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                   }`}
                 >
@@ -202,7 +202,7 @@ export default function Order() {
               {/* Card Header */}
               <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-slate-50">
                 <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
                   Order Summary
@@ -236,8 +236,8 @@ export default function Order() {
                         <tr key={idx} className="border-b border-slate-200 hover:bg-slate-50 transition-colors duration-150">
                           <td className="px-4 py-3 whitespace-nowrap">
                             <div className="flex items-center">
-                              <div className="flex-shrink-0 h-9 w-9 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
-                                <span className="text-indigo-600 font-bold text-sm">
+                              <div className="flex-shrink-0 h-9 w-9 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                <span className="text-green-600 font-bold text-sm">
                                   {item.product.name.charAt(0).toUpperCase()}
                                 </span>
                               </div>
@@ -278,13 +278,13 @@ export default function Order() {
                 <div className="p-6 border-t border-slate-200 bg-slate-50 space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-base font-semibold text-gray-700">Order Total</span>
-                    <span className="text-2xl font-extrabold text-blue-600">
+                    <span className="text-2xl font-extrabold text-green-600">
                       ฿{total.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                     </span>
                   </div>
                   <button
                     onClick={handlePlaceOrder}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />

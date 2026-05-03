@@ -59,7 +59,7 @@ export default function Search() {
         {/* Header Section */}
         <div className="mb-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <h1 className="text-4xl font-extrabold text-gray-900 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             Advanced Search
@@ -75,7 +75,7 @@ export default function Search() {
               <button
                 className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
                   searchType === 'product' 
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200' 
+                    ? 'bg-green-50 text-green-700 border border-green-200' 
                     : 'text-gray-500 hover:bg-gray-100'
                 }`}
                 onClick={() => { setSearchType('product'); setResults([]); setWarehouseId(""); }}
@@ -85,7 +85,7 @@ export default function Search() {
               <button
                 className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
                   searchType === 'inventory' 
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200' 
+                    ? 'bg-green-50 text-green-700 border border-green-200' 
                     : 'text-gray-500 hover:bg-gray-100'
                 }`}
                 onClick={() => { setSearchType('inventory'); setResults([]); }}
@@ -100,7 +100,7 @@ export default function Search() {
                 <select
                   value={productId}
                   onChange={(e) => setProductId(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
                 >
                   <option value="">All Products</option>
                   {products.map((product) => (
@@ -116,7 +116,7 @@ export default function Search() {
                   <select
                     value={warehouseId}
                     onChange={(e) => setWarehouseId(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
                   >
                     <option value="">All Warehouses</option>
                     {warehouses.map((warehouse) => (
@@ -131,7 +131,7 @@ export default function Search() {
               <button
                 onClick={handleSearch}
                 disabled={isSearching}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors flex items-center gap-2 font-medium"
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors flex items-center gap-2 font-medium"
               >
                 <FaSearch />
                 {isSearching ? 'Searching...' : 'Search'}
@@ -171,8 +171,8 @@ export default function Search() {
                   <tr key={index} className="border-b border-slate-200 hover:bg-slate-50 transition-colors duration-150">
                     <td className="px-4 py-3 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-indigo-600 font-bold">
+                        <div className="flex-shrink-0 h-10 w-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-green-600 font-bold">
                             {(item.product?.name || item.name || '?').charAt(0).toUpperCase()}
                           </span>
                         </div>

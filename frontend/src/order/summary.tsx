@@ -103,7 +103,7 @@ export default function OrderSummary() {
             </button>
             <div>
               <h1 className="text-4xl font-extrabold text-gray-900 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
                 Order Summary
@@ -121,8 +121,8 @@ export default function OrderSummary() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 )}
-                <span className={`flex items-center gap-1.5 ${i === 2 ? "text-blue-600 font-bold" : "text-slate-400"}`}>
-                  <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${i === 2 ? "bg-blue-600 text-white" : "bg-slate-200 text-slate-500"}`}>
+                <span className={`flex items-center gap-1.5 ${i === 2 ? "text-green-600 font-bold" : "text-slate-400"}`}>
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${i === 2 ? "bg-green-600 text-white" : "bg-slate-200 text-slate-500"}`}>
                     {i === 2 ? "✓" : i + 1}
                   </span>
                   {label}
@@ -142,7 +142,7 @@ export default function OrderSummary() {
             <div className="bg-white shadow-md rounded-lg overflow-hidden">
               <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
                 <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                   Customer Information
@@ -156,8 +156,8 @@ export default function OrderSummary() {
                   { label: "Address", value: customerData.address, icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" },
                 ].map(({ label, value, icon }) => (
                   <div key={label} className="flex items-start gap-4 px-6 py-3">
-                    <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={icon} />
                       </svg>
                     </div>
@@ -174,7 +174,7 @@ export default function OrderSummary() {
             <div className="bg-white shadow-md rounded-lg overflow-hidden">
               <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
                 <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                   </svg>
                   Warehouse & Delivery
@@ -182,7 +182,7 @@ export default function OrderSummary() {
               </div>
               {warehouseLoading ? (
                 <div className="px-6 py-8 flex items-center justify-center gap-3 text-slate-400">
-                  <div className="w-5 h-5 border-2 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
+                  <div className="w-5 h-5 border-2 border-green-100 border-t-green-500 rounded-full animate-spin" />
                   <span className="text-sm font-medium">Finding nearest warehouse...</span>
                 </div>
               ) : (
@@ -204,14 +204,14 @@ export default function OrderSummary() {
                   <div className="grid grid-cols-2 divide-x divide-slate-100">
                     <div className="px-6 py-4 text-center">
                       <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">Distance</p>
-                      <p className="text-2xl font-extrabold text-blue-600">
+                      <p className="text-2xl font-extrabold text-green-600">
                         {nearestWarehouse?.distance_km ?? "—"}
                         <span className="text-sm font-semibold text-slate-400 ml-1">km</span>
                       </p>
                     </div>
                     <div className="px-6 py-4 text-center">
                       <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">Est. Time</p>
-                      <p className="text-2xl font-extrabold text-blue-600">
+                      <p className="text-2xl font-extrabold text-green-600">
                         {nearestWarehouse?.estimated_time_mins ?? "—"}
                         <span className="text-sm font-semibold text-slate-400 ml-1">min</span>
                       </p>
@@ -225,7 +225,7 @@ export default function OrderSummary() {
             <div className="bg-white shadow-md rounded-lg overflow-hidden">
               <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
                 <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>
                   Order Items
@@ -247,7 +247,7 @@ export default function OrderSummary() {
                     <tr key={idx} className="border-b border-slate-200 hover:bg-slate-50 transition-colors">
                       <td className="px-4 py-3 whitespace-nowrap">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-bold text-xs shrink-0">
+                          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-xs shrink-0">
                             {item.product.name.charAt(0).toUpperCase()}
                           </div>
                           <span className="text-sm font-medium text-slate-800">{item.product.name}</span>
@@ -265,7 +265,7 @@ export default function OrderSummary() {
               </table>
               <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center">
                 <span className="text-sm font-semibold text-gray-700">Grand Total</span>
-                <span className="text-2xl font-extrabold text-blue-600">
+                <span className="text-2xl font-extrabold text-green-600">
                   ฿{total.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                 </span>
               </div>

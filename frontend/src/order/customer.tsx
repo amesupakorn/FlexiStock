@@ -33,7 +33,7 @@ export default function Customer() {
           <p className="text-slate-500 text-sm mb-6">Please start from the order page first.</p>
           <button
             onClick={() => navigate("/order")}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-semibold transition-colors"
+            className="w-full bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg font-semibold transition-colors"
           >
             Go to Order
           </button>
@@ -93,7 +93,7 @@ export default function Customer() {
             </button>
             <div>
               <h1 className="text-4xl font-extrabold text-gray-900 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 Customer Details
@@ -111,8 +111,8 @@ export default function Customer() {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            <span className="flex items-center gap-1.5 text-blue-600 font-bold">
-              <span className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">2</span>
+            <span className="flex items-center gap-1.5 text-green-600 font-bold">
+              <span className="w-6 h-6 rounded-full bg-green-600 text-white flex items-center justify-center text-xs font-bold">2</span>
               Customer Info
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -134,7 +134,7 @@ export default function Customer() {
             {/* Customer Info Card */}
             <div className="bg-white shadow-md rounded-lg p-6">
               <h2 className="text-lg font-semibold text-gray-800 border-b border-gray-100 pb-3 mb-5 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 Customer Information
@@ -148,7 +148,7 @@ export default function Customer() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. John Smith"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-slate-800 font-medium"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none text-slate-800 font-medium"
                   />
                 </div>
 
@@ -159,7 +159,7 @@ export default function Customer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="customer@example.com"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-slate-800 font-medium"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none text-slate-800 font-medium"
                   />
                 </div>
 
@@ -170,18 +170,18 @@ export default function Customer() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+66 8x xxx xxxx"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-slate-800 font-medium"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none text-slate-800 font-medium"
                   />
                 </div>
 
                 {/* Selected Address */}
                 {placeName && (
-                  <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 flex items-start gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                  <div className="bg-green-50 border border-green-100 rounded-lg p-3 flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-500 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
                     <div>
-                      <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-0.5">Delivery Address</p>
+                      <p className="text-xs font-bold text-green-600 uppercase tracking-wide mb-0.5">Delivery Address</p>
                       <p className="text-sm text-slate-700 font-medium">{placeName}</p>
                     </div>
                   </div>
@@ -193,7 +193,7 @@ export default function Customer() {
             <div className="bg-white shadow-md rounded-lg overflow-hidden">
               <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
                 <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
                   Order Overview
@@ -222,7 +222,7 @@ export default function Customer() {
               </div>
               <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center">
                 <span className="text-sm font-semibold text-gray-700">Total</span>
-                <span className="text-xl font-extrabold text-blue-600">
+                <span className="text-xl font-extrabold text-green-600">
                   ฿{totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                 </span>
               </div>
@@ -234,7 +234,7 @@ export default function Customer() {
               disabled={isSubmitting || !isFormValid}
               className={`w-full py-3.5 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2 ${
                 isFormValid && !isSubmitting
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                  ? 'bg-green-600 hover:bg-green-700 text-white'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
@@ -264,7 +264,7 @@ export default function Customer() {
               {/* Map Card Header */}
               <div className="px-6 py-4 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
                 <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -289,7 +289,7 @@ export default function Customer() {
                         ref={inputRef}
                         type="text"
                         placeholder="Search delivery address..."
-                        className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-slate-800"
+                        className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none text-slate-800"
                       />
                     </div>
                   </Autocomplete>
@@ -298,7 +298,7 @@ export default function Customer() {
                   <div className="mt-4 rounded-lg overflow-hidden border border-gray-200">
                     {!mapLoaded ? (
                       <div className="h-[420px] bg-slate-50 flex flex-col items-center justify-center gap-3 text-slate-400">
-                        <div className="w-8 h-8 border-4 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
+                        <div className="w-8 h-8 border-4 border-green-100 border-t-green-500 rounded-full animate-spin" />
                         <p className="text-sm font-medium">Loading map...</p>
                       </div>
                     ) : (

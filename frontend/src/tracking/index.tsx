@@ -62,14 +62,13 @@ const TrackingPage: React.FC = () => {
       if (data.length === 0) {
         handleAlert({ 
           title: "ไม่พบข้อมูลการติดตาม", 
-          text: "หมายเลขคำสั่งซื้อนี้อาจยังไม่ได้เริ่มการจัดส่ง หรือหมายเลขไม่ถูกต้อง", 
           icon: "info" 
         });
       }
     } catch (err) {
       console.error("Search error:", err);
       const message = err instanceof Error ? err.message : "ไม่สามารถดึงข้อมูลการติดตามได้";
-      handleAlert({ title: "เกิดข้อผิดพลาด", text: message, icon: "error" });
+      handleAlert({ title: `เกิดข้อผิดพลาด: ${message}`, icon: "error" });
       setTrackingData([]);
     } finally {
       setLoading(false);
@@ -115,7 +114,7 @@ const TrackingPage: React.FC = () => {
       setDelayReason('');
     } catch (err) {
       console.error("Update error:", err);
-      handleAlert({ title: "เกิดข้อผิดพลาด", text: "ไม่สามารถอัปเดตสถานะได้", icon: "error" });
+      handleAlert({ title: "ไม่สามารถอัปเดตสถานะได้", icon: "error" });
     } finally {
       setIsUpdating(false);
     }
@@ -145,6 +144,11 @@ const TrackingPage: React.FC = () => {
 
   const sortedTracking = [...trackingData].sort((a, b) => 
     new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+  );
+
+  // Filter out duplicate statuses (keep only the newest one for each status)
+  const uniqueTracking = sortedTracking.filter((track, index, self) => 
+    index === self.findIndex((t) => t.status === track.status)
   );
 
   return (
@@ -205,7 +209,7 @@ const TrackingPage: React.FC = () => {
                 {/* Vertical Line */}
                 <div className="absolute left-[19px] top-4 bottom-4 w-0.5 bg-slate-100"></div>
 
-                {sortedTracking.map((track, index) => {
+                {uniqueTracking.map((track, index) => {
                   const isLatest = index === 0;
                   return (
                     <div key={track.id} className="flex gap-8 relative">
@@ -320,7 +324,7 @@ const TrackingPage: React.FC = () => {
         {isUpdateModalOpen && selectedTrackingItem && (
           <div className="fixed inset-0 backdrop-blur-md bg-slate-900/40 flex items-center justify-center z-50 p-4">
             <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 overflow-hidden animate-in zoom-in-95 duration-200">
-              <div className="bg-blue-600 text-white px-8 py-6 flex items-center justify-between">
+              <div className="bg-green-600 text-white px-8 py-6 flex items-center justify-between">
                 <h2 className="text-xl font-black flex items-center gap-3 tracking-tight">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -348,7 +352,7 @@ const TrackingPage: React.FC = () => {
                   <select
                     value={newStatus}
                     onChange={(e) => setNewStatus(e.target.value as TrackingStatus)}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all font-bold text-slate-800"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 outline-none transition-all font-bold text-slate-800"
                   >
                     <option value="Processing">กำลังเตรียมสินค้า</option>
                     <option value="InTransit">ระหว่างการขนส่ง</option>
@@ -364,7 +368,7 @@ const TrackingPage: React.FC = () => {
                     value={locationInput}
                     onChange={(e) => setLocationInput(e.target.value)}
                     placeholder="ระบุสถานที่..."
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all font-bold text-slate-800 placeholder:text-slate-300"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 outline-none transition-all font-bold text-slate-800 placeholder:text-slate-300"
                   />
                 </div>
 
@@ -375,7 +379,7 @@ const TrackingPage: React.FC = () => {
                       value={delayReason}
                       onChange={(e) => setDelayReason(e.target.value)}
                       placeholder="อธิบายสาเหตุความล่าช้า..."
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all font-bold text-slate-800 h-28 resize-none placeholder:text-slate-300"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 outline-none transition-all font-bold text-slate-800 h-28 resize-none placeholder:text-slate-300"
                     />
                   </div>
                 )}
@@ -390,7 +394,7 @@ const TrackingPage: React.FC = () => {
                   <button
                     onClick={handleStatusChange}
                     disabled={isUpdating}
-                    className="flex-grow py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 transition-all active:scale-95 flex items-center justify-center gap-2"
+                    className="flex-grow py-3 bg-green-600 hover:bg-green-700 disabled:bg-slate-300 text-white rounded-2xl font-bold shadow-lg shadow-green-100 transition-all active:scale-95 flex items-center justify-center gap-2"
                   >
                     {isUpdating ? (
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

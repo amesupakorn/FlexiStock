@@ -18,6 +18,10 @@ const StockPage = () => {
   const [isStockModalOpen, setIsStockModalOpen] = useState(false);
   const [selectedInventory, setSelectedInventory] = useState(null);
   const [isEditMinMaxModalOpen, setIsEditMinMaxModalOpen] = useState(false);
+  
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const navigate = useNavigate();
 
@@ -96,6 +100,19 @@ const StockPage = () => {
       return matchesSearch && matchesWarehouse && matchesProduct;
     });
   }, [inventory, searchTerm, selectedWarehouse, selectedProduct]);
+
+  // Paginated Data
+  const paginatedInventory = useMemo(() => {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    return filteredInventory.slice(startIndex, startIndex + rowsPerPage);
+  }, [filteredInventory, currentPage, rowsPerPage]);
+
+  const totalPages = Math.ceil(filteredInventory.length / rowsPerPage);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedWarehouse, selectedProduct, rowsPerPage]);
 
   // Validate product form
   const validateProductForm = () => {
@@ -295,7 +312,7 @@ const StockPage = () => {
         {/* Header Section */}
         <div className="mb-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <h1 className="text-4xl font-extrabold text-gray-900 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
             Stock Management
@@ -304,7 +321,7 @@ const StockPage = () => {
           <div className="flex flex-wrap gap-3 justify-end">
             <button 
               onClick={() => handleOpenModal('product')} 
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
@@ -333,13 +350,13 @@ const StockPage = () => {
                 placeholder="Search products or warehouses"
                 value={searchTerm}
                 onChange={handleSearch}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
               />
             </div>
             <select 
               value={selectedWarehouse} 
               onChange={handleWarehouseChange} 
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
             >
               {warehouseOptions.map((name) => (
                 <option key={name} value={name}>{name}</option>
@@ -348,12 +365,25 @@ const StockPage = () => {
             <select 
               value={selectedProduct} 
               onChange={handleProductChange} 
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
             >
               {productOptions.map((name) => (
                 <option key={name} value={name}>{name}</option>
               ))}
             </select>
+            
+            <div className="flex items-center gap-2 ml-auto">
+              <span className="text-sm text-gray-500 font-medium">Rows per page:</span>
+              <select 
+                value={rowsPerPage} 
+                onChange={(e) => setRowsPerPage(Number(e.target.value))} 
+                className="px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none text-sm font-semibold"
+              >
+                {[10, 20, 30, 50].map((val) => (
+                  <option key={val} value={val}>{val}</option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
 
@@ -380,7 +410,7 @@ const StockPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredInventory.map((item, index) => (
+                    {paginatedInventory.map((item, index) => (
                     <tr 
                         key={index} 
                         className="border-b border-slate-200 hover:bg-slate-50 transition-colors duration-150"
@@ -388,8 +418,8 @@ const StockPage = () => {
                         {/* Product Column */}
                         <td className="px-4 py-3 whitespace-nowrap">
                         <div className="flex items-center">
-                            <div className="flex-shrink-0 h-10 w-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
-                            <span className="text-indigo-600 font-bold">
+                            <div className="flex-shrink-0 h-10 w-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <span className="text-green-600 font-bold">
                                 {item.product.name.charAt(0).toUpperCase()}
                             </span>
                             </div>
@@ -497,6 +527,54 @@ const StockPage = () => {
                 </tbody>
                 </table>
           </div>
+
+          {/* Pagination Controls */}
+          <div className="bg-white px-6 py-4 border-t border-slate-200 flex items-center justify-between">
+            <div className="text-sm text-slate-500 font-medium">
+              Showing <span className="font-bold text-slate-900">{(currentPage - 1) * rowsPerPage + 1}</span> to <span className="font-bold text-slate-900">{Math.min(currentPage * rowsPerPage, filteredInventory.length)}</span> of <span className="font-bold text-slate-900">{filteredInventory.length}</span> results
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className={`p-2 rounded-lg border border-slate-200 transition-all ${currentPage === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-50 hover:border-slate-300'}`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </button>
+              
+              <div className="flex items-center gap-1">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  let pageNum;
+                  if (totalPages <= 5) pageNum = i + 1;
+                  else if (currentPage <= 3) pageNum = i + 1;
+                  else if (currentPage >= totalPages - 2) pageNum = totalPages - 4 + i;
+                  else pageNum = currentPage - 2 + i;
+
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => setCurrentPage(pageNum)}
+                      className={`w-10 h-10 rounded-lg text-sm font-bold transition-all ${currentPage === pageNum ? 'bg-green-600 text-white shadow-lg shadow-green-600/20' : 'text-slate-600 hover:bg-slate-50'}`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className={`p-2 rounded-lg border border-slate-200 transition-all ${currentPage === totalPages ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-50 hover:border-slate-300'}`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </div>
+          </div>
       </div>
 
 
@@ -504,7 +582,7 @@ const StockPage = () => {
       {isModalOpen && (
             <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50 p-4">
                 <div className="bg-white w-full max-w-md rounded-xl shadow-2xl border border-gray-200 overflow-hidden">
-                <div className="bg-blue-600 text-white px-6 py-4 flex items-center justify-between">
+                <div className="bg-green-600 text-white px-6 py-4 flex items-center justify-between">
                     <h2 className="text-2xl font-bold flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -513,7 +591,7 @@ const StockPage = () => {
                     </h2>
                     <button 
                     onClick={() => setIsModalOpen(false)}
-                    className="text-white hover:bg-blue-700 p-2 rounded-full transition-colors"
+                    className="text-white hover:bg-green-700 p-2 rounded-full transition-colors"
                     >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -535,7 +613,7 @@ const StockPage = () => {
                         className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:outline-none 
                         ${formErrors.name 
                             ? 'border-red-500 focus:ring-red-200' 
-                            : 'border-gray-300 focus:ring-blue-200 focus:border-blue-500'}`}
+                            : 'border-gray-300 focus:ring-green-200 focus:border-green-500'}`}
                         placeholder="Enter product name"
                     />
                     {formErrors.name && (
@@ -555,7 +633,7 @@ const StockPage = () => {
                         name="description"
                         value={productForm.description}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-200 focus:outline-none focus:border-blue-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200 focus:outline-none focus:border-green-500"
                         placeholder="Optional description"
                     />
                     </div>
@@ -573,7 +651,7 @@ const StockPage = () => {
                         className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:outline-none 
                         ${formErrors.price 
                             ? 'border-red-500 focus:ring-red-200' 
-                            : 'border-gray-300 focus:ring-blue-200 focus:border-blue-500'}`}
+                            : 'border-gray-300 focus:ring-green-200 focus:border-green-500'}`}
                         placeholder="Enter price"
                     />
                     {formErrors.price && (
@@ -604,7 +682,7 @@ const StockPage = () => {
                     </button>
                     <button
                         onClick={handleSubmitProduct}
-                        className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+                        className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
@@ -754,7 +832,7 @@ const StockPage = () => {
             {isEditMinMaxModalOpen && selectedInventory && (
             <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50 ">
                 <div className="bg-white w-full max-w-md rounded-xl shadow-2xl border border-gray-200 overflow-hidden">
-                <div className="bg-blue-600 text-white px-6 py-4 flex items-center justify-between">
+                <div className="bg-green-600 text-white px-6 py-4 flex items-center justify-between">
                     <h2 className="text-2xl font-bold flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -763,7 +841,7 @@ const StockPage = () => {
                     </h2>
                     <button 
                         onClick={() => setIsEditMinMaxModalOpen(false)}
-                        className="text-white hover:bg-blue-700 p-2 rounded-full transition-colors"
+                        className="text-white hover:bg-green-700 p-2 rounded-full transition-colors"
                     >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
