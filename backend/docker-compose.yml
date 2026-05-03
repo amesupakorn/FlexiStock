@@ -1,19 +1,4 @@
 services:
-  cloudsql-proxy:
-    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.1.0
-    command:
-      - "--address=0.0.0.0"
-      - "--port=5432"
-      - "--credentials-file=/config/service-account-key.json"
-      - "osged-494803:asia-southeast1:free-trial-first-project"
-    volumes:
-      - ./service-account-key.json:/config/service-account-key.json
-    restart: always
-    healthcheck:
-      test: ["CMD", "/cloud-sql-proxy", "--help"]
-      interval: 5s
-      timeout: 3s
-      retries: 10
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -32,25 +17,21 @@ services:
       - "5001:8080"
     environment:
       - PORT=8080
-      - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
+      - DATABASE_URL=postgresql://postgres:6743@136.110.11.74:5432/flexistock
       - INVENTORY_SERVICE_URL=http://inventory-service:8080
       - ORDER_SERVICE_URL=http://order-service:8080
       - TRACK_SERVICE_URL=http://track-service:8080
       - FORECAST_SERVICE_URL=http://forecast_service:8080
       - SEARCH_SERVICE_URL=http://search-service:8080
-    depends_on:
-      cloudsql-proxy:
-        condition: service_healthy
+    # No dependencies
 
   inventory-service:
     build: ./inventory-service
     environment:
       - PORT=8080
-      - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
+      - DATABASE_URL=postgresql://postgres:6743@136.110.11.74:5432/flexistock
       - RABBITMQ_URL=amqp://rabbitmq:5672
     depends_on:
-      cloudsql-proxy:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
 
@@ -58,14 +39,12 @@ services:
     build: ./order-service
     environment:
       - PORT=8080
-      - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
+      - DATABASE_URL=postgresql://postgres:6743@136.110.11.74:5432/flexistock
       - RABBITMQ_URL=amqp://rabbitmq:5672
       - FORECAST_API_URL=http://forecast-python:8000/forecast
       - INVENTORY_SERVICE_URL=http://inventory-service:8080
       - Google_MAP_API=${GOOGLE_MAPS_API_KEY}
     depends_on:
-      cloudsql-proxy:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
 
@@ -73,11 +52,9 @@ services:
     build: ./track-service
     environment:
       - PORT=8080
-      - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
+      - DATABASE_URL=postgresql://postgres:6743@136.110.11.74:5432/flexistock
       - RABBITMQ_URL=amqp://rabbitmq:5672
     depends_on:
-      cloudsql-proxy:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
 
@@ -85,11 +62,9 @@ services:
     build: ./forecast_service
     environment:
       - PORT=8080
-      - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
+      - DATABASE_URL=postgresql://postgres:6743@136.110.11.74:5432/flexistock
       - RABBITMQ_URL=amqp://rabbitmq:5672
     depends_on:
-      cloudsql-proxy:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
 
@@ -97,13 +72,11 @@ services:
     build: ./notification-service
     environment:
       - PORT=8080
-      - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
+      - DATABASE_URL=postgresql://postgres:6743@136.110.11.74:5432/flexistock
       - RABBITMQ_URL=amqp://rabbitmq:5672
       - EMAIL_USER=${EMAIL_USER}
       - EMAIL_PASS=${EMAIL_PASS}
     depends_on:
-      cloudsql-proxy:
-        condition: service_healthy
       rabbitmq:
         condition: service_healthy
 
@@ -111,10 +84,7 @@ services:
     build: ./search-service
     environment:
       - PORT=8080
-      - DATABASE_URL=postgresql://postgres:6743@cloudsql-proxy:5432/flexistock
-    depends_on:
-      cloudsql-proxy:
-        condition: service_healthy
+      - DATABASE_URL=postgresql://postgres:6743@136.110.11.74:5432/flexistock
 
   forecast-python:
     build: ./forecast_service/pyservice
