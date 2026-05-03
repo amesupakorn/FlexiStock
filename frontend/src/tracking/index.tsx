@@ -4,12 +4,14 @@ import { format } from 'date-fns';
 import { th } from 'date-fns/locale';
 import { handleAlert } from '../components/swifAlert';
 
+import { API_URLS } from '../api/base';
+
 // Enum matching Prisma
 export type TrackingStatus = 'Processing' | 'InTransit' | 'Delivered' | 'Delayed';
-const BASE_URL = "http://localhost:5001/api/track";
+const BASE_URL = API_URLS.TRACK;
 
 // Define status progression order
-const STATUS_PROGRESSION: TrackingStatus[] = ['Processing', 'InTransit', 'Delivered'];
+
 
 interface TrackingData {
   id: string;

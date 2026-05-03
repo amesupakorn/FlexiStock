@@ -19,8 +19,6 @@
     "@shadcn/ui": "^0.0.4",
     "@tailwindcss/vite": "^4.0.9",
     "axios": "^1.8.1",
-    "button": "link:@/components/ui/button",
-    "card": "link:@/components/ui/card",
     "chart.js": "^4.4.8",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.484.0",

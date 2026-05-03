@@ -1,9 +1,10 @@
 import axios from "axios";
+import { API_URLS } from "./base";
 
-const API_Near_URL = "http://localhost:5001/api/orders/nearest";
-const API_create_URL = "http://localhost:5001/api/orders/createOrder";
+const API_Near_URL = `${API_URLS.ORDERS}/nearest`;
+const API_create_URL = `${API_URLS.ORDERS}/createOrder`;
 
-const API_GATEWAY_URL = "http://localhost:5001/api/orders/createOrder"; 
+
 
 export const getNearestWarehouse = async (lat: number, lng: number) => {
   try {
@@ -31,7 +32,7 @@ export const createOrder = async (customerData: any, selectedItems: any[], wareh
 
 export const getOrders = async () => {
   try {
-    const response = await axios.get("http://localhost:5001/api/orders/all");
+    const response = await axios.get(`${API_URLS.ORDERS}/all`);
     return response.data;
   } catch (error) {
     console.error("Error fetching orders:", error);

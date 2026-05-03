@@ -1,8 +1,9 @@
 'use client';
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { fetchInventoryDetail } from '../api/fetchData';
-import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../api/base';
+// import { useNavigate } from 'react-router-dom';
 import { handleAlert } from '../components/swifAlert';
 
 const StockPage = () => {
@@ -16,14 +17,14 @@ const StockPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStockModalOpen, setIsStockModalOpen] = useState(false);
-  const [selectedInventory, setSelectedInventory] = useState(null);
+  const [selectedInventory, setSelectedInventory] = useState<any>(null);
   const [isEditMinMaxModalOpen, setIsEditMinMaxModalOpen] = useState(false);
   
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [productForm, setProductForm] = useState({
     name: '',
@@ -55,10 +56,10 @@ const StockPage = () => {
         setInventory(response.data);
   
         // Extract unique warehouses and products
-        const warehouses = Array.from(new Set(response.data.map((item: any) => item.warehouse.name)));
+        const warehouses = Array.from(new Set(response.data.map((item: any) => item.warehouse.name))) as string[];
         setWarehouseOptions(['All Warehouse', ...warehouses]);
   
-        const products = Array.from(new Set(response.data.map((item: any) => item.product.name)));
+        const products = Array.from(new Set(response.data.map((item: any) => item.product.name))) as string[];
         setProductOptions(['All Product', ...products]);
       } catch (error) {
         console.error('Error fetching stock:', error);
@@ -135,7 +136,7 @@ const StockPage = () => {
       errors.price = 'Invalid price';
     }
 
-    setFormErrors(errors);
+    setFormErrors(prev => ({ ...prev, ...errors, stock: '' }));
     return Object.values(errors).every(error => error === '');
   };
 
@@ -150,12 +151,12 @@ const StockPage = () => {
       errors.stock = 'Stock must be greater than 0';
     }
 
-    setFormErrors(errors);
+    setFormErrors(prev => ({ ...prev, ...errors, name: '', price: '' }));
     return Object.values(errors).every(error => error === '');
   };
 
   // Handle form input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<any>) => {
     const { name, value } = e.target;
     setProductForm(prev => ({
       ...prev,
@@ -169,7 +170,7 @@ const StockPage = () => {
     }));
   };
 
-  const handleStockInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleStockInputChange = (e: React.ChangeEvent<any>) => {
     const { name, value } = e.target;
     setStockForm(prev => ({
       ...prev,
@@ -207,7 +208,7 @@ const StockPage = () => {
         price: parseFloat(productForm.price)
       };
 
-      await axios.post('http://localhost:5001/api/inventory/create/product', productData);
+      await axios.post(`${API_BASE_URL}/api/inventory/create/product`, productData);
       setProductForm({ name: '', description: '', price: '' });
       setIsModalOpen(false);
 
@@ -237,7 +238,7 @@ const StockPage = () => {
         maxStock: stockForm.maxStock,
       };
 
-      await axios.post('http://localhost:5001/api/inventory/create/inventory', stockData);
+      await axios.post(`${API_BASE_URL}/api/inventory/create/inventory`, stockData);
       setStockForm({ productId: '', warehouseId: '', stock: 0, minStock: 0, maxStock: 0 });
       setIsStockModalOpen(false);
       await fetchInventoryDetail();
@@ -251,9 +252,10 @@ const StockPage = () => {
   };
 
 
-  const handleAdjustStock = async (item, type) => {
+  const handleAdjustStock = async (item: any, type: string) => {
     const amount = prompt(`Enter amount to ${type === 'add' ? 'add' : 'remove'}:`);
   
+    if (amount === null) return;
     const parsedAmount = parseInt(amount);
     if (isNaN(parsedAmount) || parsedAmount <= 0) {
       alert("Please enter a valid number greater than 0");
@@ -263,7 +265,7 @@ const StockPage = () => {
     const stockChange = type === "add" ? parsedAmount : -parsedAmount;
   
     try {
-      const response = await fetch(`http://localhost:5001/api/inventory/update/${item.id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/inventory/update/${item.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -294,7 +296,7 @@ const StockPage = () => {
   };
 
 
-  const handleEditMinMax = (item) => {
+  const handleEditMinMax = (item: any) => {
     setSelectedInventory(item);
     setIsEditMinMaxModalOpen(true); 
   };
@@ -851,13 +853,14 @@ const StockPage = () => {
 
                 <div className='p-4'>
                 <form
-                    onSubmit={async (e) => {
+                    onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
                     e.preventDefault();
-                    const minStock = parseInt(e.target.minStock.value);
-                    const maxStock = parseInt(e.target.maxStock.value);
+                    const formData = new FormData(e.currentTarget);
+                    const minStock = parseInt(formData.get('minStock') as string);
+                    const maxStock = parseInt(formData.get('maxStock') as string);
 
                     try {
-                        const response = await fetch(`http://localhost:5001/api/inventory/update/${selectedInventory.id}`, {
+                        const response = await fetch(`${API_BASE_URL}/api/inventory/update/${selectedInventory.id}`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ minStock, maxStock }),

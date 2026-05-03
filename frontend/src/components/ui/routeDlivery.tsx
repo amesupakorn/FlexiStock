@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Route, MapPin, Truck } from 'lucide-react';
 
 const RouteVisualization = () => {

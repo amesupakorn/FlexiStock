@@ -1,6 +1,7 @@
 import axios from "axios";
+import API_BASE_URL from "./base";
 
-const API_GATEWAY_URL = "http://localhost:5001";
+const API_GATEWAY_URL = API_BASE_URL;
 
 export const fetchDashboardStats = async () => {
   try {

@@ -316,7 +316,7 @@ export default function Customer() {
                       >
                         <Marker
                           position={mapLocation}
-                          animation={2} // DROP animation
+                          animation={2 as any} // DROP animation
                         />
                       </GoogleMap>
                     )}

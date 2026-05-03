@@ -11,14 +11,14 @@ export async function sendLowStockEmail(data: LowStockData) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
   await transporter.sendMail({
     from: '"FlexiStock" <no-reply@flexistock.com>',
-    to: "65070221@kmitl.ac.th",
+    to: "supakorn642@gmail.com",
     subject: `🚨 Low Stock Alert: ${data.productName}`,
     html: `
       <h3>Stock Alert</h3>

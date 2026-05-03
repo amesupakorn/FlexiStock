@@ -43,7 +43,7 @@ def forecast(data: List[OrderData]):
         result["warehouse_id"] = warehouse_id
         result["product_id"] = product_id
 
-        key = f"{warehouse_id}-{product_id}"
+        key = f"{warehouse_id}:{product_id}"
         result_by_pair[key] = result.to_dict(orient="records")
 
     # คืนค่าผลลัพธ์การพยากรณ์ในรูปแบบ JSON

@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { fetchForecast } from "../api/fetchForecast";
 import { fetchDashboardStats } from "../api/fetchStats";
 import { ForecastPoint } from '../models/forecast';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend, AreaChart, Area } from 'recharts';
+import { Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, AreaChart, Area } from 'recharts';
 import { FaChartLine, FaBox, FaTruckFast, FaTriangleExclamation, FaWarehouse, FaCaretUp, FaCaretDown } from "react-icons/fa6";
 
 const ForeCast = () => {
@@ -10,8 +10,6 @@ const ForeCast = () => {
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [selectedWarehouse, setSelectedWarehouse] = useState<string | null>(null);
-  const [forecastData, setForecastData] = useState<any[]>([]);
-  const [warehouses, setWarehouses] = useState<any[]>([]);
 
   useEffect(() => {
     const loadAllData = async () => {
@@ -22,12 +20,12 @@ const ForeCast = () => {
           fetchDashboardStats()
         ]);
 
-        setForecastData(forecastRes.forecastData);
+        // setForecastData(forecastRes.forecastData);
         setStats(statsRes);
 
         if (forecastRes.forecastResult && typeof forecastRes.forecastResult === 'object') {
           const groupedByWarehouse = Object.entries(forecastRes.forecastResult).reduce(
-            (acc: Record<string, Record<string, ForecastPoint[]>>, [key, values]) => {
+            (acc: Record<string, Record<string, ForecastPoint[]>>, [_, values]) => {
               const forecastArray = values as any[];
               if (forecastArray.length === 0) return acc;
               const warehouse_id = forecastArray[0].warehouse_id;

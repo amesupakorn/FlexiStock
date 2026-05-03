@@ -27,7 +27,7 @@ interface Order {
   }>;
 }
 
-type TrackingStatusType = 'Processing' | 'InTransit' | 'Delivered' | 'Delayed';
+
 
 const TrackingStatus: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);

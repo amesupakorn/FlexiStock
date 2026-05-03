@@ -27,7 +27,7 @@ export const listenForForecastData = async () => {
         // Assuming forecastData.data is an object where keys are 'warehouse_id-product_id'
         const transformedData = Object.entries(forecastData.data).map(([key, value]) => {
           // Assume value is an array, so cast it to the expected type
-          const [warehouse_id, product_id] = key.split("-");
+          const [warehouse_id, product_id] = key.split(":");
           
           // Cast value to ForecastPoint[]
           const forecastArray = value as ForecastPoint[];

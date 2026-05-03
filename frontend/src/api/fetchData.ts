@@ -1,6 +1,7 @@
 import axios from "axios";
+import API_BASE_URL from "./base";
 
-const API_GATEWAY_URL = "http://localhost:5001";  // URL ของ API Gateway
+const API_GATEWAY_URL = API_BASE_URL;  // URL ของ API Gateway
 
 // ฟังก์ชันทดสอบเรียก API
 export const fetchOrders = async () => {

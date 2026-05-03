@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaBox, FaSearch, FaChartLine } from "react-icons/fa";
+import { FaBox, FaSearch } from "react-icons/fa";
 import { FaWarehouse } from "react-icons/fa6";
 import { MdSpaceDashboard } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
