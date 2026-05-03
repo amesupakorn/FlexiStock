@@ -1,8 +1,19 @@
 services:
   cloudsql-proxy:
-    image: gcr.io/cloudsql-docker/gce-proxy:1.33.0
-    command: /cloud_sql_proxy -instances=osged-494803:asia-southeast1:free-trial-first-project=tcp:0.0.0.0:5432
+    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.1.0
+    command:
+      - "--address=0.0.0.0"
+      - "--port=5432"
+      - "--credentials-file=/config/service-account-key.json"
+      - "osged-494803:asia-southeast1:free-trial-first-project"
+    volumes:
+      - ./service-account-key.json:/config/service-account-key.json
     restart: always
+    healthcheck:
+      test: ["CMD", "/cloud-sql-proxy", "--help"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   rabbitmq:
     image: rabbitmq:3-management
