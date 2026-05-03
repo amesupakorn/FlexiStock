@@ -23,7 +23,7 @@ export default function OrderSummary() {
           <p className="text-slate-500 text-sm mb-6">Please complete the order flow from the beginning.</p>
           <button
             onClick={() => navigate("/order")}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-semibold transition-colors"
+            className="w-full bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg font-semibold transition-colors"
           >
             Start New Order
           </button>
@@ -59,17 +59,28 @@ export default function OrderSummary() {
       }
     };
     fetchWarehouse();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const total = selectedItems.reduce((sum, item) => sum + item.total, 0);
 
   const handleCreateOrder = async () => {
+    if (!warehouseLocation) {
+      handleAlert({ title: "Warehouse information is missing", icon: "warning" });
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      const order = await createOrder(customerData, selectedItems, warehouseLocation?.id);
+      const response = await createOrder(customerData, selectedItems, warehouseLocation.id);
       handleAlert({ title: "Order Created Successfully", icon: "success" });
-      navigate(`/track?orderId=${order.id}`);
+      
+      // Navigate to tracking for the first order created
+      if (response.orders && response.orders.length > 0) {
+        navigate(`/track?orderId=${response.orders[0].id}`);
+      } else {
+        navigate('/tracking'); // Fallback to tracking list
+      }
     } catch (error) {
       console.error("Failed to create order:", error);
       handleAlert({ title: "Failed to create order", icon: "error" });
@@ -274,11 +285,11 @@ export default function OrderSummary() {
             {/* Confirm Button */}
             <button
               onClick={handleCreateOrder}
-              disabled={isSubmitting}
+              disabled={isSubmitting || warehouseLoading || !warehouseLocation}
               className={`w-full py-4 rounded-lg font-semibold text-base transition-colors flex items-center justify-center gap-2 ${
-                isSubmitting
+                isSubmitting || warehouseLoading || !warehouseLocation
                   ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+                  : 'bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/20'
               }`}
             >
               {isSubmitting ? (
@@ -305,7 +316,7 @@ export default function OrderSummary() {
             <div className="bg-white shadow-md rounded-lg overflow-hidden h-full flex flex-col">
               <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
                 <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                   </svg>
                   Delivery Route
@@ -315,7 +326,7 @@ export default function OrderSummary() {
                     href={mapsDirectionsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-100 px-3 py-1.5 rounded-full transition-colors"
+                    className="flex items-center gap-1.5 text-xs font-semibold text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100 border border-green-100 px-3 py-1.5 rounded-full transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -328,7 +339,7 @@ export default function OrderSummary() {
               <div className="flex-grow p-6 flex flex-col gap-4">
                 {warehouseLoading ? (
                   <div className="flex-grow bg-slate-50 rounded-lg border border-slate-200 flex flex-col items-center justify-center gap-3 text-slate-400 min-h-[420px]">
-                    <div className="w-8 h-8 border-4 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
+                    <div className="w-8 h-8 border-4 border-green-100 border-t-green-500 rounded-full animate-spin" />
                     <p className="text-sm font-medium">Loading route...</p>
                   </div>
                 ) : mapsEmbedSrc ? (
@@ -342,9 +353,9 @@ export default function OrderSummary() {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
-                      <div className="flex items-center gap-2 bg-blue-50 border border-blue-100 px-3 py-2 rounded-lg flex-grow min-w-0">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full shrink-0"></div>
-                        <span className="font-semibold text-blue-800 text-xs truncate">{customerData.address}</span>
+                      <div className="flex items-center gap-2 bg-green-50 border border-green-100 px-3 py-2 rounded-lg flex-grow min-w-0">
+                        <div className="w-2 h-2 bg-green-500 rounded-full shrink-0"></div>
+                        <span className="font-semibold text-green-800 text-xs truncate">{customerData.address}</span>
                       </div>
                     </div>
 

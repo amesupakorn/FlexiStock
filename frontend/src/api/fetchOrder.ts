@@ -15,7 +15,6 @@ export const getNearestWarehouse = async (lat: number, lng: number) => {
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 export const createOrder = async (customerData: any, selectedItems: any[], warehouse_id: string) => {
   try {
     const response = await axios.post(`${API_create_URL}`, {

@@ -87,8 +87,8 @@ const ForeCast = () => {
     return (
       <div className="flex flex-col items-center justify-center h-[60vh]">
         <div className="relative w-20 h-20">
-          <div className="absolute top-0 left-0 w-full h-full border-4 border-blue-500/20 rounded-full"></div>
-          <div className="absolute top-0 left-0 w-full h-full border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="absolute top-0 left-0 w-full h-full border-4 border-green-500/20 rounded-full"></div>
+          <div className="absolute top-0 left-0 w-full h-full border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
         <span className="mt-6 text-gray-500 font-medium animate-pulse">กำลังประมวลผลข้อมูลพยากรณ์...</span>
       </div>
@@ -101,7 +101,7 @@ const ForeCast = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-gray-800 tracking-tight flex items-center gap-3">
-            <div className="p-2 bg-blue-600 rounded-xl shadow-lg shadow-blue-200">
+            <div className="p-2 bg-green-600 rounded-xl shadow-lg shadow-green-200">
               <FaChartLine className="text-white w-6 h-6" />
             </div>
             แดชบอร์ดการวิเคราะห์และพยากรณ์
@@ -115,7 +115,7 @@ const ForeCast = () => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl p-6 text-white shadow-xl shadow-blue-200 relative overflow-hidden group">
+        <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-3xl p-6 text-white shadow-xl shadow-green-200 relative overflow-hidden group">
           <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
             <FaBox size={120} />
           </div>
@@ -126,7 +126,7 @@ const ForeCast = () => {
             <span className="font-medium opacity-90">สต็อกทั้งหมด</span>
           </div>
           <div className="text-4xl font-bold">{stats?.inventory?.totalStock?.toLocaleString() || 0}</div>
-          <div className="mt-2 text-blue-100 text-sm flex items-center gap-1">
+          <div className="mt-2 text-green-100 text-sm flex items-center gap-1">
             <FaCaretUp /> 12% จากเดือนที่แล้ว
           </div>
         </div>

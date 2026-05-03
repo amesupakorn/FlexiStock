@@ -7,6 +7,11 @@ import { v4 as uuidv4 } from "uuid";
 export const createOrder = async (req: Request, res: Response) => {
   const { customerData, selectedItems, warehouse_id } = req.body; 
 
+  if (!customerData || !selectedItems) {
+    console.error("Missing required data: customerData or selectedItems is undefined");
+    return res.status(400).json({ error: "Missing customerData or selectedItems" });
+  }
+
   try {
     // Create Customer record
 
